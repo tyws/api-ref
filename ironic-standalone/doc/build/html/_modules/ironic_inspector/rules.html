@@ -1,0 +1,890 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+
+    <title>OpenStack Docs: ironic_inspector.rules</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link href="../../_static/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Pygments CSS -->
+<link href="../../_static/css/native.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link href="../../_static/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="../../_static/css/combined.css" rel="stylesheet">
+
+<!-- Search CSS -->
+<link href="../../_static/css/search.css" rel="stylesheet">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+  
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-17511903-1', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+  </head>
+  <body>
+
+<!-- TEMPLATE_NAME: _modules/ironic_inspector/rules -->
+
+ <script>
+    (function (window, document) {
+        var loader = function () {
+            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+            script.src = "https://search.openstack.org/widget/embed.min.js?t="+Date.now();
+            tag.parentNode.insertBefore(script, tag);
+        };
+        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+    })(window, document);
+</script>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="brand-wrapper">
+        <a class="navbar-brand" href="https://www.openstack.org/"></a>
+      </div>
+      <div class="search-icon show"><i class="fa fa-search"></i> Search</div></div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="search-container tiny">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</div>
+      <ul class="nav navbar-nav navbar-main show">
+        <li class="search-container-mobile">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</li>
+        <li>
+          <a href="https://www.openstack.org/software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuSoftware">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/">Overview</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/project-navigator/">Project Navigator</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/sample-configs/">Sample Configs</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/security/">Security</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/start/">Get Started</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/roadmap/">Roadmap</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/latest-release/">Latest Release</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/sourcecode/">Source Code</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/user-stories/" class="drop" id="dropdownMenuUsers">Users <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuUsers">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/user-stories/">Overview</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/telecoms-and-nfv/">Telecoms and NFV</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/enterprise/">OpenStack in the Enterprise</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/appdev/">Application Developers & ISVs</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org/">Superuser Magazine</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/surveys/landing">User Survey</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/community/" class="drop" id="dropdownMenuCommunity">Community <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuCommunity">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/">Welcome! Start Here</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation/">OpenStack Foundation</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://wiki.openstack.org">OpenStack Wiki</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://groups.openstack.org">User Groups</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/speakers/">Speakers Bureau</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation/companies/">Supporting Companies</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/jobs/">Jobs</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/">Join The Community</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/marketplace/">Marketplace</a>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/events/" class="drop" id="dropdownMenuEvents">Events <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuEvents">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//www.openstack.org/community/events/">Overview</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/summit/">The OpenStack Summit</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//www.openstack.org/community/events/">More OpenStack Events</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/events/openstackdays">OpenStack Days</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/learn/" class="drop" id="dropdownMenuLearn">Learn <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/marketplace/training/">Training</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/coa/">Get Certified</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask a Technical Question</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser Magazine</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/videos/">Summit Videos</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/analysts/">Analyst Reports</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/news/">News</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/blog/">Blog</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://docs.openstack.org/">Docs</a>
+        </li>
+        <li>
+
+</li>
+
+
+            <li>
+
+                <li class="join-nav-section">
+                    <a href="https://www.openstack.org/join/" id="dropdownMenuJoin">Join <i class="fa fa-caret-down"></i></a>
+                    <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuJoin" style="display: none;">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/register/?membership-type=foundation">Sign up for Foundation Membership</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/#sponsor">Sponsor the Foundation</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation">More about the Foundation</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://www.openstack.org/Security/login/?BackURL=/home/" class="sign-in-btn">Log In</a>
+                </li>
+
+            </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /.container -->
+</nav>
+    <div class="container docs-book-wrapper">
+      <div class="row">
+        <div class="col-lg-9 col-md-8 col-sm-8 col-lg-push-3 col-md-push-4 col-sm-push-4">
+<div class="row">
+  <div class="col-lg-8">
+      <h2>ironic_inspector.rules</h2>
+    
+  </div>
+  <div class="docs-actions">
+    
+    
+    <a id="logABugLink1" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+    
+  </div>
+</div>
+          <div class="row docs-byline">
+            <div class="docs-updated">updated: 2019-10-31 19:28</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="docs-body">
+
+  <h1>Source code for ironic_inspector.rules</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2015 Red Hat, Inc.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may</span>
+<span class="c1"># not use this file except in compliance with the License. You may obtain</span>
+<span class="c1"># a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT</span>
+<span class="c1"># WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the</span>
+<span class="c1"># License for the specific language governing permissions and limitations</span>
+<span class="c1"># under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;Support for introspection rules.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">jsonpath_rw</span> <span class="k">as</span> <span class="nn">jsonpath</span>
+<span class="kn">import</span> <span class="nn">jsonschema</span>
+<span class="kn">from</span> <span class="nn">oslo_db</span> <span class="k">import</span> <span class="n">exception</span> <span class="k">as</span> <span class="n">db_exc</span>
+<span class="kn">from</span> <span class="nn">oslo_utils</span> <span class="k">import</span> <span class="n">timeutils</span>
+<span class="kn">from</span> <span class="nn">oslo_utils</span> <span class="k">import</span> <span class="n">uuidutils</span>
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="k">import</span> <span class="n">orm</span>
+
+<span class="kn">from</span> <span class="nn">ironic_inspector.common.i18n</span> <span class="k">import</span> <span class="n">_</span>
+<span class="kn">from</span> <span class="nn">ironic_inspector</span> <span class="k">import</span> <span class="n">db</span>
+<span class="kn">from</span> <span class="nn">ironic_inspector.plugins</span> <span class="k">import</span> <span class="n">base</span> <span class="k">as</span> <span class="n">plugins_base</span>
+<span class="kn">from</span> <span class="nn">ironic_inspector</span> <span class="k">import</span> <span class="n">utils</span>
+
+
+<span class="n">LOG</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">getProcessingLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">_CONDITIONS_SCHEMA</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">_ACTIONS_SCHEMA</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="conditions_schema"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.rules.html#ironic_inspector.rules.conditions_schema">[docs]</a><span class="k">def</span> <span class="nf">conditions_schema</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">_CONDITIONS_SCHEMA</span>
+    <span class="k">if</span> <span class="n">_CONDITIONS_SCHEMA</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">condition_plugins</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span>
+                             <span class="n">plugins_base</span><span class="o">.</span><span class="n">rule_conditions_manager</span><span class="p">()]</span>
+        <span class="n">_CONDITIONS_SCHEMA</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Inspector rule conditions schema&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+            <span class="c1"># we can have rules that always apply</span>
+            <span class="s2">&quot;minItems&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+                <span class="c1"># field might become optional in the future, but not right now</span>
+                <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;op&quot;</span><span class="p">,</span> <span class="s2">&quot;field&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;op&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;condition operator&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;enum&quot;</span><span class="p">:</span> <span class="n">condition_plugins</span>
+                    <span class="p">},</span>
+                    <span class="s2">&quot;field&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;JSON path to field for matching&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span>
+                    <span class="p">},</span>
+                    <span class="s2">&quot;multiple&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;how to treat multiple values&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;enum&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;any&quot;</span><span class="p">,</span> <span class="s2">&quot;first&quot;</span><span class="p">]</span>
+                    <span class="p">},</span>
+                    <span class="s2">&quot;invert&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;whether to invert the result&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;boolean&quot;</span>
+                    <span class="p">},</span>
+                <span class="p">},</span>
+                <span class="c1"># other properties are validated by plugins</span>
+                <span class="s2">&quot;additionalProperties&quot;</span><span class="p">:</span> <span class="kc">True</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">_CONDITIONS_SCHEMA</span></div>
+
+
+<div class="viewcode-block" id="actions_schema"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.rules.html#ironic_inspector.rules.actions_schema">[docs]</a><span class="k">def</span> <span class="nf">actions_schema</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">_ACTIONS_SCHEMA</span>
+    <span class="k">if</span> <span class="n">_ACTIONS_SCHEMA</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">action_plugins</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span>
+                          <span class="n">plugins_base</span><span class="o">.</span><span class="n">rule_actions_manager</span><span class="p">()]</span>
+        <span class="n">_ACTIONS_SCHEMA</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Inspector rule actions schema&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;minItems&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;action to take&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;enum&quot;</span><span class="p">:</span> <span class="n">action_plugins</span>
+                    <span class="p">},</span>
+                <span class="p">},</span>
+                <span class="c1"># other properties are validated by plugins</span>
+                <span class="s2">&quot;additionalProperties&quot;</span><span class="p">:</span> <span class="kc">True</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">_ACTIONS_SCHEMA</span></div>
+
+
+<div class="viewcode-block" id="IntrospectionRule"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.rules.html#ironic_inspector.rules.IntrospectionRule">[docs]</a><span class="k">class</span> <span class="nc">IntrospectionRule</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;High-level class representing an introspection rule.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">conditions</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create rule object from database data.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_uuid</span> <span class="o">=</span> <span class="n">uuid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conditions</span> <span class="o">=</span> <span class="n">conditions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span> <span class="o">=</span> <span class="n">actions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">description</span>
+
+<div class="viewcode-block" id="IntrospectionRule.as_dict"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.rules.html#ironic_inspector.rules.IntrospectionRule.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">short</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_uuid</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">short</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;conditions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conditions</span><span class="p">]</span>
+            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_uuid</span>
+
+<div class="viewcode-block" id="IntrospectionRule.check_conditions"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.rules.html#ironic_inspector.rules.IntrospectionRule.check_conditions">[docs]</a>    <span class="k">def</span> <span class="nf">check_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if conditions are true for a given node.</span>
+
+<span class="sd">        :param node_info: a NodeInfo object</span>
+<span class="sd">        :param data: introspection data</span>
+<span class="sd">        :returns: True if conditions match, otherwise False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Checking rule &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+                  <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">ext_mgr</span> <span class="o">=</span> <span class="n">plugins_base</span><span class="o">.</span><span class="n">rule_conditions_manager</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">cond</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conditions</span><span class="p">:</span>
+            <span class="n">scheme</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">_parse_path</span><span class="p">(</span><span class="n">cond</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">scheme</span> <span class="o">==</span> <span class="s1">&#39;node&#39;</span><span class="p">:</span>
+                <span class="n">source_data</span> <span class="o">=</span> <span class="n">node_info</span><span class="o">.</span><span class="n">node</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">scheme</span> <span class="o">==</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span>
+                <span class="n">source_data</span> <span class="o">=</span> <span class="n">data</span>
+
+            <span class="n">field_values</span> <span class="o">=</span> <span class="n">jsonpath</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">source_data</span><span class="p">)</span>
+            <span class="n">field_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">field_values</span><span class="p">]</span>
+            <span class="n">cond_ext</span> <span class="o">=</span> <span class="n">ext_mgr</span><span class="p">[</span><span class="n">cond</span><span class="o">.</span><span class="n">op</span><span class="p">]</span><span class="o">.</span><span class="n">obj</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">field_values</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cond_ext</span><span class="o">.</span><span class="n">ALLOW_NONE</span><span class="p">:</span>
+                    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Field with JSON path </span><span class="si">%s</span><span class="s1"> was not found in data&#39;</span><span class="p">,</span>
+                              <span class="n">cond</span><span class="o">.</span><span class="n">field</span><span class="p">,</span> <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+                    <span class="n">field_values</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Field with JSON path </span><span class="si">%(path)s</span><span class="s1"> was not found &#39;</span>
+                             <span class="s1">&#39;in data, rule &quot;</span><span class="si">%(rule)s</span><span class="s1">&quot; will not &#39;</span>
+                             <span class="s1">&#39;be applied&#39;</span><span class="p">,</span>
+                             <span class="p">{</span><span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">cond</span><span class="o">.</span><span class="n">field</span><span class="p">,</span> <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">},</span>
+                             <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+
+            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">field_values</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">cond_ext</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">node_info</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">cond</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">cond</span><span class="o">.</span><span class="n">invert</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">result</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">cond</span><span class="o">.</span><span class="n">multiple</span> <span class="o">==</span> <span class="s1">&#39;first&#39;</span>
+                        <span class="ow">or</span> <span class="p">(</span><span class="n">cond</span><span class="o">.</span><span class="n">multiple</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">result</span><span class="p">)</span>
+                        <span class="ow">or</span> <span class="p">(</span><span class="n">cond</span><span class="o">.</span><span class="n">multiple</span> <span class="o">==</span> <span class="s1">&#39;any&#39;</span> <span class="ow">and</span> <span class="n">result</span><span class="p">)):</span>
+                    <span class="k">break</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+                <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Rule &quot;</span><span class="si">%(rule)s</span><span class="s1">&quot; will not be applied: condition &#39;</span>
+                         <span class="s1">&#39;</span><span class="si">%(field)s</span><span class="s1"> </span><span class="si">%(op)s</span><span class="s1"> </span><span class="si">%(params)s</span><span class="s1"> failed&#39;</span><span class="p">,</span>
+                         <span class="p">{</span><span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="s1">&#39;field&#39;</span><span class="p">:</span> <span class="n">cond</span><span class="o">.</span><span class="n">field</span><span class="p">,</span>
+                          <span class="s1">&#39;op&#39;</span><span class="p">:</span> <span class="n">cond</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">cond</span><span class="o">.</span><span class="n">params</span><span class="p">},</span>
+                         <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Rule &quot;</span><span class="si">%s</span><span class="s1">&quot; will be applied&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+                 <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="IntrospectionRule.apply_actions"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.rules.html#ironic_inspector.rules.IntrospectionRule.apply_actions">[docs]</a>    <span class="k">def</span> <span class="nf">apply_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run actions on a node.</span>
+
+<span class="sd">        :param node_info: NodeInfo instance</span>
+<span class="sd">        :param data: introspection data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Running actions for rule &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+                  <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">ext_mgr</span> <span class="o">=</span> <span class="n">plugins_base</span><span class="o">.</span><span class="n">rule_actions_manager</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">act</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">:</span>
+            <span class="n">ext</span> <span class="o">=</span> <span class="n">ext_mgr</span><span class="p">[</span><span class="n">act</span><span class="o">.</span><span class="n">action</span><span class="p">]</span><span class="o">.</span><span class="n">obj</span>
+
+            <span class="k">for</span> <span class="n">formatted_param</span> <span class="ow">in</span> <span class="n">ext</span><span class="o">.</span><span class="n">FORMATTED_PARAMS</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">initial</span> <span class="o">=</span> <span class="n">act</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">formatted_param</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                    <span class="c1"># Ignore parameter that wasn&#39;t given.</span>
+                    <span class="k">continue</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">act</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">formatted_param</span><span class="p">]</span> <span class="o">=</span> <span class="n">_format_value</span><span class="p">(</span><span class="n">initial</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+            <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Running action `</span><span class="si">%(action)s</span><span class="s1"> </span><span class="si">%(params)s</span><span class="s1">`&#39;</span><span class="p">,</span>
+                      <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">act</span><span class="o">.</span><span class="n">action</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">act</span><span class="o">.</span><span class="n">params</span><span class="p">},</span>
+                      <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">ext</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">node_info</span><span class="p">,</span> <span class="n">act</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Successfully applied actions&#39;</span><span class="p">,</span>
+                  <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_format_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply parameter formatting to a value.</span>
+
+<span class="sd">    Format strings with the values from `data`. If `value` is a dict or</span>
+<span class="sd">    list, any string members (and any nested string members) will also be</span>
+<span class="sd">    formatted recursively. This includes both keys and values for dicts.</span>
+
+<span class="sd">    :param value: The string to format, or container whose members to</span>
+<span class="sd">                  format.</span>
+<span class="sd">    :param data: Introspection data.</span>
+<span class="sd">    :returns: `value`, formatted with the parameters from `data`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+        <span class="c1"># NOTE(aarefiev): verify provided value with introspection</span>
+        <span class="c1"># data format specifications.</span>
+        <span class="c1"># TODO(aarefiev): simple verify on import rule time.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Invalid formatting variable key &#39;</span>
+                                <span class="s1">&#39;provided in value </span><span class="si">%(val)s</span><span class="s1">: </span><span class="si">%(e)s</span><span class="s1">&#39;</span><span class="p">),</span>
+                              <span class="p">{</span><span class="s1">&#39;val&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="n">e</span><span class="p">},</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">_format_value</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span> <span class="n">_format_value</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">value</span><span class="p">)}</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">_format_value</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Assume this is a &#39;primitive&#39; value.</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_path</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parse path, extract scheme and path.</span>
+
+<span class="sd">     Parse path with &#39;node&#39; and &#39;data&#39; scheme, which links on</span>
+<span class="sd">     introspection data and node info respectively. If scheme is</span>
+<span class="sd">     missing in path, default is &#39;data&#39;.</span>
+
+<span class="sd">    :param path: data or node path</span>
+<span class="sd">    :return: tuple (scheme, path)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;://&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">scheme</span> <span class="o">=</span> <span class="s1">&#39;data&#39;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">scheme</span> <span class="o">=</span> <span class="n">path</span><span class="p">[:</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">3</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">scheme</span><span class="p">,</span> <span class="n">path</span>
+
+
+<span class="k">def</span> <span class="nf">_validate_conditions</span><span class="p">(</span><span class="n">conditions_json</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Validates conditions from jsonschema.</span>
+
+<span class="sd">    :returns: a list of conditions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">jsonschema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">conditions_json</span><span class="p">,</span> <span class="n">conditions_schema</span><span class="p">())</span>
+    <span class="k">except</span> <span class="n">jsonschema</span><span class="o">.</span><span class="n">ValidationError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Validation failed for conditions: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">exc</span><span class="p">)</span>
+
+    <span class="n">cond_mgr</span> <span class="o">=</span> <span class="n">plugins_base</span><span class="o">.</span><span class="n">rule_conditions_manager</span><span class="p">()</span>
+    <span class="n">conditions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">reserved_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;op&#39;</span><span class="p">,</span> <span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="s1">&#39;multiple&#39;</span><span class="p">,</span> <span class="s1">&#39;invert&#39;</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">cond_json</span> <span class="ow">in</span> <span class="n">conditions_json</span><span class="p">:</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">cond_json</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">]</span>
+
+        <span class="n">scheme</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">_parse_path</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">scheme</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Unsupported scheme for field: </span><span class="si">%s</span><span class="s1">, valid &#39;</span>
+                                <span class="s1">&#39;values are node:// or data://&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">scheme</span><span class="p">)</span>
+        <span class="c1"># verify field as JSON path</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">jsonpath</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Unable to parse field JSON path </span><span class="si">%(field)s</span><span class="s1">: &#39;</span>
+                                <span class="s1">&#39;</span><span class="si">%(error)s</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;field&#39;</span><span class="p">:</span> <span class="n">field</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">exc</span><span class="p">})</span>
+
+        <span class="n">plugin</span> <span class="o">=</span> <span class="n">cond_mgr</span><span class="p">[</span><span class="n">cond_json</span><span class="p">[</span><span class="s1">&#39;op&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">obj</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cond_json</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                  <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reserved_params</span><span class="p">}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">plugin</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Invalid parameters for operator </span><span class="si">%(op)s</span><span class="s1">: &#39;</span>
+                                <span class="s1">&#39;</span><span class="si">%(error)s</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span>
+                              <span class="p">{</span><span class="s1">&#39;op&#39;</span><span class="p">:</span> <span class="n">cond_json</span><span class="p">[</span><span class="s1">&#39;op&#39;</span><span class="p">],</span> <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">exc</span><span class="p">})</span>
+
+        <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">cond_json</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">],</span>
+                           <span class="n">cond_json</span><span class="p">[</span><span class="s1">&#39;op&#39;</span><span class="p">],</span>
+                           <span class="n">cond_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;multiple&#39;</span><span class="p">,</span> <span class="s1">&#39;any&#39;</span><span class="p">),</span>
+                           <span class="n">cond_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;invert&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+                           <span class="n">params</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">conditions</span>
+
+
+<span class="k">def</span> <span class="nf">_validate_actions</span><span class="p">(</span><span class="n">actions_json</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Validates actions from jsonschema.</span>
+
+<span class="sd">    :returns: a list of actions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">jsonschema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">actions_json</span><span class="p">,</span> <span class="n">actions_schema</span><span class="p">())</span>
+    <span class="k">except</span> <span class="n">jsonschema</span><span class="o">.</span><span class="n">ValidationError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Validation failed for actions: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">exc</span><span class="p">)</span>
+
+    <span class="n">act_mgr</span> <span class="o">=</span> <span class="n">plugins_base</span><span class="o">.</span><span class="n">rule_actions_manager</span><span class="p">()</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">action_json</span> <span class="ow">in</span> <span class="n">actions_json</span><span class="p">:</span>
+        <span class="n">plugin</span> <span class="o">=</span> <span class="n">act_mgr</span><span class="p">[</span><span class="n">action_json</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">obj</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">action_json</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;action&#39;</span><span class="p">}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">plugin</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Invalid parameters for action </span><span class="si">%(act)s</span><span class="s1">: &#39;</span>
+                                <span class="s1">&#39;</span><span class="si">%(error)s</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span>
+                              <span class="p">{</span><span class="s1">&#39;act&#39;</span><span class="p">:</span> <span class="n">action_json</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">],</span> <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">exc</span><span class="p">})</span>
+
+        <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">action_json</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">actions</span>
+
+
+<div class="viewcode-block" id="create"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.rules.html#ironic_inspector.rules.create">[docs]</a><span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">conditions_json</span><span class="p">,</span> <span class="n">actions_json</span><span class="p">,</span> <span class="n">uuid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+           <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a new rule in database.</span>
+
+<span class="sd">    :param conditions_json: list of dicts with the following keys:</span>
+<span class="sd">                            * op - operator</span>
+<span class="sd">                            * field - JSON path to field to compare</span>
+<span class="sd">                            Other keys are stored as is.</span>
+<span class="sd">    :param actions_json: list of dicts with the following keys:</span>
+<span class="sd">                         * action - action type</span>
+<span class="sd">                         Other keys are stored as is.</span>
+<span class="sd">    :param uuid: rule UUID, will be generated if empty</span>
+<span class="sd">    :param description: human-readable rule description</span>
+<span class="sd">    :returns: new IntrospectionRule object</span>
+<span class="sd">    :raises: utils.Error on failure</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">uuid</span> <span class="o">=</span> <span class="n">uuid</span> <span class="ow">or</span> <span class="n">uuidutils</span><span class="o">.</span><span class="n">generate_uuid</span><span class="p">()</span>
+    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Creating rule </span><span class="si">%(uuid)s</span><span class="s1"> with description &quot;</span><span class="si">%(descr)s</span><span class="s1">&quot;, &#39;</span>
+              <span class="s1">&#39;conditions </span><span class="si">%(conditions)s</span><span class="s1"> and actions </span><span class="si">%(actions)s</span><span class="s1">&#39;</span><span class="p">,</span>
+              <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">uuid</span><span class="p">,</span> <span class="s1">&#39;descr&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+               <span class="s1">&#39;conditions&#39;</span><span class="p">:</span> <span class="n">conditions_json</span><span class="p">,</span> <span class="s1">&#39;actions&#39;</span><span class="p">:</span> <span class="n">actions_json</span><span class="p">})</span>
+
+    <span class="n">conditions</span> <span class="o">=</span> <span class="n">_validate_conditions</span><span class="p">(</span><span class="n">conditions_json</span><span class="p">)</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="n">_validate_actions</span><span class="p">(</span><span class="n">actions_json</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">ensure_transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+            <span class="n">rule</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Rule</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+                           <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">created_at</span><span class="o">=</span><span class="n">timeutils</span><span class="o">.</span><span class="n">utcnow</span><span class="p">())</span>
+
+            <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">multiple</span><span class="p">,</span> <span class="n">invert</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">conditions</span><span class="p">:</span>
+                <span class="n">rule</span><span class="o">.</span><span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">RuleCondition</span><span class="p">(</span><span class="n">op</span><span class="o">=</span><span class="n">op</span><span class="p">,</span>
+                                                        <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">,</span>
+                                                        <span class="n">multiple</span><span class="o">=</span><span class="n">multiple</span><span class="p">,</span>
+                                                        <span class="n">invert</span><span class="o">=</span><span class="n">invert</span><span class="p">,</span>
+                                                        <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">))</span>
+
+            <span class="k">for</span> <span class="n">action</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                <span class="n">rule</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">RuleAction</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span>
+                                                  <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">))</span>
+
+            <span class="n">rule</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">db_exc</span><span class="o">.</span><span class="n">DBDuplicateEntry</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Database integrity error </span><span class="si">%s</span><span class="s1"> when &#39;</span>
+                  <span class="s1">&#39;creating a rule&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Rule with UUID </span><span class="si">%s</span><span class="s1"> already exists&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">uuid</span><span class="p">,</span>
+                          <span class="n">code</span><span class="o">=</span><span class="mi">409</span><span class="p">)</span>
+
+    <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Created rule </span><span class="si">%(uuid)s</span><span class="s1"> with description &quot;</span><span class="si">%(descr)s</span><span class="s1">&quot;&#39;</span><span class="p">,</span>
+             <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">uuid</span><span class="p">,</span> <span class="s1">&#39;descr&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">IntrospectionRule</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">,</span>
+                             <span class="n">conditions</span><span class="o">=</span><span class="n">rule</span><span class="o">.</span><span class="n">conditions</span><span class="p">,</span>
+                             <span class="n">actions</span><span class="o">=</span><span class="n">rule</span><span class="o">.</span><span class="n">actions</span><span class="p">,</span>
+                             <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.rules.html#ironic_inspector.rules.get">[docs]</a><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">uuid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get a rule by its UUID.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">rule</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Rule</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">orm</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">NoResultFound</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Rule </span><span class="si">%s</span><span class="s1"> was not found&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">IntrospectionRule</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">rule</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">actions</span><span class="o">=</span><span class="n">rule</span><span class="o">.</span><span class="n">actions</span><span class="p">,</span>
+                             <span class="n">conditions</span><span class="o">=</span><span class="n">rule</span><span class="o">.</span><span class="n">conditions</span><span class="p">,</span>
+                             <span class="n">description</span><span class="o">=</span><span class="n">rule</span><span class="o">.</span><span class="n">description</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_all"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.rules.html#ironic_inspector.rules.get_all">[docs]</a><span class="k">def</span> <span class="nf">get_all</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;List all rules.&quot;&quot;&quot;</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Rule</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Rule</span><span class="o">.</span><span class="n">created_at</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">IntrospectionRule</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">rule</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">actions</span><span class="o">=</span><span class="n">rule</span><span class="o">.</span><span class="n">actions</span><span class="p">,</span>
+                              <span class="n">conditions</span><span class="o">=</span><span class="n">rule</span><span class="o">.</span><span class="n">conditions</span><span class="p">,</span>
+                              <span class="n">description</span><span class="o">=</span><span class="n">rule</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">query</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="delete"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.rules.html#ironic_inspector.rules.delete">[docs]</a><span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">uuid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Delete a rule by its UUID.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">ensure_transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">RuleAction</span><span class="p">,</span>
+                       <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">RuleCondition</span><span class="p">,</span>
+                       <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span> <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Rule</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+                 <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">())</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">count</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Rule </span><span class="si">%s</span><span class="s1"> was not found&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span>
+
+    <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Introspection rule </span><span class="si">%s</span><span class="s1"> was deleted&#39;</span><span class="p">,</span> <span class="n">uuid</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="delete_all"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.rules.html#ironic_inspector.rules.delete_all">[docs]</a><span class="k">def</span> <span class="nf">delete_all</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Delete all rules.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">ensure_transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">RuleAction</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">RuleCondition</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Rule</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+
+    <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;All introspection rules were deleted&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="apply"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.rules.html#ironic_inspector.rules.apply">[docs]</a><span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply rules to a node.&quot;&quot;&quot;</span>
+    <span class="n">rules</span> <span class="o">=</span> <span class="n">get_all</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">rules</span><span class="p">:</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;No custom introspection rules to apply&#39;</span><span class="p">,</span>
+                  <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Applying custom introspection rules&#39;</span><span class="p">,</span>
+              <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">to_apply</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">check_conditions</span><span class="p">(</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+            <span class="n">to_apply</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">to_apply</span><span class="p">:</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Running actions&#39;</span><span class="p">,</span> <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">to_apply</span><span class="p">:</span>
+            <span class="n">rule</span><span class="o">.</span><span class="n">apply_actions</span><span class="p">(</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;No actions to apply&#39;</span><span class="p">,</span> <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Successfully applied custom introspection rules&#39;</span><span class="p">,</span>
+             <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
+</pre></div>
+
+              </div>
+            </div>
+          </div>
+          <div class="docs-actions">
+          
+          
+            <a id="logABugLink3" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+          
+          </div>
+          <div class="row docs-byline bottom">
+            <div class="docs-updated">updated: 2019-10-31 19:28</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8 docs-license">
+<a href="https://creativecommons.org/licenses/by/3.0/">
+ <img src="../../_static/images/docs/license.png" alt="Creative Commons Attribution 3.0 License"/>
+</a>
+<p>
+ Except where otherwise noted, this document is licensed under
+ <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons
+ Attribution 3.0 License</a>. See all <a href="http://www.openstack.org/legal">
+ OpenStack Legal Documents</a>.
+</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 docs-actions-wrapper">
+            <!-- ID buglinkbottom added so that pre-filled doc bugs
+                 are sent to Launchpad projects related to the
+                 document -->
+              <a href="#" id="logABugLink2" class="docs-footer-actions"><i class="fa fa-bug"></i> found an error? report a bug</a>
+              <a href="http://ask.openstack.org" class="docs-footer-actions"><i class="fa fa-question-circle"></i> questions?</a>
+            </div>
+          </div>
+        </div>
+<div class="col-lg-3 col-md-4 col-sm-4 col-lg-pull-9 col-md-pull-8 col-sm-pull-8 docs-sidebar">
+  <div class="btn-group docs-sidebar-releases">
+    <button onclick="location.href='/'" class="btn docs-sidebar-home" data-toggle="tooltip" data-placement="top" title="Docs Home"><i class="fa fa-arrow-circle-o-left"></i></button>
+<button href="#" type="button" data-toggle="dropdown" class="btn docs-sidebar-release-select">OpenStack Documentation<i class="fa fa-caret-down"></i></button>
+    <ul class="dropdown-menu docs-sidebar-dropdown" role="menu" aria-labelledby="dLabel">
+      <li role="presentation" class="dropdown-header">Guides</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#install-guides">Install Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#user-guides">User Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#configuration-guides">Configuration Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#ops-and-admin-guides">Operations and Administration Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#api-guides">API Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#contributor-guides">Contributor Guides</a></li>
+      <li role="presentation" class="dropdown-header">Languages</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/de/">Deutsch (German)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/fr/">Français (French)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/id/">Bahasa Indonesia (Indonesian)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/it/">Italiano (Italian)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/ja/">日本語 (Japanese)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/ko_KR/">한국어 (Korean)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/pt_BR/">Português (Portuguese)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/tr_TR/">Türkçe (Türkiye)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/zh_CN/">简体中文 (Simplified Chinese)</a></li>
+    </ul>
+  </div>
+  <div class="docs-sidebar-toc">
+    <div class="docs-sidebar-section" id="table-of-contents">
+      <a href="../../index.html" class="docs-sidebar-section-title"><h4>ironic-inspector 2019.9.1.dev3</h4></a>
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Install Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration/index.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../admin/index.html">Administrator Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributor/index.html">How To Contribute</a></li>
+</ul>
+
+    </div>
+
+  </div>
+</div>
+      </div>
+    </div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+      <div class="col-lg-2 col-sm-2">
+        <h3>OpenStack</h3>
+        <ul>
+          <li><a href="http://openstack.org/projects/">Projects</a></li>
+          <li><a href="http://openstack.org/projects/openstack-security/">OpenStack Security</a></li>
+          <li><a href="http://openstack.org/projects/openstack-faq/">Common Questions</a></li>
+          <li><a href="http://openstack.org/blog/">Blog</a></li>
+          <li><a href="http://openstack.org/news/">News</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Community</h3>
+        <ul>
+          <li><a href="http://openstack.org/community/">User Groups</a></li>
+          <li><a href="http://openstack.org/community/events/">Events</a></li>
+          <li><a href="http://openstack.org/community/jobs/">Jobs</a></li>
+          <li><a href="http://openstack.org/foundation/companies/">Companies</a></li>
+          <li><a href="http://docs.openstack.org/infra/manual/developers.html">Contribute</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Documentation</h3>
+        <ul>
+          <li><a href="http://docs.openstack.org">OpenStack Manuals</a></li>
+          <li><a href="http://openstack.org/software/start/">Getting Started</a></li>
+          <li><a href="http://developer.openstack.org">API Documentation</a></li>
+          <li><a href="https://wiki.openstack.org">Wiki</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Branding & Legal</h3>
+        <ul>
+          <li><a href="http://openstack.org/brand/">Logos & Guidelines</a></li>
+          <li><a href="http://openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>
+          <li><a href="http://openstack.org/privacy/">Privacy Policy</a></li>
+          <li><a href="https://wiki.openstack.org/wiki/How_To_Contribute#Contributor_License_Agreement">OpenStack CLA</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <h3>Stay In Touch</h3>
+        <a href="https://twitter.com/OpenStack" target="_blank" class="social-icons footer-twitter"></a>
+        <a href="https://www.facebook.com/openstack" target="_blank" class="social-icons footer-facebook"></a>
+        <a href="https://www.linkedin.com/company/openstack" target="_blank" class="social-icons footer-linkedin"></a>
+        <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank" class="social-icons footer-youtube"></a>
+        <p class="fine-print">
+          The OpenStack project is provided under the
+          <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 license</a>. Openstack.org is powered by
+          <a href="http://rackspace.com" target="_blank">Rackspace Cloud Computing</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- jQuery -->
+<script type="text/javascript" src="../../_static/js/jquery-3.2.1.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
+<script type="text/javascript" src="../../_static/js/bootstrap.min.js"></script>
+
+<!-- The rest of the JS -->
+<script type="text/javascript" src="../../_static/js/navigation.js"></script>
+
+<!-- Docs JS -->
+<script type="text/javascript" src="../../_static/js/docs.js"></script>
+
+<!-- Popovers -->
+<script type="text/javascript" src="../../_static/js/webui-popover.js"></script>
+
+<!-- standard sphinx include libraries, which allow search highlighting -->
+<script type="text/javascript" src="../../_static/underscore.js"></script>
+<script type="text/javascript" src="../../_static/doctools.js"></script>
+<script type="text/javascript" src="../../_static/searchtools.js"></script>
+
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2019.9.1.dev3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        SOURCELINK_SUFFIX: '.txt',
+        HAS_SOURCE:  true
+      };
+</script>
+
+
+<!-- Javascript for page -->
+<script language="JavaScript">
+/* build a description of this page including SHA, source location on git repo,
+   build time and the project's launchpad bug tag. Set the HREF of the bug
+   buttons */
+
+    var lineFeed = "%0A";
+    var gitURL = "Source: Can't derive source file URL";
+
+    /* there have been cases where "pagename" wasn't set; better check for it */
+        /* "giturl" is the URL of the source file on Git and is auto-generated by
+           openstackdocstheme.
+
+           "pagename" is a standard sphinx parameter containing the name of
+           the source file, without extension.                             */
+
+        var sourceFile = "_modules/ironic_inspector/rules" + ".rst";
+        gitURL = "Source: https://git.openstack.org/cgit/openstack/ironic-inspector/tree/doc/source" + "/" + sourceFile;
+
+    /* gitsha, project and bug_tag rely on variables in conf.py */
+    var gitSha = "SHA: 8078a7d117a84fedb405447f7403b0e908afb559";
+        var bugProject = "ironic-inspector";
+        var bugTitle = "ironic_inspector.rules in ironic-inspector";
+    var fieldTags = "";
+        var useStoryboard = "";
+
+
+    /* "last_updated" is the build date and time. It relies on the
+       conf.py variable "html_last_updated_fmt", which should include
+       year/month/day as well as hours and minutes                   */
+    var buildstring = "Release: 2019.9.1.dev3 on 2019-10-31 19:28";
+
+    var fieldComment = encodeURI(buildstring) +
+                       lineFeed + encodeURI(gitSha) +
+                       lineFeed + encodeURI(gitURL) ;
+
+    logABug(bugTitle, bugProject, fieldComment, fieldTags);
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+          $.ajax({
+            context: this,
+            dataType : "html",
+            url : "https://docs.openstack.org/rocky/badge.html",
+            success : function(results) {
+                $('#deprecated-badge-container').html(results);
+            }
+        });
+    });
+</script>
+<div id="deprecated-badge-container"></div>
+
+  </body>
+</html>

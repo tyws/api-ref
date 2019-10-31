@@ -1,0 +1,1390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+
+    <title>OpenStack Docs: ironic_inspector.node_cache</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link href="../../_static/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Pygments CSS -->
+<link href="../../_static/css/native.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link href="../../_static/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="../../_static/css/combined.css" rel="stylesheet">
+
+<!-- Search CSS -->
+<link href="../../_static/css/search.css" rel="stylesheet">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+  
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-17511903-1', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+  </head>
+  <body>
+
+<!-- TEMPLATE_NAME: _modules/ironic_inspector/node_cache -->
+
+ <script>
+    (function (window, document) {
+        var loader = function () {
+            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+            script.src = "https://search.openstack.org/widget/embed.min.js?t="+Date.now();
+            tag.parentNode.insertBefore(script, tag);
+        };
+        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+    })(window, document);
+</script>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="brand-wrapper">
+        <a class="navbar-brand" href="https://www.openstack.org/"></a>
+      </div>
+      <div class="search-icon show"><i class="fa fa-search"></i> Search</div></div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="search-container tiny">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</div>
+      <ul class="nav navbar-nav navbar-main show">
+        <li class="search-container-mobile">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</li>
+        <li>
+          <a href="https://www.openstack.org/software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuSoftware">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/">Overview</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/project-navigator/">Project Navigator</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/sample-configs/">Sample Configs</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/security/">Security</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/start/">Get Started</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/roadmap/">Roadmap</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/latest-release/">Latest Release</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/sourcecode/">Source Code</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/user-stories/" class="drop" id="dropdownMenuUsers">Users <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuUsers">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/user-stories/">Overview</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/telecoms-and-nfv/">Telecoms and NFV</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/enterprise/">OpenStack in the Enterprise</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/appdev/">Application Developers & ISVs</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org/">Superuser Magazine</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/surveys/landing">User Survey</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/community/" class="drop" id="dropdownMenuCommunity">Community <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuCommunity">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/">Welcome! Start Here</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation/">OpenStack Foundation</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://wiki.openstack.org">OpenStack Wiki</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://groups.openstack.org">User Groups</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/speakers/">Speakers Bureau</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation/companies/">Supporting Companies</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/jobs/">Jobs</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/">Join The Community</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/marketplace/">Marketplace</a>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/events/" class="drop" id="dropdownMenuEvents">Events <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuEvents">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//www.openstack.org/community/events/">Overview</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/summit/">The OpenStack Summit</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//www.openstack.org/community/events/">More OpenStack Events</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/events/openstackdays">OpenStack Days</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/learn/" class="drop" id="dropdownMenuLearn">Learn <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/marketplace/training/">Training</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/coa/">Get Certified</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask a Technical Question</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser Magazine</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/videos/">Summit Videos</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/analysts/">Analyst Reports</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/news/">News</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/blog/">Blog</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://docs.openstack.org/">Docs</a>
+        </li>
+        <li>
+
+</li>
+
+
+            <li>
+
+                <li class="join-nav-section">
+                    <a href="https://www.openstack.org/join/" id="dropdownMenuJoin">Join <i class="fa fa-caret-down"></i></a>
+                    <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuJoin" style="display: none;">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/register/?membership-type=foundation">Sign up for Foundation Membership</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/#sponsor">Sponsor the Foundation</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation">More about the Foundation</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://www.openstack.org/Security/login/?BackURL=/home/" class="sign-in-btn">Log In</a>
+                </li>
+
+            </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /.container -->
+</nav>
+    <div class="container docs-book-wrapper">
+      <div class="row">
+        <div class="col-lg-9 col-md-8 col-sm-8 col-lg-push-3 col-md-push-4 col-sm-push-4">
+<div class="row">
+  <div class="col-lg-8">
+      <h2>ironic_inspector.node_cache</h2>
+    
+  </div>
+  <div class="docs-actions">
+    
+    
+    <a id="logABugLink1" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+    
+  </div>
+</div>
+          <div class="row docs-byline">
+            <div class="docs-updated">updated: 2019-10-31 19:28</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="docs-body">
+
+  <h1>Source code for ironic_inspector.node_cache</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#    http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or</span>
+<span class="c1"># implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;Cache for nodes currently under introspection.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">contextlib</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+
+<span class="kn">from</span> <span class="nn">automaton</span> <span class="k">import</span> <span class="n">exceptions</span> <span class="k">as</span> <span class="n">automaton_errors</span>
+<span class="kn">from</span> <span class="nn">ironicclient</span> <span class="k">import</span> <span class="n">exceptions</span>
+<span class="kn">from</span> <span class="nn">oslo_concurrency</span> <span class="k">import</span> <span class="n">lockutils</span>
+<span class="kn">from</span> <span class="nn">oslo_config</span> <span class="k">import</span> <span class="n">cfg</span>
+<span class="kn">from</span> <span class="nn">oslo_db.sqlalchemy</span> <span class="k">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">db_utils</span>
+<span class="kn">from</span> <span class="nn">oslo_utils</span> <span class="k">import</span> <span class="n">excutils</span>
+<span class="kn">from</span> <span class="nn">oslo_utils</span> <span class="k">import</span> <span class="n">reflection</span>
+<span class="kn">from</span> <span class="nn">oslo_utils</span> <span class="k">import</span> <span class="n">timeutils</span>
+<span class="kn">from</span> <span class="nn">oslo_utils</span> <span class="k">import</span> <span class="n">uuidutils</span>
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="k">import</span> <span class="n">exc</span> <span class="k">as</span> <span class="n">orm_errors</span>
+
+<span class="kn">from</span> <span class="nn">ironic_inspector.common.i18n</span> <span class="k">import</span> <span class="n">_</span>
+<span class="kn">from</span> <span class="nn">ironic_inspector.common</span> <span class="k">import</span> <span class="n">ironic</span> <span class="k">as</span> <span class="n">ir_utils</span>
+<span class="kn">from</span> <span class="nn">ironic_inspector</span> <span class="k">import</span> <span class="n">db</span>
+<span class="kn">from</span> <span class="nn">ironic_inspector</span> <span class="k">import</span> <span class="n">introspection_state</span> <span class="k">as</span> <span class="n">istate</span>
+<span class="kn">from</span> <span class="nn">ironic_inspector</span> <span class="k">import</span> <span class="n">utils</span>
+
+
+<span class="n">CONF</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">CONF</span>
+
+
+<span class="n">LOG</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">getProcessingLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="n">MACS_ATTRIBUTE</span> <span class="o">=</span> <span class="s1">&#39;mac&#39;</span>
+<span class="n">_LOCK_TEMPLATE</span> <span class="o">=</span> <span class="s1">&#39;node-</span><span class="si">%s</span><span class="s1">&#39;</span>
+<span class="n">_SEMAPHORES</span> <span class="o">=</span> <span class="n">lockutils</span><span class="o">.</span><span class="n">Semaphores</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_get_lock</span><span class="p">(</span><span class="n">uuid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get lock object for a given node UUID.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">lockutils</span><span class="o">.</span><span class="n">internal_lock</span><span class="p">(</span><span class="n">_LOCK_TEMPLATE</span> <span class="o">%</span> <span class="n">uuid</span><span class="p">,</span>
+                                   <span class="n">semaphores</span><span class="o">=</span><span class="n">_SEMAPHORES</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_lock_ctx</span><span class="p">(</span><span class="n">uuid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get context manager yielding a lock object for a given node UUID.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">lockutils</span><span class="o">.</span><span class="n">lock</span><span class="p">(</span><span class="n">_LOCK_TEMPLATE</span> <span class="o">%</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">semaphores</span><span class="o">=</span><span class="n">_SEMAPHORES</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="NodeInfo"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo">[docs]</a><span class="k">class</span> <span class="nc">NodeInfo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Record about a node in the cache.</span>
+
+<span class="sd">    This class optionally allows to acquire a lock on a node. Note that the</span>
+<span class="sd">    class instance itself is NOT thread-safe, you need to create a new instance</span>
+<span class="sd">    for every thread.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">version_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">started_at</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">finished_at</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">node</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lock</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manage_boot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span> <span class="o">=</span> <span class="n">uuid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">started_at</span> <span class="o">=</span> <span class="n">started_at</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finished_at</span> <span class="o">=</span> <span class="n">finished_at</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">error</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">invalidate_cache</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_version_id</span> <span class="o">=</span> <span class="n">version_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_node</span> <span class="o">=</span> <span class="n">node</span>
+        <span class="k">if</span> <span class="n">ports</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ports</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">ports</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span><span class="o">.</span><span class="n">address</span><span class="p">:</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ports</span> <span class="o">=</span> <span class="n">ports</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ironic</span> <span class="o">=</span> <span class="n">ironic</span>
+        <span class="c1"># On upgrade existing records will have manage_boot=NULL, which is</span>
+        <span class="c1"># equivalent to True actually.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_manage_boot</span> <span class="o">=</span> <span class="n">manage_boot</span> <span class="k">if</span> <span class="n">manage_boot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">True</span>
+        <span class="c1"># This is a lock on a node UUID, not on a NodeInfo object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span> <span class="o">=</span> <span class="n">lock</span> <span class="k">if</span> <span class="n">lock</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">_get_lock</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
+        <span class="c1"># Whether lock was acquired using this NodeInfo object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_locked</span> <span class="o">=</span> <span class="n">lock</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fsm</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_locked</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;BUG: node lock was not released by the moment &#39;</span>
+                        <span class="s1">&#39;node info object is deleted&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Self represented as an UUID and a state.&quot;&quot;&quot;</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">:</span>
+            <span class="n">parts</span> <span class="o">+=</span> <span class="p">[</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">]</span>
+        <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+
+<div class="viewcode-block" id="NodeInfo.acquire_lock"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.acquire_lock">[docs]</a>    <span class="k">def</span> <span class="nf">acquire_lock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Acquire a lock on the associated node.</span>
+
+<span class="sd">        Exits with success if a lock is already acquired using this NodeInfo</span>
+<span class="sd">        object.</span>
+
+<span class="sd">        :param blocking: if True, wait for lock to be acquired, otherwise</span>
+<span class="sd">                         return immediately.</span>
+<span class="sd">        :returns: boolean value, whether lock was acquired successfully</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_locked</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Attempting to acquire lock&#39;</span><span class="p">,</span> <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="n">blocking</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_locked</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Successfully acquired lock&#39;</span><span class="p">,</span> <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Unable to acquire lock&#39;</span><span class="p">,</span> <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="NodeInfo.release_lock"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.release_lock">[docs]</a>    <span class="k">def</span> <span class="nf">release_lock</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Release a lock on a node.</span>
+
+<span class="sd">        Does nothing if lock was not acquired using this NodeInfo object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_locked</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Successfully released lock&#39;</span><span class="p">,</span> <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_locked</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">version_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the version id&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_version_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">row</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">NotFoundInCacheError</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Node not found in the &#39;</span>
+                                                   <span class="s1">&#39;cache&#39;</span><span class="p">),</span> <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_version_id</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">version_id</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_version_id</span>
+
+    <span class="k">def</span> <span class="nf">_set_version_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_row</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="n">row</span><span class="o">.</span><span class="n">version_id</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">row</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_version_id</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get a row from the database with self.uuid and self.version_id&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># race condition if version_id changed outside of this node_info</span>
+            <span class="k">return</span> <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span>
+                <span class="n">uuid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">version_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">version_id</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">orm_errors</span><span class="o">.</span><span class="n">NoResultFound</span><span class="p">,</span> <span class="n">orm_errors</span><span class="o">.</span><span class="n">StaleDataError</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">NodeStateRaceCondition</span><span class="p">(</span><span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_commit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">fields</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Commit the fields into the DB.&quot;&quot;&quot;</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Committing fields: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">ensure_transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_version_id</span><span class="p">(</span><span class="n">uuidutils</span><span class="o">.</span><span class="n">generate_uuid</span><span class="p">(),</span> <span class="n">session</span><span class="p">)</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_row</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
+
+<div class="viewcode-block" id="NodeInfo.commit"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.commit">[docs]</a>    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Commit current node status into the database.&quot;&quot;&quot;</span>
+        <span class="c1"># state and version_id are updated separately</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_commit</span><span class="p">(</span><span class="n">started_at</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">started_at</span><span class="p">,</span> <span class="n">finished_at</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">finished_at</span><span class="p">,</span>
+                     <span class="n">error</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;State of the node_info object.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_row</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">state</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span>
+
+    <span class="k">def</span> <span class="nf">_set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_commit</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">_get_fsm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get an fsm instance initialized with self.state.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fsm</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fsm</span> <span class="o">=</span> <span class="n">istate</span><span class="o">.</span><span class="n">FSM</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">shallow</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fsm</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">start_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fsm</span>
+
+    <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+    <span class="k">def</span> <span class="nf">_fsm_ctx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">fsm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_fsm</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">fsm</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">fsm</span><span class="o">.</span><span class="n">current_state</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span>
+                <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Updating node state: </span><span class="si">%(current)s</span><span class="s1"> --&gt; </span><span class="si">%(new)s</span><span class="s1">&#39;</span><span class="p">,</span>
+                         <span class="p">{</span><span class="s1">&#39;current&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s1">&#39;new&#39;</span><span class="p">:</span> <span class="n">fsm</span><span class="o">.</span><span class="n">current_state</span><span class="p">},</span>
+                         <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_state</span><span class="p">(</span><span class="n">fsm</span><span class="o">.</span><span class="n">current_state</span><span class="p">)</span>
+
+<div class="viewcode-block" id="NodeInfo.fsm_event"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.fsm_event">[docs]</a>    <span class="k">def</span> <span class="nf">fsm_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update node_info.state based on a fsm.process_event(event) call.</span>
+
+<span class="sd">        An AutomatonException triggers an error event.</span>
+<span class="sd">        If strict, node_info.finished(istate.Events.error, error=str(exc))</span>
+<span class="sd">        is called with the AutomatonException instance and a EventError raised.</span>
+
+<span class="sd">        :param event: an event to process by the fsm</span>
+<span class="sd">        :strict: whether to fail the introspection upon an invalid event</span>
+<span class="sd">        :raises: NodeStateInvalidEvent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fsm_ctx</span><span class="p">()</span> <span class="k">as</span> <span class="n">fsm</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Executing fsm(</span><span class="si">%(state)s</span><span class="s1">).process_event(</span><span class="si">%(event)s</span><span class="s1">)&#39;</span><span class="p">,</span>
+                      <span class="p">{</span><span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">fsm</span><span class="o">.</span><span class="n">current_state</span><span class="p">,</span> <span class="s1">&#39;event&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">},</span>
+                      <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">fsm</span><span class="o">.</span><span class="n">process_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">automaton_errors</span><span class="o">.</span><span class="n">NotFound</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Invalid event: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">exc</span>
+                <span class="k">if</span> <span class="n">strict</span><span class="p">:</span>
+                    <span class="n">LOG</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+                    <span class="c1"># assuming an error event is always possible</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">finished</span><span class="p">(</span><span class="n">istate</span><span class="o">.</span><span class="n">Events</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">LOG</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">NodeStateInvalidEvent</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">),</span> <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Node introspection options as a dict.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Option</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span>
+                <span class="n">uuid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_options</span> <span class="o">=</span> <span class="p">{</span><span class="n">row</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                             <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Node look up attributes as a dict.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Attribute</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span>
+                <span class="n">node_uuid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ironic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Ironic client instance.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ironic</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ironic</span> <span class="o">=</span> <span class="n">ir_utils</span><span class="o">.</span><span class="n">get_client</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ironic</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">manage_boot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Whether to manage boot for this node.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_manage_boot</span>
+
+<div class="viewcode-block" id="NodeInfo.set_option"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.set_option">[docs]</a>    <span class="k">def</span> <span class="nf">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set an option for a node.&quot;&quot;&quot;</span>
+        <span class="n">encoded</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">ensure_transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Option</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span>
+                <span class="n">uuid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">encoded</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+                <span class="n">session</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NodeInfo.finished"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.finished">[docs]</a>    <span class="k">def</span> <span class="nf">finished</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Record status for this node and process a terminal transition.</span>
+
+<span class="sd">        Also deletes look up attributes from the cache.</span>
+
+<span class="sd">        :param event: the event to process</span>
+<span class="sd">        :param error: error message</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">release_lock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finished_at</span> <span class="o">=</span> <span class="n">timeutils</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">error</span>
+
+        <span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">ensure_transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fsm_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_commit</span><span class="p">(</span><span class="n">finished_at</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">finished_at</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">)</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Attribute</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span>
+                <span class="n">node_uuid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Option</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span>
+                <span class="n">uuid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="NodeInfo.add_attribute"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.add_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">add_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Store look up attribute for a node in the database.</span>
+
+<span class="sd">        :param name: attribute name</span>
+<span class="sd">        :param value: attribute value or list of possible values</span>
+<span class="sd">        :param session: optional existing database session</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
+
+        <span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">ensure_transaction</span><span class="p">(</span><span class="n">session</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">Attribute</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuidutils</span><span class="o">.</span><span class="n">generate_uuid</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                             <span class="n">value</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">node_uuid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+            <span class="c1"># Invalidate attributes so they&#39;re loaded on next usage</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="NodeInfo.from_row"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.from_row">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_row</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lock</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">node</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Construct NodeInfo from a database row.&quot;&quot;&quot;</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                  <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;uuid&#39;</span><span class="p">,</span> <span class="s1">&#39;version_id&#39;</span><span class="p">,</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;started_at&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;finished_at&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;manage_boot&#39;</span><span class="p">)}</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">ironic</span><span class="o">=</span><span class="n">ironic</span><span class="p">,</span> <span class="n">lock</span><span class="o">=</span><span class="n">lock</span><span class="p">,</span> <span class="n">node</span><span class="o">=</span><span class="n">node</span><span class="p">,</span> <span class="o">**</span><span class="n">fields</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NodeInfo.invalidate_cache"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.invalidate_cache">[docs]</a>    <span class="k">def</span> <span class="nf">invalidate_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Clear all cached info, so that it&#39;s reloaded next time.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_options</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_node</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ports</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ironic</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fsm</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_version_id</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="NodeInfo.node"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.node">[docs]</a>    <span class="k">def</span> <span class="nf">node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get Ironic node object associated with the cached node record.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ironic</span> <span class="o">=</span> <span class="n">ironic</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">ironic</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_node</span> <span class="o">=</span> <span class="n">ir_utils</span><span class="o">.</span><span class="n">get_node</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="n">ironic</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node</span></div>
+
+<div class="viewcode-block" id="NodeInfo.create_ports"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.create_ports">[docs]</a>    <span class="k">def</span> <span class="nf">create_ports</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create one or several ports for this node.</span>
+
+<span class="sd">        :param ports: List of ports with all their attributes</span>
+<span class="sd">                      e.g  [{&#39;mac&#39;: xx, &#39;ip&#39;: xx, &#39;client_id&#39;: None},</span>
+<span class="sd">                      {&#39;mac&#39;: xx, &#39;ip&#39;: None, &#39;client_id&#39;: None}]</span>
+<span class="sd">                      It also support the old style of list of macs.</span>
+<span class="sd">                      A warning is issued if port already exists on a node.</span>
+
+<span class="sd">        :param ironic: Ironic client to use instead of self.ironic</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">existing_macs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
+            <span class="n">mac</span> <span class="o">=</span> <span class="n">port</span>
+            <span class="n">extra</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="s1">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">port</span><span class="p">:</span>
+                <span class="n">extra</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">port</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]})</span>
+            <span class="n">pxe_enabled</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">mac</span> <span class="o">=</span> <span class="n">port</span><span class="p">[</span><span class="s1">&#39;mac&#39;</span><span class="p">]</span>
+                <span class="n">client_id</span> <span class="o">=</span> <span class="n">port</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;client_id&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">client_id</span><span class="p">:</span>
+                    <span class="n">extra</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;client-id&#39;</span><span class="p">:</span> <span class="n">client_id</span><span class="p">}</span>
+
+                <span class="n">pxe_enabled</span> <span class="o">=</span> <span class="n">port</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pxe&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mac</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ports</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_create_port</span><span class="p">(</span><span class="n">mac</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="n">ironic</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="n">extra</span><span class="p">,</span>
+                                  <span class="n">pxe_enabled</span><span class="o">=</span><span class="n">pxe_enabled</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">existing_macs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mac</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">existing_macs</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Did not create ports </span><span class="si">%s</span><span class="s1"> as they already exist&#39;</span><span class="p">,</span>
+                        <span class="n">existing_macs</span><span class="p">,</span> <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NodeInfo.ports"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.ports">[docs]</a>    <span class="k">def</span> <span class="nf">ports</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get Ironic port objects associated with the cached node record.</span>
+
+<span class="sd">        This value is cached as well, use invalidate_cache() to clean.</span>
+
+<span class="sd">        :return: dict MAC -&gt; port object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ports</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ironic</span> <span class="o">=</span> <span class="n">ironic</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">ironic</span>
+            <span class="n">port_list</span> <span class="o">=</span> <span class="n">ironic</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">list_ports</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ports</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span><span class="o">.</span><span class="n">address</span><span class="p">:</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">port_list</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ports</span></div>
+
+    <span class="k">def</span> <span class="nf">_create_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mac</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">ironic</span> <span class="o">=</span> <span class="n">ironic</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">ironic</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">port</span> <span class="o">=</span> <span class="n">ironic</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                <span class="n">node_uuid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">mac</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Port </span><span class="si">%(uuid)s</span><span class="s1"> was created successfully, MAC: </span><span class="si">%(mac)s</span><span class="s1">,&#39;</span>
+                     <span class="s1">&#39;attributes: </span><span class="si">%(attrs)s</span><span class="s1">&#39;</span><span class="p">,</span>
+                     <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">port</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="s1">&#39;mac&#39;</span><span class="p">:</span> <span class="n">port</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
+                      <span class="s1">&#39;attrs&#39;</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">},</span>
+                     <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Conflict</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Port </span><span class="si">%s</span><span class="s1"> already exists, skipping&#39;</span><span class="p">,</span>
+                        <span class="n">mac</span><span class="p">,</span> <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+            <span class="c1"># NOTE(dtantsur): we didn&#39;t get port object back, so we have to</span>
+            <span class="c1"># reload ports on next access</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ports</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ports</span><span class="p">[</span><span class="n">mac</span><span class="p">]</span> <span class="o">=</span> <span class="n">port</span>
+
+<div class="viewcode-block" id="NodeInfo.patch"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.patch">[docs]</a>    <span class="k">def</span> <span class="nf">patch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patches</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply JSON patches to a node.</span>
+
+<span class="sd">        Refreshes cached node instance.</span>
+
+<span class="sd">        :param patches: JSON patches to apply</span>
+<span class="sd">        :param ironic: Ironic client to use instead of self.ironic</span>
+<span class="sd">        :raises: ironicclient exceptions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ironic</span> <span class="o">=</span> <span class="n">ironic</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">ironic</span>
+        <span class="c1"># NOTE(aarefiev): support path w/o ahead forward slash</span>
+        <span class="c1"># as Ironic cli does</span>
+        <span class="k">for</span> <span class="n">patch</span> <span class="ow">in</span> <span class="n">patches</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">patch</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">patch</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
+                <span class="n">patch</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">patch</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span>
+
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Updating node with patches </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">patches</span><span class="p">,</span> <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_node</span> <span class="o">=</span> <span class="n">ironic</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">patches</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NodeInfo.patch_port"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.patch_port">[docs]</a>    <span class="k">def</span> <span class="nf">patch_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">patches</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply JSON patches to a port.</span>
+
+<span class="sd">        :param port: port object or its MAC</span>
+<span class="sd">        :param patches: JSON patches to apply</span>
+<span class="sd">        :param ironic: Ironic client to use instead of self.ironic</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ironic</span> <span class="o">=</span> <span class="n">ironic</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">ironic</span>
+        <span class="n">ports</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ports</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+            <span class="n">port</span> <span class="o">=</span> <span class="n">ports</span><span class="p">[</span><span class="n">port</span><span class="p">]</span>
+
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Updating port </span><span class="si">%(mac)s</span><span class="s1"> with patches </span><span class="si">%(patches)s</span><span class="s1">&#39;</span><span class="p">,</span>
+                  <span class="p">{</span><span class="s1">&#39;mac&#39;</span><span class="p">:</span> <span class="n">port</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="s1">&#39;patches&#39;</span><span class="p">:</span> <span class="n">patches</span><span class="p">},</span>
+                  <span class="n">node_info</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">new_port</span> <span class="o">=</span> <span class="n">ironic</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">port</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">patches</span><span class="p">)</span>
+        <span class="n">ports</span><span class="p">[</span><span class="n">port</span><span class="o">.</span><span class="n">address</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_port</span></div>
+
+<div class="viewcode-block" id="NodeInfo.update_properties"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.update_properties">[docs]</a>    <span class="k">def</span> <span class="nf">update_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">props</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update properties on a node.</span>
+
+<span class="sd">        :param props: properties to update</span>
+<span class="sd">        :param ironic: Ironic client to use instead of self.ironic</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ironic</span> <span class="o">=</span> <span class="n">ironic</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">ironic</span>
+        <span class="n">patches</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;op&#39;</span><span class="p">:</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;/properties/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">k</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">v</span><span class="p">}</span>
+                   <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">props</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">patches</span><span class="p">,</span> <span class="n">ironic</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NodeInfo.update_capabilities"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.update_capabilities">[docs]</a>    <span class="k">def</span> <span class="nf">update_capabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">caps</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update capabilities on a node.</span>
+
+<span class="sd">        :param caps: capabilities to update</span>
+<span class="sd">        :param ironic: Ironic client to use instead of self.ironic</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">existing</span> <span class="o">=</span> <span class="n">ir_utils</span><span class="o">.</span><span class="n">capabilities_to_dict</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">()</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;capabilities&#39;</span><span class="p">))</span>
+        <span class="n">existing</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">caps</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_properties</span><span class="p">(</span>
+            <span class="n">ironic</span><span class="o">=</span><span class="n">ironic</span><span class="p">,</span>
+            <span class="n">capabilities</span><span class="o">=</span><span class="n">ir_utils</span><span class="o">.</span><span class="n">dict_to_capabilities</span><span class="p">(</span><span class="n">existing</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="NodeInfo.delete_port"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.delete_port">[docs]</a>    <span class="k">def</span> <span class="nf">delete_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Delete port.</span>
+
+<span class="sd">        :param port: port object or its MAC</span>
+<span class="sd">        :param ironic: Ironic client to use instead of self.ironic</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ironic</span> <span class="o">=</span> <span class="n">ironic</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">ironic</span>
+        <span class="n">ports</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ports</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+            <span class="n">port</span> <span class="o">=</span> <span class="n">ports</span><span class="p">[</span><span class="n">port</span><span class="p">]</span>
+
+        <span class="n">ironic</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">port</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">ports</span><span class="p">[</span><span class="n">port</span><span class="o">.</span><span class="n">address</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="NodeInfo.get_by_path"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.get_by_path">[docs]</a>    <span class="k">def</span> <span class="nf">get_by_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get field value by ironic-style path (e.g. /extra/foo).</span>
+
+<span class="sd">        :param path: path to a field</span>
+<span class="sd">        :returns: field value</span>
+<span class="sd">        :raises: KeyError if field was not found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;/&#39;</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+                <span class="n">prop</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">(),</span> <span class="n">prop</span><span class="p">)[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">(),</span> <span class="n">path</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NodeInfo.replace_field"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.NodeInfo.replace_field">[docs]</a>    <span class="k">def</span> <span class="nf">replace_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Replace a field on ironic node.</span>
+
+<span class="sd">        :param path: path to a field as used by the ironic client</span>
+<span class="sd">        :param func: function accepting an old value and returning a new one</span>
+<span class="sd">        :param kwargs: if &#39;default&#39; value is passed here, it will be used when</span>
+<span class="sd">                       no existing value is found.</span>
+<span class="sd">        :raises: KeyError if value is not found and default is not set</span>
+<span class="sd">        :raises: everything that patch() may raise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ironic</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;ironic&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">ironic</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_by_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;replace&#39;</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;default&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">]</span>
+                <span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;add&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span>
+
+        <span class="n">ref_value</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="n">ref_value</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">patch</span><span class="p">([{</span><span class="s1">&#39;op&#39;</span><span class="p">:</span> <span class="n">op</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}],</span> <span class="n">ironic</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="triggers_fsm_error_transition"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.triggers_fsm_error_transition">[docs]</a><span class="k">def</span> <span class="nf">triggers_fsm_error_transition</span><span class="p">(</span><span class="n">errors</span><span class="o">=</span><span class="p">(</span><span class="ne">Exception</span><span class="p">,),</span>
+                                  <span class="n">no_errors</span><span class="o">=</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">NodeStateInvalidEvent</span><span class="p">,</span>
+                                             <span class="n">utils</span><span class="o">.</span><span class="n">NodeStateRaceCondition</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;Trigger an fsm error transition upon certain errors.</span>
+
+<span class="sd">    It is assumed the first function arg of the decorated function is always a</span>
+<span class="sd">    NodeInfo instance.</span>
+
+<span class="sd">    :param errors: a tuple of exceptions upon which an error</span>
+<span class="sd">                   event is triggered. Re-raised.</span>
+<span class="sd">    :param no_errors: a tuple of exceptions that won&#39;t trigger the</span>
+<span class="sd">                      error event.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">outer</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="nd">@six</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">node_info</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">node_info</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">no_errors</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+                <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Not processing error event for the &#39;</span>
+                          <span class="s1">&#39;exception: </span><span class="si">%(exc)s</span><span class="s1"> raised by </span><span class="si">%(func)s</span><span class="s1">&#39;</span><span class="p">,</span>
+                          <span class="p">{</span><span class="s1">&#39;exc&#39;</span><span class="p">:</span> <span class="n">exc</span><span class="p">,</span>
+                           <span class="s1">&#39;func&#39;</span><span class="p">:</span> <span class="n">reflection</span><span class="o">.</span><span class="n">get_callable_name</span><span class="p">(</span><span class="n">func</span><span class="p">)},</span>
+                          <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">errors</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">excutils</span><span class="o">.</span><span class="n">save_and_reraise_exception</span><span class="p">():</span>
+                    <span class="n">LOG</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Processing the error event because of an &#39;</span>
+                              <span class="s1">&#39;exception </span><span class="si">%(exc_type)s</span><span class="s1">: </span><span class="si">%(exc)s</span><span class="s1"> raised by &#39;</span>
+                              <span class="s1">&#39;</span><span class="si">%(func)s</span><span class="s1">&#39;</span><span class="p">,</span>
+                              <span class="p">{</span><span class="s1">&#39;exc_type&#39;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">exc</span><span class="p">),</span> <span class="s1">&#39;exc&#39;</span><span class="p">:</span> <span class="n">exc</span><span class="p">,</span>
+                               <span class="s1">&#39;func&#39;</span><span class="p">:</span> <span class="n">reflection</span><span class="o">.</span><span class="n">get_callable_name</span><span class="p">(</span><span class="n">func</span><span class="p">)},</span>
+                              <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">)</span>
+                    <span class="c1"># an error event should be possible from all states</span>
+                    <span class="n">node_info</span><span class="o">.</span><span class="n">finished</span><span class="p">(</span><span class="n">istate</span><span class="o">.</span><span class="n">Events</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">ret</span>
+        <span class="k">return</span> <span class="n">inner</span>
+    <span class="k">return</span> <span class="n">outer</span></div>
+
+
+<div class="viewcode-block" id="fsm_event_before"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.fsm_event_before">[docs]</a><span class="k">def</span> <span class="nf">fsm_event_before</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Trigger an fsm event before the function execution.</span>
+
+<span class="sd">    It is assumed the first function arg of the decorated function is always a</span>
+<span class="sd">    NodeInfo instance.</span>
+
+<span class="sd">    :param event: the event to process before the function call</span>
+<span class="sd">    :param strict: make an invalid fsm event trigger an error event</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">outer</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="nd">@six</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">node_info</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Processing event </span><span class="si">%(event)s</span><span class="s1"> before calling &#39;</span>
+                      <span class="s1">&#39;</span><span class="si">%(func)s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;event&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">,</span> <span class="s1">&#39;func&#39;</span><span class="p">:</span> <span class="n">func</span><span class="p">},</span>
+                      <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">)</span>
+            <span class="n">node_info</span><span class="o">.</span><span class="n">fsm_event</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">node_info</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">inner</span>
+    <span class="k">return</span> <span class="n">outer</span></div>
+
+
+<div class="viewcode-block" id="fsm_event_after"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.fsm_event_after">[docs]</a><span class="k">def</span> <span class="nf">fsm_event_after</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Trigger an fsm event after the function execution.</span>
+
+<span class="sd">    It is assumed the first function arg of the decorated function is always a</span>
+<span class="sd">    NodeInfo instance.</span>
+
+<span class="sd">    :param event: the event to process after the function call</span>
+<span class="sd">    :param strict: make an invalid fsm event trigger an error event</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">outer</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="nd">@six</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">node_info</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">node_info</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Processing event </span><span class="si">%(event)s</span><span class="s1"> after calling &#39;</span>
+                      <span class="s1">&#39;</span><span class="si">%(func)s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;event&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">,</span> <span class="s1">&#39;func&#39;</span><span class="p">:</span> <span class="n">func</span><span class="p">},</span>
+                      <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">)</span>
+            <span class="n">node_info</span><span class="o">.</span><span class="n">fsm_event</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ret</span>
+        <span class="k">return</span> <span class="n">inner</span>
+    <span class="k">return</span> <span class="n">outer</span></div>
+
+
+<div class="viewcode-block" id="fsm_transition"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.fsm_transition">[docs]</a><span class="k">def</span> <span class="nf">fsm_transition</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">reentrant</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">exc_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Decorate a function to perform a (non-)reentrant transition.</span>
+
+<span class="sd">    If True, reentrant transition will be performed at the end of a function</span>
+<span class="sd">    call. If False, the transition will be performed before the function call.</span>
+<span class="sd">    The function is decorated with the triggers_fsm_error_transition decorator</span>
+<span class="sd">    as well.</span>
+
+<span class="sd">    :param event: the event to bind the transition to.</span>
+<span class="sd">    :param reentrant: whether the transition is reentrant.</span>
+<span class="sd">    :param exc_kwargs: passed on to the triggers_fsm_error_transition decorator</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">outer</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="n">inner</span> <span class="o">=</span> <span class="n">triggers_fsm_error_transition</span><span class="p">(</span><span class="o">**</span><span class="n">exc_kwargs</span><span class="p">)(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">reentrant</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">fsm_event_before</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span><span class="n">inner</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fsm_event_after</span><span class="p">(</span><span class="n">event</span><span class="p">)(</span><span class="n">inner</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">outer</span></div>
+
+
+<div class="viewcode-block" id="release_lock"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.release_lock">[docs]</a><span class="k">def</span> <span class="nf">release_lock</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Decorate a node_info-function to release the node_info lock.</span>
+
+<span class="sd">    Assumes the first parameter of the function func is always a NodeInfo</span>
+<span class="sd">    instance.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@six</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">node_info</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">node_info</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="c1"># FIXME(milan) hacking the test cases to work</span>
+            <span class="c1"># with release_lock.assert_called_once...</span>
+            <span class="k">if</span> <span class="n">node_info</span><span class="o">.</span><span class="n">_locked</span><span class="p">:</span>
+                <span class="n">node_info</span><span class="o">.</span><span class="n">release_lock</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">inner</span></div>
+
+
+<div class="viewcode-block" id="start_introspection"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.start_introspection">[docs]</a><span class="k">def</span> <span class="nf">start_introspection</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Start the introspection of a node.</span>
+
+<span class="sd">    If a node_info record exists in the DB, a start transition is used rather</span>
+<span class="sd">    than dropping the record in order to check for the start transition</span>
+<span class="sd">    validity in particular node state.</span>
+
+<span class="sd">    :param uuid: Ironic node UUID</span>
+<span class="sd">    :param kwargs: passed on to add_node()</span>
+<span class="sd">    :raises: NodeStateInvalidEvent in case the start transition is invalid in</span>
+<span class="sd">             the current node state</span>
+<span class="sd">    :raises: NodeStateRaceCondition if a mismatch was detected between the</span>
+<span class="sd">             node_info cache and the DB</span>
+<span class="sd">    :returns: NodeInfo</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">ensure_transaction</span><span class="p">():</span>
+        <span class="n">node_info</span> <span class="o">=</span> <span class="n">NodeInfo</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
+        <span class="c1"># check that the start transition is possible</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">node_info</span><span class="o">.</span><span class="n">fsm_event</span><span class="p">(</span><span class="n">istate</span><span class="o">.</span><span class="n">Events</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">utils</span><span class="o">.</span><span class="n">NotFoundInCacheError</span><span class="p">:</span>
+            <span class="c1"># node not found while in the fsm_event handler</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Node missing in the cache; adding it now&#39;</span><span class="p">,</span>
+                      <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">)</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">istate</span><span class="o">.</span><span class="n">States</span><span class="o">.</span><span class="n">starting</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">node_info</span><span class="o">.</span><span class="n">state</span>
+        <span class="k">return</span> <span class="n">add_node</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="add_node"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.add_node">[docs]</a><span class="k">def</span> <span class="nf">add_node</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">manage_boot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">attributes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Store information about a node under introspection.</span>
+
+<span class="sd">    All existing information about this node is dropped.</span>
+<span class="sd">    Empty values are skipped.</span>
+
+<span class="sd">    :param uuid: Ironic node UUID</span>
+<span class="sd">    :param state: The initial state of the node</span>
+<span class="sd">    :param manage_boot: whether to manage boot for this node</span>
+<span class="sd">    :param attributes: attributes known about this node (like macs, BMC etc);</span>
+<span class="sd">                       also ironic client instance may be passed under &#39;ironic&#39;</span>
+<span class="sd">    :returns: NodeInfo</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">started_at</span> <span class="o">=</span> <span class="n">timeutils</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">ensure_transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">_delete_node</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
+        <span class="n">version_id</span> <span class="o">=</span> <span class="n">uuidutils</span><span class="o">.</span><span class="n">generate_uuid</span><span class="p">()</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">version_id</span><span class="o">=</span><span class="n">version_id</span><span class="p">,</span>
+                <span class="n">started_at</span><span class="o">=</span><span class="n">started_at</span><span class="p">,</span> <span class="n">manage_boot</span><span class="o">=</span><span class="n">manage_boot</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+
+        <span class="n">node_info</span> <span class="o">=</span> <span class="n">NodeInfo</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">started_at</span><span class="o">=</span><span class="n">started_at</span><span class="p">,</span>
+                             <span class="n">version_id</span><span class="o">=</span><span class="n">version_id</span><span class="p">,</span> <span class="n">manage_boot</span><span class="o">=</span><span class="n">manage_boot</span><span class="p">,</span>
+                             <span class="n">ironic</span><span class="o">=</span><span class="n">attributes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ironic&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">attributes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">node_info</span><span class="o">.</span><span class="n">add_attribute</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">node_info</span></div>
+
+
+<div class="viewcode-block" id="delete_nodes_not_in_list"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.delete_nodes_not_in_list">[docs]</a><span class="k">def</span> <span class="nf">delete_nodes_not_in_list</span><span class="p">(</span><span class="n">uuids</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Delete nodes which don&#39;t exist in Ironic node UUIDs.</span>
+
+<span class="sd">    :param uuids: Ironic node UUIDs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">inspector_uuids</span> <span class="o">=</span> <span class="n">_list_node_uuids</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">uuid</span> <span class="ow">in</span> <span class="n">inspector_uuids</span> <span class="o">-</span> <span class="n">uuids</span><span class="p">:</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Node </span><span class="si">%s</span><span class="s1"> was deleted from Ironic, dropping from Ironic &#39;</span>
+                    <span class="s1">&#39;Inspector database&#39;</span><span class="p">,</span> <span class="n">uuid</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">_get_lock_ctx</span><span class="p">(</span><span class="n">uuid</span><span class="p">):</span>
+            <span class="n">_delete_node</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_delete_node</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Delete information about a node.</span>
+
+<span class="sd">    :param uuid: Ironic node UUID</span>
+<span class="sd">    :param session: optional existing database session</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">ensure_transaction</span><span class="p">(</span><span class="n">session</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Attribute</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span>
+            <span class="n">node_uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Option</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="p">):</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+                           <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="introspection_active"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.introspection_active">[docs]</a><span class="k">def</span> <span class="nf">introspection_active</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Check if introspection is active for at least one node.&quot;&quot;&quot;</span>
+    <span class="c1"># FIXME(dtantsur): is there a better way to express it?</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">finished_at</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+            <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="active_macs"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.active_macs">[docs]</a><span class="k">def</span> <span class="nf">active_macs</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;List all MAC&#39;s that are on introspection right now.&quot;&quot;&quot;</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Attribute</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span>
+             <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Attribute</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">MACS_ATTRIBUTE</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">x</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">query</span><span class="p">}</span></div>
+
+
+<span class="k">def</span> <span class="nf">_list_node_uuids</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get all nodes&#39; uuid from cache.</span>
+
+<span class="sd">    :returns: Set of nodes&#39; uuid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">x</span><span class="o">.</span><span class="n">uuid</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="o">.</span><span class="n">uuid</span><span class="p">)}</span>
+
+
+<div class="viewcode-block" id="get_node"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.get_node">[docs]</a><span class="k">def</span> <span class="nf">get_node</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">locked</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get node from cache.</span>
+
+<span class="sd">    :param node_id: node UUID or name.</span>
+<span class="sd">    :param ironic: optional ironic client instance</span>
+<span class="sd">    :param locked: if True, get a lock on node before fetching its data</span>
+<span class="sd">    :returns: structure NodeInfo.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">uuidutils</span><span class="o">.</span><span class="n">is_uuid_like</span><span class="p">(</span><span class="n">node_id</span><span class="p">):</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">uuid</span> <span class="o">=</span> <span class="n">node_id</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">ir_utils</span><span class="o">.</span><span class="n">get_node</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="n">ironic</span><span class="p">)</span>
+        <span class="n">uuid</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">uuid</span>
+
+    <span class="k">if</span> <span class="n">locked</span><span class="p">:</span>
+        <span class="n">lock</span> <span class="o">=</span> <span class="n">_get_lock</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
+        <span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">lock</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">row</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Could not find node </span><span class="si">%s</span><span class="s1"> in cache&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">uuid</span><span class="p">,</span>
+                              <span class="n">code</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">NodeInfo</span><span class="o">.</span><span class="n">from_row</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="n">ironic</span><span class="p">,</span> <span class="n">lock</span><span class="o">=</span><span class="n">lock</span><span class="p">,</span> <span class="n">node</span><span class="o">=</span><span class="n">node</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">excutils</span><span class="o">.</span><span class="n">save_and_reraise_exception</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">lock</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="find_node"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.find_node">[docs]</a><span class="k">def</span> <span class="nf">find_node</span><span class="p">(</span><span class="o">**</span><span class="n">attributes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find node in cache.</span>
+
+<span class="sd">    Looks up a node based on attributes in a best-match fashion.</span>
+<span class="sd">    This function acquires a lock on a node.</span>
+
+<span class="sd">    :param attributes: attributes known about this node (like macs, BMC etc)</span>
+<span class="sd">                       also ironic client instance may be passed under &#39;ironic&#39;</span>
+<span class="sd">    :returns: structure NodeInfo with attributes ``uuid`` and ``created_at``</span>
+<span class="sd">    :raises: Error if node is not found or multiple nodes match the attributes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ironic</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ironic&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># NOTE(dtantsur): sorting is not required, but gives us predictability</span>
+    <span class="n">found</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Empty value for attribute </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
+
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Trying to use </span><span class="si">%s</span><span class="s1"> of value </span><span class="si">%s</span><span class="s1"> for node look up&#39;</span><span class="p">,</span>
+                  <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Attribute</span><span class="o">.</span><span class="n">node_uuid</span><span class="p">)</span>
+        <span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">db</span><span class="o">.</span><span class="n">Attribute</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">)</span> <span class="o">&amp;</span>
+                 <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Attribute</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">moves</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">or_</span><span class="p">,</span> <span class="n">pairs</span><span class="p">))</span>
+        <span class="n">found</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">node_uuid</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">query</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">NotFoundInCacheError</span><span class="p">(</span><span class="n">_</span><span class="p">(</span>
+            <span class="s1">&#39;Could not find a node for attributes </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">attributes</span><span class="p">)</span>
+
+    <span class="n">most_common</span> <span class="o">=</span> <span class="n">found</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>
+    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;The following nodes match the attributes: </span><span class="si">%(attributes)s</span><span class="s1">, &#39;</span>
+              <span class="s1">&#39;scoring: </span><span class="si">%(most_common)s</span><span class="s1">&#39;</span><span class="p">,</span>
+              <span class="p">{</span><span class="s1">&#39;most_common&#39;</span><span class="p">:</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">tpl</span> <span class="k">for</span> <span class="n">tpl</span> <span class="ow">in</span> <span class="n">most_common</span><span class="p">),</span>
+               <span class="s1">&#39;attributes&#39;</span><span class="p">:</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">tpl</span> <span class="k">for</span> <span class="n">tpl</span> <span class="ow">in</span>
+                                       <span class="n">attributes</span><span class="o">.</span><span class="n">items</span><span class="p">())})</span>
+
+    <span class="c1"># NOTE(milan) most_common is sorted, higher scores first</span>
+    <span class="n">highest_score</span> <span class="o">=</span> <span class="n">most_common</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">found</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">most_common</span> <span class="k">if</span> <span class="n">highest_score</span> <span class="o">==</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">found</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span>
+            <span class="s1">&#39;Multiple nodes match the same number of attributes &#39;</span>
+            <span class="s1">&#39;</span><span class="si">%(attr)s</span><span class="s1">: </span><span class="si">%(found)s</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;attr&#39;</span><span class="p">:</span> <span class="n">attributes</span><span class="p">,</span> <span class="s1">&#39;found&#39;</span><span class="p">:</span> <span class="n">found</span><span class="p">},</span> <span class="n">code</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span>
+
+    <span class="n">uuid</span> <span class="o">=</span> <span class="n">found</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+    <span class="n">node_info</span> <span class="o">=</span> <span class="n">NodeInfo</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="n">ironic</span><span class="p">)</span>
+    <span class="n">node_info</span><span class="o">.</span><span class="n">acquire_lock</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="o">.</span><span class="n">started_at</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="o">.</span><span class="n">finished_at</span><span class="p">)</span><span class="o">.</span>
+               <span class="n">filter_by</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">row</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span>
+                <span class="s1">&#39;Could not find node </span><span class="si">%s</span><span class="s1"> in introspection cache, &#39;</span>
+                <span class="s1">&#39;probably it</span><span class="se">\&#39;</span><span class="s1">s not on introspection now&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">finished_at</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span>
+                <span class="s1">&#39;Introspection for node </span><span class="si">%(node)s</span><span class="s1"> already finished on &#39;</span>
+                <span class="s1">&#39;</span><span class="si">%(finish)s</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;node&#39;</span><span class="p">:</span> <span class="n">uuid</span><span class="p">,</span> <span class="s1">&#39;finish&#39;</span><span class="p">:</span> <span class="n">row</span><span class="o">.</span><span class="n">finished_at</span><span class="p">})</span>
+
+        <span class="n">node_info</span><span class="o">.</span><span class="n">started_at</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">started_at</span>
+        <span class="k">return</span> <span class="n">node_info</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">excutils</span><span class="o">.</span><span class="n">save_and_reraise_exception</span><span class="p">():</span>
+            <span class="n">node_info</span><span class="o">.</span><span class="n">release_lock</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="clean_up"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.clean_up">[docs]</a><span class="k">def</span> <span class="nf">clean_up</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Clean up the cache.</span>
+
+<span class="sd">    * Finish introspection for timed out nodes.</span>
+<span class="sd">    * Drop outdated node status information.</span>
+
+<span class="sd">    :return: list of timed out node UUID&#39;s</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">CONF</span><span class="o">.</span><span class="n">node_status_keep_time</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">status_keep_threshold</span> <span class="o">=</span> <span class="p">(</span><span class="n">timeutils</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span>
+                                 <span class="n">seconds</span><span class="o">=</span><span class="n">CONF</span><span class="o">.</span><span class="n">node_status_keep_time</span><span class="p">))</span>
+        <span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">ensure_transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="o">.</span><span class="n">finished_at</span><span class="o">.</span><span class="n">isnot</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="o">.</span><span class="n">finished_at</span> <span class="o">&lt;</span> <span class="n">status_keep_threshold</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+
+    <span class="n">timeout</span> <span class="o">=</span> <span class="n">CONF</span><span class="o">.</span><span class="n">timeout</span>
+    <span class="k">if</span> <span class="n">timeout</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="n">timeutils</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+    <span class="n">uuids</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">uuid</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span>
+             <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                 <span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="o">.</span><span class="n">started_at</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">,</span>
+                 <span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="o">.</span><span class="n">finished_at</span><span class="o">.</span><span class="n">is_</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">()]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">uuids</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="n">LOG</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Introspection for nodes </span><span class="si">%s</span><span class="s1"> has timed out&#39;</span><span class="p">,</span> <span class="n">uuids</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">uuids</span><span class="p">:</span>
+        <span class="n">node_info</span> <span class="o">=</span> <span class="n">get_node</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">locked</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">node_info</span><span class="o">.</span><span class="n">finished_at</span> <span class="ow">or</span> <span class="n">node_info</span><span class="o">.</span><span class="n">started_at</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">node_info</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="n">istate</span><span class="o">.</span><span class="n">States</span><span class="o">.</span><span class="n">waiting</span><span class="p">:</span>
+                <span class="n">LOG</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Something went wrong, timeout occurred &#39;</span>
+                          <span class="s1">&#39;while introspection in &quot;</span><span class="si">%s</span><span class="s1">&quot; state&#39;</span><span class="p">,</span>
+                          <span class="n">node_info</span><span class="o">.</span><span class="n">state</span><span class="p">,</span>
+                          <span class="n">node_info</span><span class="o">=</span><span class="n">node_info</span><span class="p">)</span>
+            <span class="n">node_info</span><span class="o">.</span><span class="n">finished</span><span class="p">(</span>
+                <span class="n">istate</span><span class="o">.</span><span class="n">Events</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="s1">&#39;Introspection timeout&#39;</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">node_info</span><span class="o">.</span><span class="n">release_lock</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">uuids</span></div>
+
+
+<div class="viewcode-block" id="create_node"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.create_node">[docs]</a><span class="k">def</span> <span class="nf">create_node</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attributes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create ironic node and cache it.</span>
+
+<span class="sd">    * Create new node in ironic.</span>
+<span class="sd">    * Cache it in inspector.</span>
+<span class="sd">    * Sets node_info state to enrolling.</span>
+
+<span class="sd">    :param driver: driver for Ironic node.</span>
+<span class="sd">    :param ironic: ronic client instance.</span>
+<span class="sd">    :param attributes: dict, additional keyword arguments to pass</span>
+<span class="sd">                             to the ironic client on node creation.</span>
+<span class="sd">    :return: NodeInfo, or None in case error happened.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ironic</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ironic</span> <span class="o">=</span> <span class="n">ir_utils</span><span class="o">.</span><span class="n">get_client</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">ironic</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">,</span> <span class="o">**</span><span class="n">attributes</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">InvalidAttribute</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Failed to create new node: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Node </span><span class="si">%s</span><span class="s1"> was created successfully&#39;</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">istate</span><span class="o">.</span><span class="n">States</span><span class="o">.</span><span class="n">enrolling</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="n">ironic</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_node_list"><a class="viewcode-back" href="../../contributor/api/ironic_inspector.node_cache.html#ironic_inspector.node_cache.get_node_list">[docs]</a><span class="k">def</span> <span class="nf">get_node_list</span><span class="p">(</span><span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get node list from the cache.</span>
+
+<span class="sd">    The list of the nodes is ordered based on the (started_at, uuid)</span>
+<span class="sd">    attribute pair, newer items first.</span>
+
+<span class="sd">    :param ironic: optional ironic client instance</span>
+<span class="sd">    :param marker: pagination marker (an UUID or None)</span>
+<span class="sd">    :param limit: pagination limit; None for default CONF.api_max_limit</span>
+<span class="sd">    :returns: a list of NodeInfo instances.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">marker</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># uuid marker -&gt; row marker for pagination</span>
+        <span class="n">marker</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">marker</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">marker</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Node not found for marker: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">marker</span><span class="p">,</span>
+                              <span class="n">code</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span>
+
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">model_query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span>
+    <span class="c1"># ordered based on (started_at, uuid); newer first</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">paginate_query</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Node</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span>
+                                   <span class="p">(</span><span class="s1">&#39;started_at&#39;</span><span class="p">,</span> <span class="s1">&#39;uuid&#39;</span><span class="p">),</span>
+                                   <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span> <span class="n">sort_dir</span><span class="o">=</span><span class="s1">&#39;desc&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">NodeInfo</span><span class="o">.</span><span class="n">from_row</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="n">ironic</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span></div>
+</pre></div>
+
+              </div>
+            </div>
+          </div>
+          <div class="docs-actions">
+          
+          
+            <a id="logABugLink3" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+          
+          </div>
+          <div class="row docs-byline bottom">
+            <div class="docs-updated">updated: 2019-10-31 19:28</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8 docs-license">
+<a href="https://creativecommons.org/licenses/by/3.0/">
+ <img src="../../_static/images/docs/license.png" alt="Creative Commons Attribution 3.0 License"/>
+</a>
+<p>
+ Except where otherwise noted, this document is licensed under
+ <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons
+ Attribution 3.0 License</a>. See all <a href="http://www.openstack.org/legal">
+ OpenStack Legal Documents</a>.
+</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 docs-actions-wrapper">
+            <!-- ID buglinkbottom added so that pre-filled doc bugs
+                 are sent to Launchpad projects related to the
+                 document -->
+              <a href="#" id="logABugLink2" class="docs-footer-actions"><i class="fa fa-bug"></i> found an error? report a bug</a>
+              <a href="http://ask.openstack.org" class="docs-footer-actions"><i class="fa fa-question-circle"></i> questions?</a>
+            </div>
+          </div>
+        </div>
+<div class="col-lg-3 col-md-4 col-sm-4 col-lg-pull-9 col-md-pull-8 col-sm-pull-8 docs-sidebar">
+  <div class="btn-group docs-sidebar-releases">
+    <button onclick="location.href='/'" class="btn docs-sidebar-home" data-toggle="tooltip" data-placement="top" title="Docs Home"><i class="fa fa-arrow-circle-o-left"></i></button>
+<button href="#" type="button" data-toggle="dropdown" class="btn docs-sidebar-release-select">OpenStack Documentation<i class="fa fa-caret-down"></i></button>
+    <ul class="dropdown-menu docs-sidebar-dropdown" role="menu" aria-labelledby="dLabel">
+      <li role="presentation" class="dropdown-header">Guides</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#install-guides">Install Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#user-guides">User Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#configuration-guides">Configuration Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#ops-and-admin-guides">Operations and Administration Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#api-guides">API Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#contributor-guides">Contributor Guides</a></li>
+      <li role="presentation" class="dropdown-header">Languages</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/de/">Deutsch (German)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/fr/">Français (French)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/id/">Bahasa Indonesia (Indonesian)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/it/">Italiano (Italian)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/ja/">日本語 (Japanese)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/ko_KR/">한국어 (Korean)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/pt_BR/">Português (Portuguese)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/tr_TR/">Türkçe (Türkiye)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/zh_CN/">简体中文 (Simplified Chinese)</a></li>
+    </ul>
+  </div>
+  <div class="docs-sidebar-toc">
+    <div class="docs-sidebar-section" id="table-of-contents">
+      <a href="../../index.html" class="docs-sidebar-section-title"><h4>ironic-inspector 2019.9.1.dev3</h4></a>
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Install Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration/index.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../admin/index.html">Administrator Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributor/index.html">How To Contribute</a></li>
+</ul>
+
+    </div>
+
+  </div>
+</div>
+      </div>
+    </div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+      <div class="col-lg-2 col-sm-2">
+        <h3>OpenStack</h3>
+        <ul>
+          <li><a href="http://openstack.org/projects/">Projects</a></li>
+          <li><a href="http://openstack.org/projects/openstack-security/">OpenStack Security</a></li>
+          <li><a href="http://openstack.org/projects/openstack-faq/">Common Questions</a></li>
+          <li><a href="http://openstack.org/blog/">Blog</a></li>
+          <li><a href="http://openstack.org/news/">News</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Community</h3>
+        <ul>
+          <li><a href="http://openstack.org/community/">User Groups</a></li>
+          <li><a href="http://openstack.org/community/events/">Events</a></li>
+          <li><a href="http://openstack.org/community/jobs/">Jobs</a></li>
+          <li><a href="http://openstack.org/foundation/companies/">Companies</a></li>
+          <li><a href="http://docs.openstack.org/infra/manual/developers.html">Contribute</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Documentation</h3>
+        <ul>
+          <li><a href="http://docs.openstack.org">OpenStack Manuals</a></li>
+          <li><a href="http://openstack.org/software/start/">Getting Started</a></li>
+          <li><a href="http://developer.openstack.org">API Documentation</a></li>
+          <li><a href="https://wiki.openstack.org">Wiki</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Branding & Legal</h3>
+        <ul>
+          <li><a href="http://openstack.org/brand/">Logos & Guidelines</a></li>
+          <li><a href="http://openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>
+          <li><a href="http://openstack.org/privacy/">Privacy Policy</a></li>
+          <li><a href="https://wiki.openstack.org/wiki/How_To_Contribute#Contributor_License_Agreement">OpenStack CLA</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <h3>Stay In Touch</h3>
+        <a href="https://twitter.com/OpenStack" target="_blank" class="social-icons footer-twitter"></a>
+        <a href="https://www.facebook.com/openstack" target="_blank" class="social-icons footer-facebook"></a>
+        <a href="https://www.linkedin.com/company/openstack" target="_blank" class="social-icons footer-linkedin"></a>
+        <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank" class="social-icons footer-youtube"></a>
+        <p class="fine-print">
+          The OpenStack project is provided under the
+          <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 license</a>. Openstack.org is powered by
+          <a href="http://rackspace.com" target="_blank">Rackspace Cloud Computing</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- jQuery -->
+<script type="text/javascript" src="../../_static/js/jquery-3.2.1.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
+<script type="text/javascript" src="../../_static/js/bootstrap.min.js"></script>
+
+<!-- The rest of the JS -->
+<script type="text/javascript" src="../../_static/js/navigation.js"></script>
+
+<!-- Docs JS -->
+<script type="text/javascript" src="../../_static/js/docs.js"></script>
+
+<!-- Popovers -->
+<script type="text/javascript" src="../../_static/js/webui-popover.js"></script>
+
+<!-- standard sphinx include libraries, which allow search highlighting -->
+<script type="text/javascript" src="../../_static/underscore.js"></script>
+<script type="text/javascript" src="../../_static/doctools.js"></script>
+<script type="text/javascript" src="../../_static/searchtools.js"></script>
+
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2019.9.1.dev3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        SOURCELINK_SUFFIX: '.txt',
+        HAS_SOURCE:  true
+      };
+</script>
+
+
+<!-- Javascript for page -->
+<script language="JavaScript">
+/* build a description of this page including SHA, source location on git repo,
+   build time and the project's launchpad bug tag. Set the HREF of the bug
+   buttons */
+
+    var lineFeed = "%0A";
+    var gitURL = "Source: Can't derive source file URL";
+
+    /* there have been cases where "pagename" wasn't set; better check for it */
+        /* "giturl" is the URL of the source file on Git and is auto-generated by
+           openstackdocstheme.
+
+           "pagename" is a standard sphinx parameter containing the name of
+           the source file, without extension.                             */
+
+        var sourceFile = "_modules/ironic_inspector/node_cache" + ".rst";
+        gitURL = "Source: https://git.openstack.org/cgit/openstack/ironic-inspector/tree/doc/source" + "/" + sourceFile;
+
+    /* gitsha, project and bug_tag rely on variables in conf.py */
+    var gitSha = "SHA: 8078a7d117a84fedb405447f7403b0e908afb559";
+        var bugProject = "ironic-inspector";
+        var bugTitle = "ironic_inspector.node_cache in ironic-inspector";
+    var fieldTags = "";
+        var useStoryboard = "";
+
+
+    /* "last_updated" is the build date and time. It relies on the
+       conf.py variable "html_last_updated_fmt", which should include
+       year/month/day as well as hours and minutes                   */
+    var buildstring = "Release: 2019.9.1.dev3 on 2019-10-31 19:28";
+
+    var fieldComment = encodeURI(buildstring) +
+                       lineFeed + encodeURI(gitSha) +
+                       lineFeed + encodeURI(gitURL) ;
+
+    logABug(bugTitle, bugProject, fieldComment, fieldTags);
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+          $.ajax({
+            context: this,
+            dataType : "html",
+            url : "https://docs.openstack.org/rocky/badge.html",
+            success : function(results) {
+                $('#deprecated-badge-container').html(results);
+            }
+        });
+    });
+</script>
+<div id="deprecated-badge-container"></div>
+
+  </body>
+</html>

@@ -1,0 +1,939 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+
+    <title>OpenStack Docs: How To Contribute</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link href="../_static/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Pygments CSS -->
+<link href="../_static/css/native.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link href="../_static/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="../_static/css/combined.css" rel="stylesheet">
+
+<!-- Search CSS -->
+<link href="../_static/css/search.css" rel="stylesheet">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+  
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-17511903-1', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+  </head>
+  <body>
+
+<!-- SOURCE_FILE: https://git.openstack.org/cgit/openstack/ironic-inspector/tree/doc/source/contributor/index.rst -->
+
+ <script>
+    (function (window, document) {
+        var loader = function () {
+            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+            script.src = "https://search.openstack.org/widget/embed.min.js?t="+Date.now();
+            tag.parentNode.insertBefore(script, tag);
+        };
+        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+    })(window, document);
+</script>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="brand-wrapper">
+        <a class="navbar-brand" href="https://www.openstack.org/"></a>
+      </div>
+      <div class="search-icon show"><i class="fa fa-search"></i> Search</div></div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="search-container tiny">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</div>
+      <ul class="nav navbar-nav navbar-main show">
+        <li class="search-container-mobile">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</li>
+        <li>
+          <a href="https://www.openstack.org/software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuSoftware">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/">Overview</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/project-navigator/">Project Navigator</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/sample-configs/">Sample Configs</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/security/">Security</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/start/">Get Started</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/roadmap/">Roadmap</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/latest-release/">Latest Release</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/sourcecode/">Source Code</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/user-stories/" class="drop" id="dropdownMenuUsers">Users <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuUsers">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/user-stories/">Overview</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/telecoms-and-nfv/">Telecoms and NFV</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/enterprise/">OpenStack in the Enterprise</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/appdev/">Application Developers & ISVs</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org/">Superuser Magazine</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/surveys/landing">User Survey</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/community/" class="drop" id="dropdownMenuCommunity">Community <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuCommunity">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/">Welcome! Start Here</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation/">OpenStack Foundation</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://wiki.openstack.org">OpenStack Wiki</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://groups.openstack.org">User Groups</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/speakers/">Speakers Bureau</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation/companies/">Supporting Companies</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/jobs/">Jobs</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/">Join The Community</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/marketplace/">Marketplace</a>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/events/" class="drop" id="dropdownMenuEvents">Events <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuEvents">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//www.openstack.org/community/events/">Overview</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/summit/">The OpenStack Summit</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//www.openstack.org/community/events/">More OpenStack Events</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/events/openstackdays">OpenStack Days</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/learn/" class="drop" id="dropdownMenuLearn">Learn <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/marketplace/training/">Training</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/coa/">Get Certified</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask a Technical Question</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser Magazine</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/videos/">Summit Videos</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/analysts/">Analyst Reports</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/news/">News</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/blog/">Blog</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://docs.openstack.org/">Docs</a>
+        </li>
+        <li>
+
+</li>
+
+
+            <li>
+
+                <li class="join-nav-section">
+                    <a href="https://www.openstack.org/join/" id="dropdownMenuJoin">Join <i class="fa fa-caret-down"></i></a>
+                    <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuJoin" style="display: none;">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/register/?membership-type=foundation">Sign up for Foundation Membership</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/#sponsor">Sponsor the Foundation</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation">More about the Foundation</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://www.openstack.org/Security/login/?BackURL=/home/" class="sign-in-btn">Log In</a>
+                </li>
+
+            </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /.container -->
+</nav>
+    <div class="container docs-book-wrapper">
+      <div class="row">
+        <div class="col-lg-9 col-md-8 col-sm-8 col-lg-push-3 col-md-push-4 col-sm-push-4">
+<div class="row">
+  <div class="col-lg-8">
+      <h2>How To Contribute</h2>
+    
+  </div>
+  <div class="docs-actions">
+    
+    <a href="../admin/dnsmasq-pxe-filter.html"><i class="fa fa-angle-double-left" data-toggle="tooltip" data-placement="top" title="Previous: dnsmasq PXE filter"></i></a>
+    
+    
+    <a href="api/autoindex.html"><i class="fa fa-angle-double-right" data-toggle="tooltip" data-placement="top" title="Next: <no title>"></i></a>
+    
+    <a id="logABugLink1" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+    
+  </div>
+</div>
+          <div class="row docs-byline">
+            <div class="docs-updated">updated: 2019-10-31 19:28</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="docs-body">
+
+  <div class="section" id="how-to-contribute">
+<span id="contributing-link"></span><h1>How To Contribute<a class="headerlink" href="#how-to-contribute" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basics">
+<h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Our source code is hosted on <a class="reference external" href="https://github.com/openstack/ironic-inspector">OpenStack GitHub</a>, but please do not send pull
+requests there.</li>
+<li>Please follow usual OpenStack <a class="reference external" href="https://docs.openstack.org/infra/manual/developers.html#development-workflow">Gerrit Workflow</a> to submit a patch.</li>
+<li>Update change log in README.rst on any significant change.</li>
+<li>It goes without saying that any code change should by accompanied by unit
+tests.</li>
+<li>Note the branch you’re proposing changes to. <code class="docutils literal notranslate"><span class="pre">master</span></code> is the current focus
+of development, use <code class="docutils literal notranslate"><span class="pre">stable/VERSION</span></code> for proposing an urgent fix, where
+<code class="docutils literal notranslate"><span class="pre">VERSION</span></code> is the current stable series. E.g. at the moment of writing the
+stable branch is <code class="docutils literal notranslate"><span class="pre">stable/1.0</span></code>.</li>
+<li>Please file an RFE in <a class="reference external" href="https://storyboard.openstack.org/#!/project/944">StoryBoard</a> for any significant code change and a
+regular story for any significant bug fix.</li>
+</ul>
+</div>
+<div class="section" id="development-environment">
+<h2>Development Environment<a class="headerlink" href="#development-environment" title="Permalink to this headline">¶</a></h2>
+<p>First of all, install <em>tox</em> utility. It’s likely to be in your distribution
+repositories under name of <code class="docutils literal notranslate"><span class="pre">python-tox</span></code>. Alternatively, you can install it
+from PyPI.</p>
+<p>Next checkout and create environments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">openstack</span><span class="o">/</span><span class="n">ironic</span><span class="o">-</span><span class="n">inspector</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">ironic</span><span class="o">-</span><span class="n">inspector</span>
+<span class="n">tox</span>
+</pre></div>
+</div>
+<p>Repeat <em>tox</em> command each time you need to run tests. If you don’t have Python
+interpreter of one of supported versions (currently 2.7 and 3.4), use
+<code class="docutils literal notranslate"><span class="pre">-e</span></code> flag to select only some environments, e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tox</span> <span class="o">-</span><span class="n">e</span> <span class="n">py27</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Support for Python 3 is highly experimental, stay with Python 2 for the
+production environment for now.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This command also runs tests for database migrations. By default the sqlite
+backend is used. For testing with mysql or postgresql, you need to set up
+a db named ‘openstack_citest’ with user ‘openstack_citest’ and password
+‘openstack_citest’ on localhost. Use the script
+<code class="docutils literal notranslate"><span class="pre">tools/test_setup.sh</span></code> to set the database up the same way as
+done in the OpenStack CI environment.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Users of Fedora &lt;= 23 will need to run “sudo dnf –releasever=24 update
+python-virtualenv” to run unit tests</p>
+</div>
+<p>To run the functional tests, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tox</span> <span class="o">-</span><span class="n">e</span> <span class="n">func</span>
+</pre></div>
+</div>
+<p>Once you have added new state or transition into inspection state machine, you
+should regenerate <a class="reference internal" href="../user/workflow.html#id1"><span class="std std-ref">State machine diagram</span></a> with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tox</span> <span class="o">-</span><span class="n">e</span> <span class="n">genstates</span>
+</pre></div>
+</div>
+<p>Run the service with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">tox</span><span class="o">/</span><span class="n">py27</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">ironic</span><span class="o">-</span><span class="n">inspector</span> <span class="o">--</span><span class="n">config</span><span class="o">-</span><span class="n">file</span> <span class="n">example</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>Of course you may have to modify <code class="docutils literal notranslate"><span class="pre">example.conf</span></code> to match your OpenStack
+environment. See the <a class="reference external" href="../install#sample-configuration-files">install guide</a>
+for information on generating or downloading an example configuration file.</p>
+<p>You can develop and test <strong>ironic-inspector</strong> using DevStack - see
+<a class="reference internal" href="#deploying-ironic-inspector-with-devstack">Deploying Ironic Inspector with DevStack</a> for the current status.</p>
+</div>
+<div class="section" id="deploying-ironic-inspector-with-devstack">
+<h2>Deploying Ironic Inspector with DevStack<a class="headerlink" href="#deploying-ironic-inspector-with-devstack" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://docs.openstack.org/devstack/latest/">DevStack</a> provides a way to
+quickly build a full OpenStack development environment with requested
+components. There is a plugin for installing <strong>ironic-inspector</strong> in DevStack.
+Installing <strong>ironic-inspector</strong> requires a machine running Ubuntu 14.04 (or
+later) or Fedora 23 (or later). Make sure this machine is fully up to date and
+has the latest packages installed before beginning this process.</p>
+<p>Download DevStack:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">git</span><span class="o">.</span><span class="n">openstack</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">openstack</span><span class="o">-</span><span class="n">dev</span><span class="o">/</span><span class="n">devstack</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">devstack</span>
+</pre></div>
+</div>
+<p>Create <code class="docutils literal notranslate"><span class="pre">local.conf</span></code> file with minimal settings required to
+enable both the <strong>ironic</strong> and the <strong>ironic-inspector</strong>. You can start with the
+<a class="reference internal" href="#example-local-conf">Example local.conf</a> and extend it as needed.</p>
+<div class="section" id="example-local-conf">
+<h3>Example local.conf<a class="headerlink" href="#example-local-conf" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[[local|localrc]]
+# Credentials
+# Reference: https://docs.openstack.org/devstack/latest/configuration.html
+ADMIN_PASSWORD=password
+DATABASE_PASSWORD=$ADMIN_PASSWORD
+RABBIT_PASSWORD=$ADMIN_PASSWORD
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+SERVICE_TOKEN=$ADMIN_PASSWORD
+SWIFT_HASH=$ADMIN_PASSWORD
+SWIFT_TEMPURL_KEY=$ADMIN_PASSWORD
+
+# Enable Neutron which is required by Ironic and disable nova-network.
+disable_service n-net n-novnc
+enable_service neutron q-svc q-agt q-dhcp q-l3 q-meta
+
+# Enable Swift for storing introspection data
+enable_service s-proxy s-object s-container s-account
+
+# Enable Ironic, Ironic Inspector plugins
+enable_plugin ironic https://github.com/openstack/ironic
+enable_plugin ironic-inspector https://github.com/openstack/ironic-inspector
+
+# Disable services
+disable_service horizon
+disable_service heat h-api h-api-cfn h-api-cw h-eng
+disable_service cinder c-sch c-api c-vol
+
+# Swift temp URL&#39;s are required for the direct deploy interface.
+SWIFT_ENABLE_TEMPURLS=True
+
+# Create 3 virtual machines to pose as Ironic&#39;s baremetal nodes.
+IRONIC_VM_COUNT=3
+IRONIC_BAREMETAL_BASIC_OPS=True
+DEFAULT_INSTANCE_TYPE=baremetal
+
+# Enable additional hardware types, if needed.
+#IRONIC_ENABLED_HARDWARE_TYPES=ipmi,fake-hardware
+# Don&#39;t forget that many hardware types require enabling of additional
+# interfaces, most often power and management:
+#IRONIC_ENABLED_MANAGEMENT_INTERFACES=ipmitool,fake
+#IRONIC_ENABLED_POWER_INTERFACES=ipmitool,fake
+#
+# The &#39;ipmi&#39; hardware type&#39;s default deploy interface is &#39;iscsi&#39;.
+# This would change the default to &#39;direct&#39;:
+#IRONIC_DEFAULT_DEPLOY_INTERFACE=direct
+
+# Enable inspection via ironic-inspector
+IRONIC_ENABLED_INSPECT_INTERFACES=inspector,no-inspect
+# Make it the default for all hardware types:
+IRONIC_DEFAULT_INSPECT_INTERFACE=inspector
+
+# This driver should be in the enabled list above.
+IRONIC_DEPLOY_DRIVER=ipmi
+
+IRONIC_BUILD_DEPLOY_RAMDISK=False
+IRONIC_INSPECTOR_BUILD_RAMDISK=False
+
+VIRT_DRIVER=ironic
+
+# By default, DevStack creates a 10.0.0.0/24 network for instances.
+# If this overlaps with the hosts network, you may adjust with the
+# following.
+NETWORK_GATEWAY=10.1.0.1
+FIXED_RANGE=10.1.0.0/24
+
+# Log all output to files
+LOGDAYS=1
+LOGFILE=$HOME/logs/stack.sh.log
+</pre></div>
+</div>
+</div>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Set IRONIC_INSPECTOR_BUILD_RAMDISK to True if you want to build ramdisk.
+Default value is False and ramdisk will be downloaded instead of building.</li>
+<li>1024 MiB of RAM is a minimum required for the default build of IPA based on
+CoreOS. If you plan to use another operating system and build IPA with
+diskimage-builder 2048 MiB is recommended.</li>
+<li>Network configuration is pretty sensitive, better not to touch it
+without deep understanding.</li>
+<li>This configuration disables <strong>horizon</strong>, <strong>heat</strong>, <strong>cinder</strong> and
+<strong>tempest</strong>, adjust it if you need these services.</li>
+</ul>
+<p>Start the install:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">stack</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
+<p>After installation is complete, you can source <code class="docutils literal notranslate"><span class="pre">openrc</span></code> in your shell, and
+then use the OpenStack CLI to manage your DevStack:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">openrc</span> <span class="n">admin</span> <span class="n">demo</span>
+</pre></div>
+</div>
+<p>Show DevStack screens:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">screen</span> <span class="o">-</span><span class="n">x</span> <span class="n">stack</span>
+</pre></div>
+</div>
+<p>To exit screen, hit <code class="docutils literal notranslate"><span class="pre">CTRL-a</span> <span class="pre">d</span></code>.</p>
+<p>List baremetal nodes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openstack</span> <span class="n">baremetal</span> <span class="n">node</span> <span class="nb">list</span>
+</pre></div>
+</div>
+<p>Bring the node to manageable state:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openstack</span> <span class="n">baremetal</span> <span class="n">node</span> <span class="n">manage</span> <span class="o">&lt;</span><span class="n">NodeID</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Inspect the node:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openstack</span> <span class="n">baremetal</span> <span class="n">node</span> <span class="n">inspect</span> <span class="o">&lt;</span><span class="n">NodeID</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The deploy driver used must support the inspect interface. See also the
+<a class="reference external" href="https://docs.openstack.org/ironic/latest/admin/drivers/ipa.html">Ironic Python Agent</a>.</p>
+</div>
+<p>A node can also be inspected using the following command. However, this will
+not affect the provision state of the node:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openstack</span> <span class="n">baremetal</span> <span class="n">introspection</span> <span class="n">start</span> <span class="o">&lt;</span><span class="n">NodeID</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Check inspection status:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openstack</span> <span class="n">baremetal</span> <span class="n">introspection</span> <span class="n">status</span> <span class="o">&lt;</span><span class="n">NodeID</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Optionally, get the inspection data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openstack</span> <span class="n">baremetal</span> <span class="n">introspection</span> <span class="n">data</span> <span class="n">save</span> <span class="o">&lt;</span><span class="n">NodeID</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="writing-a-plugin">
+<h2>Writing a Plugin<a class="headerlink" href="#writing-a-plugin" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><strong>ironic-inspector</strong> allows you to hook code into the data processing chain
+after introspection. Inherit <code class="docutils literal notranslate"><span class="pre">ProcessingHook</span></code> class defined in
+<a class="reference external" href="https://docs.openstack.org/ironic-inspector/latest/contributor/api/ironic_inspector.plugins.base.html">ironic_inspector.plugins.base</a> module and overwrite any or both of
+the following methods:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">before_processing(introspection_data,**)</span></code></dt>
+<dd><p class="first last">called before any data processing, providing the raw data. Each plugin in
+the chain can modify the data, so order in which plugins are loaded
+matters here. Returns nothing.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">before_update(introspection_data,node_info,**)</span></code></dt>
+<dd><p class="first last">called after node is found and ports are created, but before data is
+updated on a node.  Please refer to the docstring for details
+and examples.</p>
+</dd>
+</dl>
+<p>You can optionally define the following attribute:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">dependencies</span></code></dt>
+<dd><p class="first last">a list of entry point names of the hooks this hook depends on. These
+hooks are expected to be enabled before the current hook.</p>
+</dd>
+</dl>
+<p>Make your plugin a setuptools entry point under
+<code class="docutils literal notranslate"><span class="pre">ironic_inspector.hooks.processing</span></code> namespace and enable it in the
+configuration file (<code class="docutils literal notranslate"><span class="pre">processing.processing_hooks</span></code> option).</p>
+</li>
+<li><p class="first"><strong>ironic-inspector</strong> allows plugins to override the action when node is not
+found in node cache. Write a callable with the following signature:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">(introspection_data,**)</span></code></dt>
+<dd><p class="first last">called when node is not found in cache, providing the processed data.
+Should return a <code class="docutils literal notranslate"><span class="pre">NodeInfo</span></code> class instance.</p>
+</dd>
+</dl>
+<p>Make your plugin a setuptools entry point under
+<code class="docutils literal notranslate"><span class="pre">ironic_inspector.hooks.node_not_found</span></code> namespace and enable it in the
+configuration file (<code class="docutils literal notranslate"><span class="pre">processing.node_not_found_hook</span></code> option).</p>
+</li>
+<li><p class="first"><strong>ironic-inspector</strong>  allows more condition types to be added for
+<a class="reference external" href="https://docs.openstack.org/ironic-inspector/latest/user/usage.html#introspection-rules">Introspection Rules</a>. Inherit <code class="docutils literal notranslate"><span class="pre">RuleConditionPlugin</span></code> class defined in
+<a class="reference external" href="https://docs.openstack.org/ironic-inspector/latest/contributor/api/ironic_inspector.plugins.base.html">ironic_inspector.plugins.base</a> module and overwrite at least the following
+method:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">check(node_info,field,params,**)</span></code></dt>
+<dd><p class="first last">called to check that condition holds for a given field. Field value is
+provided as <code class="docutils literal notranslate"><span class="pre">field</span></code> argument, <code class="docutils literal notranslate"><span class="pre">params</span></code> is a dictionary defined
+at the time of condition creation. Returns boolean value.</p>
+</dd>
+</dl>
+<p>The following methods and attributes may also be overridden:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">validate(params,**)</span></code></dt>
+<dd><p class="first last">called to validate parameters provided during condition creating.
+Default implementation requires keys listed in <code class="docutils literal notranslate"><span class="pre">REQUIRED_PARAMS</span></code> (and
+only them).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">REQUIRED_PARAMS</span></code></dt>
+<dd><p class="first last">contains set of required parameters used in the default implementation
+of <code class="docutils literal notranslate"><span class="pre">validate</span></code> method, defaults to <code class="docutils literal notranslate"><span class="pre">value</span></code> parameter.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ALLOW_NONE</span></code></dt>
+<dd><p class="first last">if it’s set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, missing fields will be passed as <code class="docutils literal notranslate"><span class="pre">None</span></code>
+values instead of failing the condition. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+</dl>
+<p>Make your plugin a setuptools entry point under
+<code class="docutils literal notranslate"><span class="pre">ironic_inspector.rules.conditions</span></code> namespace.</p>
+</li>
+<li><p class="first"><strong>ironic-inspector</strong> allows more action types to be added for <a class="reference external" href="https://docs.openstack.org/ironic-inspector/latest/user/usage.html#introspection-rules">Introspection
+Rules</a>. Inherit <code class="docutils literal notranslate"><span class="pre">RuleActionPlugin</span></code> class defined in
+<a class="reference external" href="https://docs.openstack.org/ironic-inspector/latest/contributor/api/ironic_inspector.plugins.base.html">ironic_inspector.plugins.base</a> module and overwrite at least the following
+method:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">apply(node_info,params,**)</span></code></dt>
+<dd><p class="first last">called to apply the action.</p>
+</dd>
+</dl>
+<p>The following methods and attributes may also be overridden:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">validate(params,**)</span></code></dt>
+<dd><p class="first last">called to validate parameters provided during actions creating.
+Default implementation requires keys listed in <code class="docutils literal notranslate"><span class="pre">REQUIRED_PARAMS</span></code> (and
+only them).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">REQUIRED_PARAMS</span></code></dt>
+<dd><p class="first last">contains set of required parameters used in the default implementation
+of <code class="docutils literal notranslate"><span class="pre">validate</span></code> method, defaults to no parameters.</p>
+</dd>
+</dl>
+<p>Make your plugin a setuptools entry point under
+<code class="docutils literal notranslate"><span class="pre">ironic_inspector.rules.conditions</span></code> namespace.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">**</span></code> argument is needed so that we can add optional arguments without
+breaking out-of-tree plugins. Please make sure to include and ignore it.</p>
+</div>
+</div>
+<div class="section" id="making-changes-to-the-database">
+<h2>Making changes to the database<a class="headerlink" href="#making-changes-to-the-database" title="Permalink to this headline">¶</a></h2>
+<p>In order to make a change to the ironic-inspector database you must update the
+database models found in <a class="reference external" href="https://docs.openstack.org/ironic-inspector/latest/contributor/api/ironic_inspector.db.html">ironic_inspector.db</a> and then create a migration to
+reflect that change.</p>
+<p>There are two ways to create a migration which are described below, both of
+these generate a new migration file. In this file there is only one function:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">upgrade</span></code> - The function to run when</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">ironic-inspector-dbsync</span> <span class="pre">upgrade</span></code> is run, and should be populated with
+code to bring the database up to its new state from the state it was in
+after the last migration.</dd>
+</dl>
+</li>
+</ul>
+<p>For further information on creating a migration, refer to
+<a class="reference external" href="http://alembic.zzzcomputing.com/en/latest/tutorial.html#create-a-migration-script">Create a Migration Script</a> from the alembic documentation.</p>
+<div class="section" id="autogenerate">
+<h3>Autogenerate<a class="headerlink" href="#autogenerate" title="Permalink to this headline">¶</a></h3>
+<p>This is the simplest way to create a migration. Alembic will compare the models
+to an up to date database, and then attempt to write a migration based on the
+differences. This should generate correct migrations in most cases however
+there are some cases when it can not detect some changes and may require
+manual modification, see <a class="reference external" href="http://alembic.zzzcomputing.com/en/latest/autogenerate.html#what-does-autogenerate-detect-and-what-does-it-not-detect">What does Autogenerate Detect (and what does it not
+detect?)</a> from the alembic documentation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ironic</span><span class="o">-</span><span class="n">inspector</span><span class="o">-</span><span class="n">dbsync</span> <span class="n">upgrade</span>
+<span class="n">ironic</span><span class="o">-</span><span class="n">inspector</span><span class="o">-</span><span class="n">dbsync</span> <span class="n">revision</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;A short description&quot;</span> <span class="o">--</span><span class="n">autogenerate</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="manual">
+<h3>Manual<a class="headerlink" href="#manual" title="Permalink to this headline">¶</a></h3>
+<p>This will generate an empty migration file, with the correct revision
+information already included. However the upgrade function is left empty
+and must be manually populated in order to perform the correct actions on
+the database:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ironic</span><span class="o">-</span><span class="n">inspector</span><span class="o">-</span><span class="n">dbsync</span> <span class="n">revision</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;A short description&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="implementing-pxe-filter-drivers">
+<h2>Implementing PXE Filter Drivers<a class="headerlink" href="#implementing-pxe-filter-drivers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="background">
+<h3>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h3>
+<p><strong>inspector</strong> in-band introspection PXE-boots the Ironic Python Agent “live”
+image, to inspect the baremetal server. <strong>ironic</strong> also PXE-boots IPA to
+perform tasks on a node, such as deploying an image. <strong>ironic</strong> uses
+<strong>neutron</strong> to provide DHCP, however <strong>neutron</strong> does not provide DHCP for
+unknown MAC addresses so <strong>inspector</strong> has to use its own DHCP/TFTP stack for
+discovery and inspection.</p>
+<p>When <strong>ironic</strong> and <strong>inspector</strong> are operating in the same L2 network, there
+is a potential for the two DHCPs to race, which could result in a node being
+deployed by <strong>ironic</strong> being PXE booted by <strong>inspector</strong>.</p>
+<p>To prevent DHCP races between the <strong>inspector</strong> DHCP and <strong>ironic</strong> DHCP,
+<strong>inspector</strong> has to be able to filter which nodes can get a DHCP lease from
+the <strong>inspector</strong> DHCP server. These filters can then be used to prevent
+node’s enrolled in <strong>ironic</strong> inventory from being PXE-booted unless they are
+explicitly moved into the <code class="docutils literal notranslate"><span class="pre">inspected</span></code> state.</p>
+</div>
+<div class="section" id="filter-interface">
+<h3>Filter Interface<a class="headerlink" href="#filter-interface" title="Permalink to this headline">¶</a></h3>
+<p>The contract between <strong>inspector</strong> and a PXE filter driver is described in the
+<a class="reference internal" href="api/ironic_inspector.pxe_filter.interface.html#ironic_inspector.pxe_filter.interface.FilterDriver" title="ironic_inspector.pxe_filter.interface.FilterDriver"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterDriver</span></code></a> interface. The methods a driver has to implement are:</p>
+<ul class="simple">
+<li><a class="reference internal" href="api/ironic_inspector.pxe_filter.interface.html#ironic_inspector.pxe_filter.interface.FilterDriver.init_filter" title="ironic_inspector.pxe_filter.interface.FilterDriver.init_filter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">init_filter()</span></code></a> called on the service start to initialize
+internal driver state</li>
+<li><a class="reference internal" href="api/ironic_inspector.pxe_filter.interface.html#ironic_inspector.pxe_filter.interface.FilterDriver.sync" title="ironic_inspector.pxe_filter.interface.FilterDriver.sync"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sync()</span></code></a> called both periodically and when a node starts or
+finishes introspection to white or blacklist its ports MAC addresses in the
+driver</li>
+<li><a class="reference internal" href="api/ironic_inspector.pxe_filter.interface.html#ironic_inspector.pxe_filter.interface.FilterDriver.tear_down_filter" title="ironic_inspector.pxe_filter.interface.FilterDriver.tear_down_filter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tear_down_filter()</span></code></a> called on service exit to reset the
+internal driver state</li>
+</ul>
+<p>The driver-specific configuration is suggested to be parsed during
+instantiation. There’s also a convenience generic interface implementation
+<a class="reference internal" href="api/ironic_inspector.pxe_filter.base.html#ironic_inspector.pxe_filter.base.BaseFilter" title="ironic_inspector.pxe_filter.base.BaseFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseFilter</span></code></a> that provides base locking and initialization
+implementation. If required, a driver can opt-out from the periodic
+synchronization by overriding the <a class="reference internal" href="api/ironic_inspector.pxe_filter.base.html#ironic_inspector.pxe_filter.base.BaseFilter.get_periodic_sync_task" title="ironic_inspector.pxe_filter.base.BaseFilter.get_periodic_sync_task"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_periodic_sync_task()</span></code></a>.</p>
+</div>
+</div>
+<div class="section" id="python-api">
+<h2>Python API<a class="headerlink" href="#python-api" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.api_tools.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.api_tools</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.bmc.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.bmc</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.cmd.all.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.cmd.all</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.common.context.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.common.context</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.common.i18n.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.common.i18n</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.common.ironic.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.common.ironic</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.common.keystone.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.common.keystone</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.common.lldp_parsers.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.common.lldp_parsers</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.common.lldp_tlvs.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.common.lldp_tlvs</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.common.rpc.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.common.rpc</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.common.service_utils.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.common.service_utils</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.common.swift.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.common.swift</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.conductor.manager.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.conductor.manager</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.conf.capabilities.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.conf.capabilities</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.conf.default.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.conf.default</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.conf.discovery.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.conf.discovery</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.conf.dnsmasq_pxe_filter.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.conf.dnsmasq_pxe_filter</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.conf.iptables.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.conf.iptables</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.conf.ironic.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.conf.ironic</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.conf.opts.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.conf.opts</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.conf.pci_devices.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.conf.pci_devices</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.conf.processing.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.conf.processing</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.conf.pxe_filter.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.conf.pxe_filter</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.conf.swift.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.conf.swift</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.db.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.db</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.dbsync.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.dbsync</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.introspect.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.introspect</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.introspection_state.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.introspection_state</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.main.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.main</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.node_cache.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.node_cache</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.plugins.base.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.plugins.base</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.plugins.capabilities.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.plugins.capabilities</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.plugins.discovery.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.plugins.discovery</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.plugins.example.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.plugins.example</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.plugins.extra_hardware.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.plugins.extra_hardware</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.plugins.lldp_basic.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.plugins.lldp_basic</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.plugins.local_link_connection.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.plugins.local_link_connection</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.plugins.pci_devices.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.plugins.pci_devices</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.plugins.raid_device.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.plugins.raid_device</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.plugins.rules.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.plugins.rules</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.plugins.serial_number.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.plugins.serial_number</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.plugins.standard.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.plugins.standard</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.policy.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.policy</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.process.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.process</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.pxe_filter.base.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.pxe_filter.base</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.pxe_filter.dnsmasq.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.pxe_filter.dnsmasq</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.pxe_filter.interface.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.pxe_filter.interface</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.pxe_filter.iptables.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.pxe_filter.iptables</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.rules.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.rules</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.utils.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.utils</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.version.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.version</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ironic_inspector.wsgi_service.html">The <code class="docutils literal notranslate"><span class="pre">ironic_inspector.wsgi_service</span></code> Module</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="docs-actions">
+          
+            <a href="../admin/dnsmasq-pxe-filter.html"><i class="fa fa-angle-double-left" data-toggle="tooltip" data-placement="top" title="Previous: dnsmasq PXE filter"></i></a>
+          
+          
+            <a href="api/autoindex.html"><i class="fa fa-angle-double-right" data-toggle="tooltip" data-placement="top" title="Next: <no title>"></i></a>
+          
+            <a id="logABugLink3" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+          
+          </div>
+          <div class="row docs-byline bottom">
+            <div class="docs-updated">updated: 2019-10-31 19:28</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8 docs-license">
+<a href="https://creativecommons.org/licenses/by/3.0/">
+ <img src="../_static/images/docs/license.png" alt="Creative Commons Attribution 3.0 License"/>
+</a>
+<p>
+ Except where otherwise noted, this document is licensed under
+ <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons
+ Attribution 3.0 License</a>. See all <a href="http://www.openstack.org/legal">
+ OpenStack Legal Documents</a>.
+</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 docs-actions-wrapper">
+            <!-- ID buglinkbottom added so that pre-filled doc bugs
+                 are sent to Launchpad projects related to the
+                 document -->
+              <a href="#" id="logABugLink2" class="docs-footer-actions"><i class="fa fa-bug"></i> found an error? report a bug</a>
+              <a href="http://ask.openstack.org" class="docs-footer-actions"><i class="fa fa-question-circle"></i> questions?</a>
+            </div>
+          </div>
+        </div>
+<div class="col-lg-3 col-md-4 col-sm-4 col-lg-pull-9 col-md-pull-8 col-sm-pull-8 docs-sidebar">
+  <div class="btn-group docs-sidebar-releases">
+    <button onclick="location.href='/'" class="btn docs-sidebar-home" data-toggle="tooltip" data-placement="top" title="Docs Home"><i class="fa fa-arrow-circle-o-left"></i></button>
+<button href="#" type="button" data-toggle="dropdown" class="btn docs-sidebar-release-select">OpenStack Documentation<i class="fa fa-caret-down"></i></button>
+    <ul class="dropdown-menu docs-sidebar-dropdown" role="menu" aria-labelledby="dLabel">
+      <li role="presentation" class="dropdown-header">Guides</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#install-guides">Install Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#user-guides">User Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#configuration-guides">Configuration Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#ops-and-admin-guides">Operations and Administration Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#api-guides">API Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#contributor-guides">Contributor Guides</a></li>
+      <li role="presentation" class="dropdown-header">Languages</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/de/">Deutsch (German)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/fr/">Français (French)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/id/">Bahasa Indonesia (Indonesian)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/it/">Italiano (Italian)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/ja/">日本語 (Japanese)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/ko_KR/">한국어 (Korean)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/pt_BR/">Português (Portuguese)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/tr_TR/">Türkçe (Türkiye)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/zh_CN/">简体中文 (Simplified Chinese)</a></li>
+    </ul>
+  </div>
+  <div class="docs-sidebar-toc">
+    <div class="docs-sidebar-section" id="table-of-contents">
+      <a href="../index.html" class="docs-sidebar-section-title"><h4>ironic-inspector 2019.9.1.dev3</h4></a>
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install/index.html">Install Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration/index.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin/index.html">Administrator Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How To Contribute</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basics">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-environment">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deploying-ironic-inspector-with-devstack">Deploying Ironic Inspector with DevStack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-a-plugin">Writing a Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#making-changes-to-the-database">Making changes to the database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementing-pxe-filter-drivers">Implementing PXE Filter Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-api">Python API</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+  <div class="docs-sidebar-toc">
+    <div class="docs-sidebar-section" id="local-table-of-contents">
+      <h4 class="docs-sidebar-section-title">Page Contents</h4>
+      <ul>
+<li><a class="reference internal" href="#">How To Contribute</a><ul>
+<li><a class="reference internal" href="#basics">Basics</a></li>
+<li><a class="reference internal" href="#development-environment">Development Environment</a></li>
+<li><a class="reference internal" href="#deploying-ironic-inspector-with-devstack">Deploying Ironic Inspector with DevStack</a><ul>
+<li><a class="reference internal" href="#example-local-conf">Example local.conf</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#writing-a-plugin">Writing a Plugin</a></li>
+<li><a class="reference internal" href="#making-changes-to-the-database">Making changes to the database</a><ul>
+<li><a class="reference internal" href="#autogenerate">Autogenerate</a></li>
+<li><a class="reference internal" href="#manual">Manual</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementing-pxe-filter-drivers">Implementing PXE Filter Drivers</a><ul>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#filter-interface">Filter Interface</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#python-api">Python API</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+  </div>
+</div>
+      </div>
+    </div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+      <div class="col-lg-2 col-sm-2">
+        <h3>OpenStack</h3>
+        <ul>
+          <li><a href="http://openstack.org/projects/">Projects</a></li>
+          <li><a href="http://openstack.org/projects/openstack-security/">OpenStack Security</a></li>
+          <li><a href="http://openstack.org/projects/openstack-faq/">Common Questions</a></li>
+          <li><a href="http://openstack.org/blog/">Blog</a></li>
+          <li><a href="http://openstack.org/news/">News</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Community</h3>
+        <ul>
+          <li><a href="http://openstack.org/community/">User Groups</a></li>
+          <li><a href="http://openstack.org/community/events/">Events</a></li>
+          <li><a href="http://openstack.org/community/jobs/">Jobs</a></li>
+          <li><a href="http://openstack.org/foundation/companies/">Companies</a></li>
+          <li><a href="http://docs.openstack.org/infra/manual/developers.html">Contribute</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Documentation</h3>
+        <ul>
+          <li><a href="http://docs.openstack.org">OpenStack Manuals</a></li>
+          <li><a href="http://openstack.org/software/start/">Getting Started</a></li>
+          <li><a href="http://developer.openstack.org">API Documentation</a></li>
+          <li><a href="https://wiki.openstack.org">Wiki</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Branding & Legal</h3>
+        <ul>
+          <li><a href="http://openstack.org/brand/">Logos & Guidelines</a></li>
+          <li><a href="http://openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>
+          <li><a href="http://openstack.org/privacy/">Privacy Policy</a></li>
+          <li><a href="https://wiki.openstack.org/wiki/How_To_Contribute#Contributor_License_Agreement">OpenStack CLA</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <h3>Stay In Touch</h3>
+        <a href="https://twitter.com/OpenStack" target="_blank" class="social-icons footer-twitter"></a>
+        <a href="https://www.facebook.com/openstack" target="_blank" class="social-icons footer-facebook"></a>
+        <a href="https://www.linkedin.com/company/openstack" target="_blank" class="social-icons footer-linkedin"></a>
+        <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank" class="social-icons footer-youtube"></a>
+        <p class="fine-print">
+          The OpenStack project is provided under the
+          <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 license</a>. Openstack.org is powered by
+          <a href="http://rackspace.com" target="_blank">Rackspace Cloud Computing</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- jQuery -->
+<script type="text/javascript" src="../_static/js/jquery-3.2.1.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
+<script type="text/javascript" src="../_static/js/bootstrap.min.js"></script>
+
+<!-- The rest of the JS -->
+<script type="text/javascript" src="../_static/js/navigation.js"></script>
+
+<!-- Docs JS -->
+<script type="text/javascript" src="../_static/js/docs.js"></script>
+
+<!-- Popovers -->
+<script type="text/javascript" src="../_static/js/webui-popover.js"></script>
+
+<!-- standard sphinx include libraries, which allow search highlighting -->
+<script type="text/javascript" src="../_static/underscore.js"></script>
+<script type="text/javascript" src="../_static/doctools.js"></script>
+<script type="text/javascript" src="../_static/searchtools.js"></script>
+
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2019.9.1.dev3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        SOURCELINK_SUFFIX: '.txt',
+        HAS_SOURCE:  true
+      };
+</script>
+
+
+<!-- Javascript for page -->
+<script language="JavaScript">
+/* build a description of this page including SHA, source location on git repo,
+   build time and the project's launchpad bug tag. Set the HREF of the bug
+   buttons */
+
+    var lineFeed = "%0A";
+    var gitURL = "Source: Can't derive source file URL";
+
+    /* there have been cases where "pagename" wasn't set; better check for it */
+        /* "giturl" is the URL of the source file on Git and is auto-generated by
+           openstackdocstheme.
+
+           "pagename" is a standard sphinx parameter containing the name of
+           the source file, without extension.                             */
+
+        var sourceFile = "contributor/index" + ".rst";
+        gitURL = "Source: https://git.openstack.org/cgit/openstack/ironic-inspector/tree/doc/source" + "/" + sourceFile;
+
+    /* gitsha, project and bug_tag rely on variables in conf.py */
+    var gitSha = "SHA: 8078a7d117a84fedb405447f7403b0e908afb559";
+        var bugProject = "ironic-inspector";
+        var bugTitle = "How To Contribute in ironic-inspector";
+    var fieldTags = "";
+        var useStoryboard = "";
+
+
+    /* "last_updated" is the build date and time. It relies on the
+       conf.py variable "html_last_updated_fmt", which should include
+       year/month/day as well as hours and minutes                   */
+    var buildstring = "Release: 2019.9.1.dev3 on 2019-10-31 19:28";
+
+    var fieldComment = encodeURI(buildstring) +
+                       lineFeed + encodeURI(gitSha) +
+                       lineFeed + encodeURI(gitURL) ;
+
+    logABug(bugTitle, bugProject, fieldComment, fieldTags);
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+          $.ajax({
+            context: this,
+            dataType : "html",
+            url : "https://docs.openstack.org/rocky/badge.html",
+            success : function(results) {
+                $('#deprecated-badge-container').html(results);
+            }
+        });
+    });
+</script>
+<div id="deprecated-badge-container"></div>
+
+  </body>
+</html>

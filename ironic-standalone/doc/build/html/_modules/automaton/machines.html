@@ -1,0 +1,958 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+
+    <title>OpenStack Docs: automaton.machines</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link href="../../_static/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Pygments CSS -->
+<link href="../../_static/css/native.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link href="../../_static/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="../../_static/css/combined.css" rel="stylesheet">
+
+<!-- Search CSS -->
+<link href="../../_static/css/search.css" rel="stylesheet">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+  
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-17511903-1', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+  </head>
+  <body>
+
+<!-- TEMPLATE_NAME: _modules/automaton/machines -->
+
+ <script>
+    (function (window, document) {
+        var loader = function () {
+            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+            script.src = "https://search.openstack.org/widget/embed.min.js?t="+Date.now();
+            tag.parentNode.insertBefore(script, tag);
+        };
+        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+    })(window, document);
+</script>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="brand-wrapper">
+        <a class="navbar-brand" href="https://www.openstack.org/"></a>
+      </div>
+      <div class="search-icon show"><i class="fa fa-search"></i> Search</div></div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="search-container tiny">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</div>
+      <ul class="nav navbar-nav navbar-main show">
+        <li class="search-container-mobile">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</li>
+        <li>
+          <a href="https://www.openstack.org/software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuSoftware">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/">Overview</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/project-navigator/">Project Navigator</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/sample-configs/">Sample Configs</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/security/">Security</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/start/">Get Started</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/roadmap/">Roadmap</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/latest-release/">Latest Release</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/sourcecode/">Source Code</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/user-stories/" class="drop" id="dropdownMenuUsers">Users <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuUsers">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/user-stories/">Overview</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/telecoms-and-nfv/">Telecoms and NFV</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/enterprise/">OpenStack in the Enterprise</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/appdev/">Application Developers & ISVs</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org/">Superuser Magazine</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/surveys/landing">User Survey</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/community/" class="drop" id="dropdownMenuCommunity">Community <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuCommunity">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/">Welcome! Start Here</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation/">OpenStack Foundation</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://wiki.openstack.org">OpenStack Wiki</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://groups.openstack.org">User Groups</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/speakers/">Speakers Bureau</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation/companies/">Supporting Companies</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/jobs/">Jobs</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/">Join The Community</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/marketplace/">Marketplace</a>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/events/" class="drop" id="dropdownMenuEvents">Events <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuEvents">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//www.openstack.org/community/events/">Overview</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/summit/">The OpenStack Summit</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//www.openstack.org/community/events/">More OpenStack Events</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/events/openstackdays">OpenStack Days</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/learn/" class="drop" id="dropdownMenuLearn">Learn <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/marketplace/training/">Training</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/coa/">Get Certified</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask a Technical Question</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser Magazine</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/videos/">Summit Videos</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/analysts/">Analyst Reports</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/news/">News</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/blog/">Blog</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://docs.openstack.org/">Docs</a>
+        </li>
+        <li>
+
+</li>
+
+
+            <li>
+
+                <li class="join-nav-section">
+                    <a href="https://www.openstack.org/join/" id="dropdownMenuJoin">Join <i class="fa fa-caret-down"></i></a>
+                    <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuJoin" style="display: none;">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/register/?membership-type=foundation">Sign up for Foundation Membership</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/#sponsor">Sponsor the Foundation</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation">More about the Foundation</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://www.openstack.org/Security/login/?BackURL=/home/" class="sign-in-btn">Log In</a>
+                </li>
+
+            </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /.container -->
+</nav>
+    <div class="container docs-book-wrapper">
+      <div class="row">
+        <div class="col-lg-9 col-md-8 col-sm-8 col-lg-push-3 col-md-push-4 col-sm-push-4">
+<div class="row">
+  <div class="col-lg-8">
+      <h2>automaton.machines</h2>
+    
+  </div>
+  <div class="docs-actions">
+    
+    
+    <a id="logABugLink1" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+    
+  </div>
+</div>
+          <div class="row docs-byline">
+            <div class="docs-updated">updated: 2019-10-31 19:28</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="docs-body">
+
+  <h1>Source code for automaton.machines</h1><div class="highlight"><pre>
+<span></span><span class="c1">#    Copyright (C) 2014 Yahoo! Inc. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1">#    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may</span>
+<span class="c1">#    not use this file except in compliance with the License. You may obtain</span>
+<span class="c1">#    a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#    Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#    distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT</span>
+<span class="c1">#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the</span>
+<span class="c1">#    License for the specific language governing permissions and limitations</span>
+<span class="c1">#    under the License.</span>
+
+<span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="kn">import</span> <span class="nn">prettytable</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+<span class="kn">from</span> <span class="nn">automaton</span> <span class="k">import</span> <span class="n">_utils</span> <span class="k">as</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">automaton</span> <span class="k">import</span> <span class="n">exceptions</span> <span class="k">as</span> <span class="n">excp</span>
+
+
+<span class="k">class</span> <span class="nc">State</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Container that defines needed components of a single state.</span>
+
+<span class="sd">    Usage of this and the :meth:`~.FiniteMachine.build` make creating finite</span>
+<span class="sd">    state machines that much easier.</span>
+
+<span class="sd">    :ivar name: The name of the state.</span>
+<span class="sd">    :ivar is_terminal: Whether this state is terminal (or not).</span>
+<span class="sd">    :ivar next_states: Dictionary of &#39;event&#39; -&gt; &#39;next state name&#39; (or none).</span>
+<span class="sd">    :ivar on_enter: callback that will be called when the state is entered.</span>
+<span class="sd">    :ivar on_exit: callback that will be called when the state is exited.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+                 <span class="n">is_terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">next_states</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">on_enter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">on_exit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">is_terminal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next_states</span> <span class="o">=</span> <span class="n">next_states</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_enter</span> <span class="o">=</span> <span class="n">on_enter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_exit</span> <span class="o">=</span> <span class="n">on_exit</span>
+
+
+<span class="k">def</span> <span class="nf">_convert_to_states</span><span class="p">(</span><span class="n">state_space</span><span class="p">):</span>
+    <span class="c1"># NOTE(harlowja): if provided dicts, convert them...</span>
+    <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">state_space</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="o">**</span><span class="n">state</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">state</span>
+
+
+<span class="k">def</span> <span class="nf">_orderedkeys</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">sort</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">_Jump</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A FSM transition tracks this data while jumping.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">on_enter</span><span class="p">,</span> <span class="n">on_exit</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_enter</span> <span class="o">=</span> <span class="n">on_enter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_exit</span> <span class="o">=</span> <span class="n">on_exit</span>
+
+
+<span class="k">class</span> <span class="nc">FiniteMachine</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A finite state machine.</span>
+
+<span class="sd">    This state machine can be used to automatically run a given set of</span>
+<span class="sd">    transitions and states in response to events (either from callbacks or from</span>
+<span class="sd">    generator/iterator send() values, see PEP 342). On each triggered event, a</span>
+<span class="sd">    ``on_enter`` and ``on_exit`` callback can also be provided which will be</span>
+<span class="sd">    called to perform some type of action on leaving a prior state and before</span>
+<span class="sd">    entering a new state.</span>
+
+<span class="sd">    NOTE(harlowja): reactions will *only* be called when the generator/iterator</span>
+<span class="sd">    from :py:meth:`~automaton.runners.Runner.run_iter` does *not* send</span>
+<span class="sd">    back a new event (they will always be called if the</span>
+<span class="sd">    :py:meth:`~automaton.runners.Runner.run` method is used). This allows</span>
+<span class="sd">    for two unique ways (these ways can also be intermixed) to use this state</span>
+<span class="sd">    machine when using :py:meth:`~automaton.runners.Runner.run`; one</span>
+<span class="sd">    where *external* event trigger the next state transition and one</span>
+<span class="sd">    where *internal* reaction callbacks trigger the next state</span>
+<span class="sd">    transition. The other way to use this</span>
+<span class="sd">    state machine is to skip using  :py:meth:`~automaton.runners.Runner.run`</span>
+<span class="sd">    or :py:meth:`~automaton.runners.Runner.run_iter`</span>
+<span class="sd">    completely and use the :meth:`~.FiniteMachine.process_event` method</span>
+<span class="sd">    explicitly and trigger the events via</span>
+<span class="sd">    some *external* functionality/triggers...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#: The result of processing an event (cause and effect...)</span>
+    <span class="n">Effect</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Effect&#39;</span><span class="p">,</span> <span class="s1">&#39;reaction,terminal&#39;</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_effect_builder</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">new_state</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Effect</span><span class="p">(</span><span class="n">new_state</span><span class="p">[</span><span class="s1">&#39;reactions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event</span><span class="p">),</span>
+                          <span class="n">new_state</span><span class="p">[</span><span class="s2">&quot;terminal&quot;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_states</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default_start_state</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">default_start_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the *default* start state that the machine should use.</span>
+
+<span class="sd">        NOTE(harlowja): this will be used by ``initialize`` but only if that</span>
+<span class="sd">        function is not given its own ``start_state`` that overrides this</span>
+<span class="sd">        default.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_start_state</span>
+
+    <span class="nd">@default_start_state</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">default_start_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">FrozenMachine</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">NotFound</span><span class="p">(</span><span class="s2">&quot;Can not set the default start state to&quot;</span>
+                                <span class="s2">&quot; undefined state &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default_start_state</span> <span class="o">=</span> <span class="n">state</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">state_space</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Builds a machine from a state space listing.</span>
+
+<span class="sd">        Each element of this list must be an instance</span>
+<span class="sd">        of :py:class:`.State` or a ``dict`` with equivalent keys that</span>
+<span class="sd">        can be used to construct a :py:class:`.State` instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">state_space</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">_convert_to_states</span><span class="p">(</span><span class="n">state_space</span><span class="p">))</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">state_space</span><span class="p">:</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">add_state</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                        <span class="n">terminal</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">,</span>
+                        <span class="n">on_enter</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">on_enter</span><span class="p">,</span>
+                        <span class="n">on_exit</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">on_exit</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">state_space</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">next_states</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">event</span><span class="p">,</span> <span class="n">next_state</span> <span class="ow">in</span> <span class="n">state</span><span class="o">.</span><span class="n">next_states</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">next_state</span><span class="p">,</span> <span class="n">State</span><span class="p">):</span>
+                        <span class="n">next_state</span> <span class="o">=</span> <span class="n">next_state</span><span class="o">.</span><span class="n">name</span>
+                    <span class="n">m</span><span class="o">.</span><span class="n">add_transition</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">m</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">current_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The current state the machine is in (or none if not initialized).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">terminated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns whether the state machine is in a terminal state.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_current</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;terminal&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">add_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">on_enter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">on_exit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds a given state to the state machine.</span>
+
+<span class="sd">        The ``on_enter`` and ``on_exit`` callbacks, if provided will be</span>
+<span class="sd">        expected to take two positional parameters, these being the state</span>
+<span class="sd">        being exited (for ``on_exit``) or the state being entered (for</span>
+<span class="sd">        ``on_enter``) and a second parameter which is the event that is</span>
+<span class="sd">        being processed that caused the state transition.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">FrozenMachine</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">Duplicate</span><span class="p">(</span><span class="s2">&quot;State &#39;</span><span class="si">%s</span><span class="s2">&#39; already defined&quot;</span> <span class="o">%</span> <span class="n">state</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">on_enter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">six</span><span class="o">.</span><span class="n">callable</span><span class="p">(</span><span class="n">on_enter</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;On enter callback must be callable&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">on_exit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">six</span><span class="o">.</span><span class="n">callable</span><span class="p">(</span><span class="n">on_exit</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;On exit callback must be callable&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;terminal&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">terminal</span><span class="p">),</span>
+            <span class="s1">&#39;reactions&#39;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s1">&#39;on_enter&#39;</span><span class="p">:</span> <span class="n">on_enter</span><span class="p">,</span>
+            <span class="s1">&#39;on_exit&#39;</span><span class="p">:</span> <span class="n">on_exit</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">is_actionable_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check whether the event is actionable in the current state.&quot;&quot;&quot;</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span>
+        <span class="k">if</span> <span class="n">current</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">event</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span><span class="p">[</span><span class="n">current</span><span class="o">.</span><span class="n">name</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">add_reaction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">reaction</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds a reaction that may get triggered by the given event &amp; state.</span>
+
+<span class="sd">        Reaction callbacks may (depending on how the state machine is ran) be</span>
+<span class="sd">        used after an event is processed (and a transition occurs) to cause the</span>
+<span class="sd">        machine to react to the newly arrived at stable state.</span>
+
+<span class="sd">        These callbacks are expected to accept three default positional</span>
+<span class="sd">        parameters (although more can be passed in via *args and **kwargs,</span>
+<span class="sd">        these will automatically get provided to the callback when it is</span>
+<span class="sd">        activated *ontop* of the three default). The three default parameters</span>
+<span class="sd">        are the last stable state, the new stable state and the event that</span>
+<span class="sd">        caused the transition to this new stable state to be arrived at.</span>
+
+<span class="sd">        The expected result of a callback is expected to be a new event that</span>
+<span class="sd">        the callback wants the state machine to react to. This new event</span>
+<span class="sd">        may (depending on how the state machine is ran) get processed (and</span>
+<span class="sd">        this process typically repeats) until the state machine reaches a</span>
+<span class="sd">        terminal state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">FrozenMachine</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">NotFound</span><span class="p">(</span><span class="s2">&quot;Can not add a reaction to event &#39;</span><span class="si">%s</span><span class="s2">&#39; for an&quot;</span>
+                                <span class="s2">&quot; undefined state &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">state</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">six</span><span class="o">.</span><span class="n">callable</span><span class="p">(</span><span class="n">reaction</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Reaction callback must be callable&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">event</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="s1">&#39;reactions&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="s1">&#39;reactions&#39;</span><span class="p">][</span><span class="n">event</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">reaction</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">Duplicate</span><span class="p">(</span><span class="s2">&quot;State &#39;</span><span class="si">%s</span><span class="s2">&#39; reaction to event &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span>
+                                 <span class="s2">&quot; already defined&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">event</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">add_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds an allowed transition from start -&gt; end for the given event.</span>
+
+<span class="sd">        :param start: starting state</span>
+<span class="sd">        :param end: ending state</span>
+<span class="sd">        :param event: event that causes start state to</span>
+<span class="sd">                      transition to end state</span>
+<span class="sd">        :param replace: replace existing event instead of raising a</span>
+<span class="sd">                        :py:class:`~automaton.exceptions.Duplicate` exception</span>
+<span class="sd">                        when the transition already exists.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">FrozenMachine</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">NotFound</span><span class="p">(</span><span class="s2">&quot;Can not add a transition on event &#39;</span><span class="si">%s</span><span class="s2">&#39; that&quot;</span>
+                                <span class="s2">&quot; starts in a undefined state &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span>
+                                <span class="o">%</span> <span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">start</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">end</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">NotFound</span><span class="p">(</span><span class="s2">&quot;Can not add a transition on event &#39;</span><span class="si">%s</span><span class="s2">&#39; that&quot;</span>
+                                <span class="s2">&quot; ends in a undefined state &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span>
+                                <span class="o">%</span> <span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="s1">&#39;terminal&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">InvalidState</span><span class="p">(</span><span class="s2">&quot;Can not add a transition on event &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span>
+                                    <span class="s2">&quot; that starts in the terminal state &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span>
+                                    <span class="o">%</span> <span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">start</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">replace</span><span class="p">:</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="n">event</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">target</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="n">end</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">Duplicate</span><span class="p">(</span><span class="s2">&quot;Cannot add transition from&quot;</span>
+                                     <span class="s2">&quot; &#39;</span><span class="si">%(start_state)s</span><span class="s2">&#39; to &#39;</span><span class="si">%(end_state)s</span><span class="s2">&#39;&quot;</span>
+                                     <span class="s2">&quot; on event &#39;</span><span class="si">%(event)s</span><span class="s2">&#39; because a&quot;</span>
+                                     <span class="s2">&quot; transition from &#39;</span><span class="si">%(start_state)s</span><span class="s2">&#39;&quot;</span>
+                                     <span class="s2">&quot; to &#39;</span><span class="si">%(existing_end_state)s</span><span class="s2">&#39; on&quot;</span>
+                                     <span class="s2">&quot; event &#39;</span><span class="si">%(event)s</span><span class="s2">&#39; already exists.&quot;</span>
+                                     <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;existing_end_state&#39;</span><span class="p">:</span> <span class="n">target</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                        <span class="s1">&#39;end_state&#39;</span><span class="p">:</span> <span class="n">end</span><span class="p">,</span> <span class="s1">&#39;event&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">,</span>
+                                        <span class="s1">&#39;start_state&#39;</span><span class="p">:</span> <span class="n">start</span><span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="n">_Jump</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">end</span><span class="p">][</span><span class="s1">&#39;on_enter&#39;</span><span class="p">],</span>
+                           <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="s1">&#39;on_exit&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="n">event</span><span class="p">]</span> <span class="o">=</span> <span class="n">target</span>
+
+    <span class="k">def</span> <span class="nf">_pre_process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span>
+        <span class="k">if</span> <span class="n">current</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">NotInitialized</span><span class="p">(</span><span class="s2">&quot;Can not process event &#39;</span><span class="si">%s</span><span class="s2">&#39;; the state&quot;</span>
+                                      <span class="s2">&quot; machine hasn&#39;t been initialized&quot;</span>
+                                      <span class="o">%</span> <span class="n">event</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">current</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;terminal&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">InvalidState</span><span class="p">(</span><span class="s2">&quot;Can not transition from terminal&quot;</span>
+                                    <span class="s2">&quot; state &#39;</span><span class="si">%s</span><span class="s2">&#39; on event &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span>
+                                    <span class="o">%</span> <span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">event</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">event</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span><span class="p">[</span><span class="n">current</span><span class="o">.</span><span class="n">name</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">NotFound</span><span class="p">(</span><span class="s2">&quot;Can not transition from state &#39;</span><span class="si">%s</span><span class="s2">&#39; on&quot;</span>
+                                <span class="s2">&quot; event &#39;</span><span class="si">%s</span><span class="s2">&#39; (no defined transition)&quot;</span>
+                                <span class="o">%</span> <span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">event</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_post_process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Trigger a state change in response to the provided event.</span>
+
+<span class="sd">        :returns: Effect this is either a :py:class:`.FiniteMachine.Effect` or</span>
+<span class="sd">                  an ``Effect`` from a subclass of :py:class:`.FiniteMachine`.</span>
+<span class="sd">                  See the appropriate named tuple for a description of the</span>
+<span class="sd">                  actual items in the tuple. For</span>
+<span class="sd">                  example, :py:class:`.FiniteMachine.Effect`&#39;s</span>
+<span class="sd">                  first item is ``reaction``: one could invoke this reaction&#39;s</span>
+<span class="sd">                  callback to react to the new stable state.</span>
+<span class="sd">        :rtype: namedtuple</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pre_process_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span>
+        <span class="n">replacement</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span><span class="p">[</span><span class="n">current</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">event</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">current</span><span class="o">.</span><span class="n">on_exit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">current</span><span class="o">.</span><span class="n">on_exit</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">replacement</span><span class="o">.</span><span class="n">on_enter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">replacement</span><span class="o">.</span><span class="n">on_enter</span><span class="p">(</span><span class="n">replacement</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current</span> <span class="o">=</span> <span class="n">replacement</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_effect_builder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">replacement</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">event</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_process_event</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets up the state machine (sets current state to start state...).</span>
+
+<span class="sd">        :param start_state: explicit start state to use to initialize the</span>
+<span class="sd">                            state machine to. If ``None`` is provided then</span>
+<span class="sd">                            the machine&#39;s default start state will be used</span>
+<span class="sd">                            instead.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">start_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">start_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_start_state</span>
+        <span class="k">if</span> <span class="n">start_state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">NotFound</span><span class="p">(</span><span class="s2">&quot;Can not start from a undefined&quot;</span>
+                                <span class="s2">&quot; state &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">start_state</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">start_state</span><span class="p">][</span><span class="s1">&#39;terminal&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">excp</span><span class="o">.</span><span class="n">InvalidState</span><span class="p">(</span><span class="s2">&quot;Can not start from a terminal&quot;</span>
+                                    <span class="s2">&quot; state &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">start_state</span><span class="p">))</span>
+        <span class="c1"># No on enter will be called, since we are priming the state machine</span>
+        <span class="c1"># and have not really transitioned from anything to get here, we will</span>
+        <span class="c1"># though allow on_exit to be called on the event that causes this</span>
+        <span class="c1"># to be moved from...</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current</span> <span class="o">=</span> <span class="n">_Jump</span><span class="p">(</span><span class="n">start_state</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span>
+                              <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">start_state</span><span class="p">][</span><span class="s1">&#39;on_exit&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shallow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unfreeze</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Copies the current state machine.</span>
+
+<span class="sd">        NOTE(harlowja): the copy will be left in an *uninitialized* state.</span>
+
+<span class="sd">        NOTE(harlowja): when a shallow copy is requested the copy will share</span>
+<span class="sd">                        the same transition table and state table as the</span>
+<span class="sd">                        source; this can be advantageous if you have a machine</span>
+<span class="sd">                        and transitions + states that is defined somewhere</span>
+<span class="sd">                        and want to use copies to run with (the copies have</span>
+<span class="sd">                        the current state that is different between machines).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)()</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">_default_start_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_start_state</span>
+        <span class="k">if</span> <span class="n">unfreeze</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="p">:</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">frozen</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">frozen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">shallow</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">state</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">copied_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">copied_data</span><span class="p">[</span><span class="s1">&#39;reactions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">copied_data</span><span class="p">[</span><span class="s1">&#39;reactions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">=</span> <span class="n">copied_data</span>
+            <span class="k">for</span> <span class="n">state</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">_transitions</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">_transitions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">_states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span>
+        <span class="k">return</span> <span class="n">c</span>
+
+    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns if this state exists in the machines known states.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">state</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span>
+
+    <span class="k">def</span> <span class="nf">freeze</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Freezes &amp; stops addition of states, transitions, reactions...&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">states</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the state names.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">events</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns how many events exist.&quot;&quot;&quot;</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">):</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">c</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Iterates over (start, event, end) transition tuples.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">event</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span><span class="p">[</span><span class="n">state</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">yield</span> <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">pformat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">empty</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Pretty formats the state + transition table into a string.</span>
+
+<span class="sd">        NOTE(harlowja): the sort parameter can be provided to sort the states</span>
+<span class="sd">        and transitions by sort order; with it being provided as false the rows</span>
+<span class="sd">        will be iterated in addition order instead.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tbl</span> <span class="o">=</span> <span class="n">prettytable</span><span class="o">.</span><span class="n">PrettyTable</span><span class="p">([</span><span class="s2">&quot;Start&quot;</span><span class="p">,</span> <span class="s2">&quot;Event&quot;</span><span class="p">,</span> <span class="s2">&quot;End&quot;</span><span class="p">,</span>
+                                       <span class="s2">&quot;On Enter&quot;</span><span class="p">,</span> <span class="s2">&quot;On Exit&quot;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">_orderedkeys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">):</span>
+            <span class="n">prefix_markings</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span> <span class="o">==</span> <span class="n">state</span><span class="p">:</span>
+                <span class="n">prefix_markings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
+            <span class="n">postfix_markings</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_start_state</span> <span class="o">==</span> <span class="n">state</span><span class="p">:</span>
+                <span class="n">postfix_markings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;^&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="s1">&#39;terminal&#39;</span><span class="p">]:</span>
+                <span class="n">postfix_markings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;$&quot;</span><span class="p">)</span>
+            <span class="n">pretty_state</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix_markings</span><span class="p">),</span> <span class="n">state</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">postfix_markings</span><span class="p">:</span>
+                <span class="n">pretty_state</span> <span class="o">+=</span> <span class="s2">&quot;[</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">postfix_markings</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span><span class="p">[</span><span class="n">state</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">_orderedkeys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span><span class="p">[</span><span class="n">state</span><span class="p">],</span>
+                                          <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">):</span>
+                    <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transitions</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="n">event</span><span class="p">]</span>
+                    <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">pretty_state</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">target</span><span class="o">.</span><span class="n">on_enter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">get_callback_name</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">on_enter</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">empty</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">target</span><span class="o">.</span><span class="n">on_exit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">get_callback_name</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">on_exit</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">empty</span><span class="p">)</span>
+                    <span class="n">tbl</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">on_enter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="s1">&#39;on_enter&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">on_enter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">on_enter</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_callback_name</span><span class="p">(</span><span class="n">on_enter</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">on_enter</span> <span class="o">=</span> <span class="n">empty</span>
+                <span class="n">on_exit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="s1">&#39;on_exit&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">on_exit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">on_exit</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_callback_name</span><span class="p">(</span><span class="n">on_exit</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">on_exit</span> <span class="o">=</span> <span class="n">empty</span>
+                <span class="n">tbl</span><span class="o">.</span><span class="n">add_row</span><span class="p">([</span><span class="n">pretty_state</span><span class="p">,</span> <span class="n">empty</span><span class="p">,</span> <span class="n">empty</span><span class="p">,</span> <span class="n">on_enter</span><span class="p">,</span> <span class="n">on_exit</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">tbl</span><span class="o">.</span><span class="n">get_string</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">HierarchicalFiniteMachine</span><span class="p">(</span><span class="n">FiniteMachine</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A fsm that understands how to run in a hierarchical mode.&quot;&quot;&quot;</span>
+
+    <span class="c1">#: The result of processing an event (cause and effect...)</span>
+    <span class="n">Effect</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Effect&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;reaction,terminal,machine&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HierarchicalFiniteMachine</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nested_machines</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_effect_builder</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">new_state</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Effect</span><span class="p">(</span><span class="n">new_state</span><span class="p">[</span><span class="s1">&#39;reactions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event</span><span class="p">),</span>
+                          <span class="n">new_state</span><span class="p">[</span><span class="s2">&quot;terminal&quot;</span><span class="p">],</span> <span class="n">new_state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;machine&#39;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">add_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span>
+                  <span class="n">terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">on_enter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">on_exit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">machine</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds a given state to the state machine.</span>
+
+<span class="sd">        :param machine: the nested state machine that will be transitioned</span>
+<span class="sd">                        into when this state is entered</span>
+<span class="sd">        :type machine: :py:class:`.FiniteMachine`</span>
+
+<span class="sd">        Further arguments are interpreted as</span>
+<span class="sd">        for :py:meth:`.FiniteMachine.add_state`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">machine</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">machine</span><span class="p">,</span> <span class="n">FiniteMachine</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Nested state machines must themselves be state machines&quot;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HierarchicalFiniteMachine</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">add_state</span><span class="p">(</span>
+            <span class="n">state</span><span class="p">,</span> <span class="n">terminal</span><span class="o">=</span><span class="n">terminal</span><span class="p">,</span> <span class="n">on_enter</span><span class="o">=</span><span class="n">on_enter</span><span class="p">,</span> <span class="n">on_exit</span><span class="o">=</span><span class="n">on_exit</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">machine</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="s1">&#39;machine&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">machine</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_nested_machines</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">=</span> <span class="n">machine</span>
+
+    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shallow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unfreeze</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">HierarchicalFiniteMachine</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">shallow</span><span class="o">=</span><span class="n">shallow</span><span class="p">,</span>
+                                                        <span class="n">unfreeze</span><span class="o">=</span><span class="n">unfreeze</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">shallow</span><span class="p">:</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">_nested_machines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nested_machines</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">_nested_machines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nested_machines</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">c</span>
+
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">nested_start_state_fetcher</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets up the state machine (sets current state to start state...).</span>
+
+<span class="sd">        :param start_state: explicit start state to use to initialize the</span>
+<span class="sd">                            state machine to. If ``None`` is provided then the</span>
+<span class="sd">                            machine&#39;s default start state will be used</span>
+<span class="sd">                            instead.</span>
+<span class="sd">        :param nested_start_state_fetcher: A callback that can return start</span>
+<span class="sd">                                           states for any nested machines</span>
+<span class="sd">                                           **only**. If not ``None`` then it</span>
+<span class="sd">                                           will be provided a single argument,</span>
+<span class="sd">                                           the machine to provide a starting</span>
+<span class="sd">                                           state for and it is expected to</span>
+<span class="sd">                                           return a starting state (or</span>
+<span class="sd">                                           ``None``) for each machine called</span>
+<span class="sd">                                           with. Do note that this callback</span>
+<span class="sd">                                           will also be passed to other nested</span>
+<span class="sd">                                           state machines as well, so it will</span>
+<span class="sd">                                           also be used to initialize any state</span>
+<span class="sd">                                           machines they contain (recursively).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HierarchicalFiniteMachine</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+            <span class="n">start_state</span><span class="o">=</span><span class="n">start_state</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">itervalues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;machine&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                <span class="n">nested_machine</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;machine&#39;</span><span class="p">]</span>
+                <span class="n">nested_start_state</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">if</span> <span class="n">nested_start_state_fetcher</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">nested_start_state</span> <span class="o">=</span> <span class="n">nested_start_state_fetcher</span><span class="p">(</span>
+                        <span class="n">nested_machine</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nested_machine</span><span class="p">,</span> <span class="n">HierarchicalFiniteMachine</span><span class="p">):</span>
+                    <span class="n">nested_machine</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+                        <span class="n">start_state</span><span class="o">=</span><span class="n">nested_start_state</span><span class="p">,</span>
+                        <span class="n">nested_start_state_fetcher</span><span class="o">=</span><span class="n">nested_start_state_fetcher</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">nested_machine</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">start_state</span><span class="o">=</span><span class="n">nested_start_state</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nested_machines</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Dictionary of **all** nested state machines this machine may use.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nested_machines</span>
+</pre></div>
+
+              </div>
+            </div>
+          </div>
+          <div class="docs-actions">
+          
+          
+            <a id="logABugLink3" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+          
+          </div>
+          <div class="row docs-byline bottom">
+            <div class="docs-updated">updated: 2019-10-31 19:28</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8 docs-license">
+<a href="https://creativecommons.org/licenses/by/3.0/">
+ <img src="../../_static/images/docs/license.png" alt="Creative Commons Attribution 3.0 License"/>
+</a>
+<p>
+ Except where otherwise noted, this document is licensed under
+ <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons
+ Attribution 3.0 License</a>. See all <a href="http://www.openstack.org/legal">
+ OpenStack Legal Documents</a>.
+</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 docs-actions-wrapper">
+            <!-- ID buglinkbottom added so that pre-filled doc bugs
+                 are sent to Launchpad projects related to the
+                 document -->
+              <a href="#" id="logABugLink2" class="docs-footer-actions"><i class="fa fa-bug"></i> found an error? report a bug</a>
+              <a href="http://ask.openstack.org" class="docs-footer-actions"><i class="fa fa-question-circle"></i> questions?</a>
+            </div>
+          </div>
+        </div>
+<div class="col-lg-3 col-md-4 col-sm-4 col-lg-pull-9 col-md-pull-8 col-sm-pull-8 docs-sidebar">
+  <div class="btn-group docs-sidebar-releases">
+    <button onclick="location.href='/'" class="btn docs-sidebar-home" data-toggle="tooltip" data-placement="top" title="Docs Home"><i class="fa fa-arrow-circle-o-left"></i></button>
+<button href="#" type="button" data-toggle="dropdown" class="btn docs-sidebar-release-select">OpenStack Documentation<i class="fa fa-caret-down"></i></button>
+    <ul class="dropdown-menu docs-sidebar-dropdown" role="menu" aria-labelledby="dLabel">
+      <li role="presentation" class="dropdown-header">Guides</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#install-guides">Install Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#user-guides">User Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#configuration-guides">Configuration Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#ops-and-admin-guides">Operations and Administration Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#api-guides">API Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#contributor-guides">Contributor Guides</a></li>
+      <li role="presentation" class="dropdown-header">Languages</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/de/">Deutsch (German)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/fr/">Français (French)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/id/">Bahasa Indonesia (Indonesian)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/it/">Italiano (Italian)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/ja/">日本語 (Japanese)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/ko_KR/">한국어 (Korean)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/pt_BR/">Português (Portuguese)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/tr_TR/">Türkçe (Türkiye)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/zh_CN/">简体中文 (Simplified Chinese)</a></li>
+    </ul>
+  </div>
+  <div class="docs-sidebar-toc">
+    <div class="docs-sidebar-section" id="table-of-contents">
+      <a href="../../index.html" class="docs-sidebar-section-title"><h4>ironic-inspector 2019.9.1.dev3</h4></a>
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Install Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration/index.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../admin/index.html">Administrator Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributor/index.html">How To Contribute</a></li>
+</ul>
+
+    </div>
+
+  </div>
+</div>
+      </div>
+    </div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+      <div class="col-lg-2 col-sm-2">
+        <h3>OpenStack</h3>
+        <ul>
+          <li><a href="http://openstack.org/projects/">Projects</a></li>
+          <li><a href="http://openstack.org/projects/openstack-security/">OpenStack Security</a></li>
+          <li><a href="http://openstack.org/projects/openstack-faq/">Common Questions</a></li>
+          <li><a href="http://openstack.org/blog/">Blog</a></li>
+          <li><a href="http://openstack.org/news/">News</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Community</h3>
+        <ul>
+          <li><a href="http://openstack.org/community/">User Groups</a></li>
+          <li><a href="http://openstack.org/community/events/">Events</a></li>
+          <li><a href="http://openstack.org/community/jobs/">Jobs</a></li>
+          <li><a href="http://openstack.org/foundation/companies/">Companies</a></li>
+          <li><a href="http://docs.openstack.org/infra/manual/developers.html">Contribute</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Documentation</h3>
+        <ul>
+          <li><a href="http://docs.openstack.org">OpenStack Manuals</a></li>
+          <li><a href="http://openstack.org/software/start/">Getting Started</a></li>
+          <li><a href="http://developer.openstack.org">API Documentation</a></li>
+          <li><a href="https://wiki.openstack.org">Wiki</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Branding & Legal</h3>
+        <ul>
+          <li><a href="http://openstack.org/brand/">Logos & Guidelines</a></li>
+          <li><a href="http://openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>
+          <li><a href="http://openstack.org/privacy/">Privacy Policy</a></li>
+          <li><a href="https://wiki.openstack.org/wiki/How_To_Contribute#Contributor_License_Agreement">OpenStack CLA</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <h3>Stay In Touch</h3>
+        <a href="https://twitter.com/OpenStack" target="_blank" class="social-icons footer-twitter"></a>
+        <a href="https://www.facebook.com/openstack" target="_blank" class="social-icons footer-facebook"></a>
+        <a href="https://www.linkedin.com/company/openstack" target="_blank" class="social-icons footer-linkedin"></a>
+        <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank" class="social-icons footer-youtube"></a>
+        <p class="fine-print">
+          The OpenStack project is provided under the
+          <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 license</a>. Openstack.org is powered by
+          <a href="http://rackspace.com" target="_blank">Rackspace Cloud Computing</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- jQuery -->
+<script type="text/javascript" src="../../_static/js/jquery-3.2.1.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
+<script type="text/javascript" src="../../_static/js/bootstrap.min.js"></script>
+
+<!-- The rest of the JS -->
+<script type="text/javascript" src="../../_static/js/navigation.js"></script>
+
+<!-- Docs JS -->
+<script type="text/javascript" src="../../_static/js/docs.js"></script>
+
+<!-- Popovers -->
+<script type="text/javascript" src="../../_static/js/webui-popover.js"></script>
+
+<!-- standard sphinx include libraries, which allow search highlighting -->
+<script type="text/javascript" src="../../_static/underscore.js"></script>
+<script type="text/javascript" src="../../_static/doctools.js"></script>
+<script type="text/javascript" src="../../_static/searchtools.js"></script>
+
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2019.9.1.dev3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        SOURCELINK_SUFFIX: '.txt',
+        HAS_SOURCE:  true
+      };
+</script>
+
+
+<!-- Javascript for page -->
+<script language="JavaScript">
+/* build a description of this page including SHA, source location on git repo,
+   build time and the project's launchpad bug tag. Set the HREF of the bug
+   buttons */
+
+    var lineFeed = "%0A";
+    var gitURL = "Source: Can't derive source file URL";
+
+    /* there have been cases where "pagename" wasn't set; better check for it */
+        /* "giturl" is the URL of the source file on Git and is auto-generated by
+           openstackdocstheme.
+
+           "pagename" is a standard sphinx parameter containing the name of
+           the source file, without extension.                             */
+
+        var sourceFile = "_modules/automaton/machines" + ".rst";
+        gitURL = "Source: https://git.openstack.org/cgit/openstack/ironic-inspector/tree/doc/source" + "/" + sourceFile;
+
+    /* gitsha, project and bug_tag rely on variables in conf.py */
+    var gitSha = "SHA: 8078a7d117a84fedb405447f7403b0e908afb559";
+        var bugProject = "ironic-inspector";
+        var bugTitle = "automaton.machines in ironic-inspector";
+    var fieldTags = "";
+        var useStoryboard = "";
+
+
+    /* "last_updated" is the build date and time. It relies on the
+       conf.py variable "html_last_updated_fmt", which should include
+       year/month/day as well as hours and minutes                   */
+    var buildstring = "Release: 2019.9.1.dev3 on 2019-10-31 19:28";
+
+    var fieldComment = encodeURI(buildstring) +
+                       lineFeed + encodeURI(gitSha) +
+                       lineFeed + encodeURI(gitURL) ;
+
+    logABug(bugTitle, bugProject, fieldComment, fieldTags);
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+          $.ajax({
+            context: this,
+            dataType : "html",
+            url : "https://docs.openstack.org/rocky/badge.html",
+            success : function(results) {
+                $('#deprecated-badge-container').html(results);
+            }
+        });
+    });
+</script>
+<div id="deprecated-badge-container"></div>
+
+  </body>
+</html>

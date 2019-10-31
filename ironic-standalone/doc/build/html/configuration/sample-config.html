@@ -1,0 +1,1568 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+
+    <title>OpenStack Docs: Ironic Inspector Configuration Options</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link href="../_static/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Pygments CSS -->
+<link href="../_static/css/native.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link href="../_static/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="../_static/css/combined.css" rel="stylesheet">
+
+<!-- Search CSS -->
+<link href="../_static/css/search.css" rel="stylesheet">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+  
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-17511903-1', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+  </head>
+  <body>
+
+<!-- SOURCE_FILE: https://git.openstack.org/cgit/openstack/ironic-inspector/tree/doc/source/configuration/sample-config.rst -->
+
+ <script>
+    (function (window, document) {
+        var loader = function () {
+            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+            script.src = "https://search.openstack.org/widget/embed.min.js?t="+Date.now();
+            tag.parentNode.insertBefore(script, tag);
+        };
+        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+    })(window, document);
+</script>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="brand-wrapper">
+        <a class="navbar-brand" href="https://www.openstack.org/"></a>
+      </div>
+      <div class="search-icon show"><i class="fa fa-search"></i> Search</div></div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="search-container tiny">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</div>
+      <ul class="nav navbar-nav navbar-main show">
+        <li class="search-container-mobile">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</li>
+        <li>
+          <a href="https://www.openstack.org/software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuSoftware">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/">Overview</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/project-navigator/">Project Navigator</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/sample-configs/">Sample Configs</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/security/">Security</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/start/">Get Started</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/roadmap/">Roadmap</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/latest-release/">Latest Release</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/sourcecode/">Source Code</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/user-stories/" class="drop" id="dropdownMenuUsers">Users <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuUsers">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/user-stories/">Overview</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/telecoms-and-nfv/">Telecoms and NFV</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/enterprise/">OpenStack in the Enterprise</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/appdev/">Application Developers & ISVs</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org/">Superuser Magazine</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/surveys/landing">User Survey</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/community/" class="drop" id="dropdownMenuCommunity">Community <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuCommunity">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/">Welcome! Start Here</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation/">OpenStack Foundation</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://wiki.openstack.org">OpenStack Wiki</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://groups.openstack.org">User Groups</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/speakers/">Speakers Bureau</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation/companies/">Supporting Companies</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/jobs/">Jobs</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/">Join The Community</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/marketplace/">Marketplace</a>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/events/" class="drop" id="dropdownMenuEvents">Events <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuEvents">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//www.openstack.org/community/events/">Overview</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/summit/">The OpenStack Summit</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//www.openstack.org/community/events/">More OpenStack Events</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/events/openstackdays">OpenStack Days</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/learn/" class="drop" id="dropdownMenuLearn">Learn <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/marketplace/training/">Training</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/coa/">Get Certified</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask a Technical Question</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser Magazine</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/videos/">Summit Videos</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/analysts/">Analyst Reports</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/news/">News</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/blog/">Blog</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://docs.openstack.org/">Docs</a>
+        </li>
+        <li>
+
+</li>
+
+
+            <li>
+
+                <li class="join-nav-section">
+                    <a href="https://www.openstack.org/join/" id="dropdownMenuJoin">Join <i class="fa fa-caret-down"></i></a>
+                    <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuJoin" style="display: none;">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/register/?membership-type=foundation">Sign up for Foundation Membership</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/#sponsor">Sponsor the Foundation</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation">More about the Foundation</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://www.openstack.org/Security/login/?BackURL=/home/" class="sign-in-btn">Log In</a>
+                </li>
+
+            </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /.container -->
+</nav>
+    <div class="container docs-book-wrapper">
+      <div class="row">
+        <div class="col-lg-9 col-md-8 col-sm-8 col-lg-push-3 col-md-push-4 col-sm-push-4">
+<div class="row">
+  <div class="col-lg-8">
+      <h2>Ironic Inspector Configuration Options</h2>
+    
+  </div>
+  <div class="docs-actions">
+    
+    <a href="ironic-inspector.html"><i class="fa fa-angle-double-left" data-toggle="tooltip" data-placement="top" title="Previous: ironic-inspector.conf"></i></a>
+    
+    
+    <a href="policy.html"><i class="fa fa-angle-double-right" data-toggle="tooltip" data-placement="top" title="Next: Policies"></i></a>
+    
+    <a id="logABugLink1" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+    
+  </div>
+</div>
+          <div class="row docs-byline">
+            <div class="docs-updated">updated: 2019-10-31 19:28</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="docs-body">
+
+  <div class="section" id="ironic-inspector-configuration-options">
+<h1>Ironic Inspector Configuration Options<a class="headerlink" href="#ironic-inspector-configuration-options" title="Permalink to this headline">¶</a></h1>
+<p>The following is a sample Ironic Inspector configuration for
+adaptation and use. It is auto-generated from Ironic Inspector
+when this documentation is built, so if you find issues with an
+option, please compare your version of Ironic Inspector with the
+version of this documentation.</p>
+<p>The sample configuration can also be downloaded as a <a class="reference download internal" href="../_downloads/ironic-inspector.conf.sample" download=""><code class="xref download docutils literal notranslate"><span class="pre">file</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">DEFAULT</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From ironic_inspector</span>
+<span class="c1">#</span>
+
+<span class="c1"># IP to listen on. (string value)</span>
+<span class="c1">#listen_address = 0.0.0.0</span>
+
+<span class="c1"># Port to listen on. (port value)</span>
+<span class="c1"># Minimum value: 0</span>
+<span class="c1"># Maximum value: 65535</span>
+<span class="c1">#listen_port = 5050</span>
+
+<span class="c1"># Authentication method used on the ironic-inspector API. Either</span>
+<span class="c1"># &quot;noauth&quot; or &quot;keystone&quot; are currently valid options. &quot;noauth&quot; will</span>
+<span class="c1"># disable all authentication. (string value)</span>
+<span class="c1"># Possible values:</span>
+<span class="c1"># keystone - &lt;No description provided&gt;</span>
+<span class="c1"># noauth - &lt;No description provided&gt;</span>
+<span class="c1">#auth_strategy = keystone</span>
+
+<span class="c1"># Timeout after which introspection is considered failed, set to 0 to</span>
+<span class="c1"># disable. (integer value)</span>
+<span class="c1"># Maximum value: 315576000</span>
+<span class="c1">#timeout = 3600</span>
+
+<span class="c1"># DEPRECATED: For how much time (in seconds) to keep status</span>
+<span class="c1"># information about nodes after introspection was finished for them.</span>
+<span class="c1"># Set to 0 (the default) to disable the timeout. (integer value)</span>
+<span class="c1"># This option is deprecated for removal.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1">#node_status_keep_time = 0</span>
+
+<span class="c1"># Amount of time in seconds, after which repeat clean up of timed out</span>
+<span class="c1"># nodes and old nodes status information. (integer value)</span>
+<span class="c1">#clean_up_period = 60</span>
+
+<span class="c1"># SSL Enabled/Disabled (boolean value)</span>
+<span class="c1">#use_ssl = false</span>
+
+<span class="c1"># Path to SSL certificate (string value)</span>
+<span class="c1">#ssl_cert_path =</span>
+
+<span class="c1"># Path to SSL key (string value)</span>
+<span class="c1">#ssl_key_path =</span>
+
+<span class="c1"># The green thread pool size. (integer value)</span>
+<span class="c1"># Minimum value: 2</span>
+<span class="c1">#max_concurrency = 1000</span>
+
+<span class="c1"># Delay (in seconds) between two introspections. (integer value)</span>
+<span class="c1">#introspection_delay = 5</span>
+
+<span class="c1"># Ironic driver_info fields that are equivalent to ipmi_address. (list</span>
+<span class="c1"># value)</span>
+<span class="c1">#ipmi_address_fields = ilo_address,drac_host,drac_address,cimc_address</span>
+
+<span class="c1"># Path to the rootwrap configuration file to use for running commands</span>
+<span class="c1"># as root (string value)</span>
+<span class="c1">#rootwrap_config = /etc/ironic-inspector/rootwrap.conf</span>
+
+<span class="c1"># Limit the number of elements an API list-call returns (integer</span>
+<span class="c1"># value)</span>
+<span class="c1"># Minimum value: 1</span>
+<span class="c1">#api_max_limit = 1000</span>
+
+<span class="c1"># Whether the current installation of ironic-inspector can manage PXE</span>
+<span class="c1"># booting of nodes. If set to False, the API will reject introspection</span>
+<span class="c1"># requests with manage_boot missing or set to True. (boolean value)</span>
+<span class="c1">#can_manage_boot = true</span>
+
+<span class="c1">#</span>
+<span class="c1"># From oslo.log</span>
+<span class="c1">#</span>
+
+<span class="c1"># If set to true, the logging level will be set to DEBUG instead of</span>
+<span class="c1"># the default INFO level. (boolean value)</span>
+<span class="c1"># Note: This option can be changed without restarting.</span>
+<span class="c1">#debug = false</span>
+
+<span class="c1"># The name of a logging configuration file. This file is appended to</span>
+<span class="c1"># any existing logging configuration files. For details about logging</span>
+<span class="c1"># configuration files, see the Python logging module documentation.</span>
+<span class="c1"># Note that when logging configuration files are used then all logging</span>
+<span class="c1"># configuration is set in the configuration file and other logging</span>
+<span class="c1"># configuration options are ignored (for example,</span>
+<span class="c1"># logging_context_format_string). (string value)</span>
+<span class="c1"># Note: This option can be changed without restarting.</span>
+<span class="c1"># Deprecated group/name - [DEFAULT]/log_config</span>
+<span class="c1">#log_config_append = &lt;None&gt;</span>
+
+<span class="c1"># Defines the format string for %%(asctime)s in log records. Default:</span>
+<span class="c1"># %(default)s . This option is ignored if log_config_append is set.</span>
+<span class="c1"># (string value)</span>
+<span class="c1">#log_date_format = %Y-%m-%d %H:%M:%S</span>
+
+<span class="c1"># (Optional) Name of log file to send logging output to. If no default</span>
+<span class="c1"># is set, logging will go to stderr as defined by use_stderr. This</span>
+<span class="c1"># option is ignored if log_config_append is set. (string value)</span>
+<span class="c1"># Deprecated group/name - [DEFAULT]/logfile</span>
+<span class="c1">#log_file = &lt;None&gt;</span>
+
+<span class="c1"># (Optional) The base directory used for relative log_file  paths.</span>
+<span class="c1"># This option is ignored if log_config_append is set. (string value)</span>
+<span class="c1"># Deprecated group/name - [DEFAULT]/logdir</span>
+<span class="c1">#log_dir = &lt;None&gt;</span>
+
+<span class="c1"># Uses logging handler designed to watch file system. When log file is</span>
+<span class="c1"># moved or removed this handler will open a new log file with</span>
+<span class="c1"># specified path instantaneously. It makes sense only if log_file</span>
+<span class="c1"># option is specified and Linux platform is used. This option is</span>
+<span class="c1"># ignored if log_config_append is set. (boolean value)</span>
+<span class="c1">#watch_log_file = false</span>
+
+<span class="c1"># Use syslog for logging. Existing syslog format is DEPRECATED and</span>
+<span class="c1"># will be changed later to honor RFC5424. This option is ignored if</span>
+<span class="c1"># log_config_append is set. (boolean value)</span>
+<span class="c1">#use_syslog = false</span>
+
+<span class="c1"># Enable journald for logging. If running in a systemd environment you</span>
+<span class="c1"># may wish to enable journal support. Doing so will use the journal</span>
+<span class="c1"># native protocol which includes structured metadata in addition to</span>
+<span class="c1"># log messages.This option is ignored if log_config_append is set.</span>
+<span class="c1"># (boolean value)</span>
+<span class="c1">#use_journal = false</span>
+
+<span class="c1"># Syslog facility to receive log lines. This option is ignored if</span>
+<span class="c1"># log_config_append is set. (string value)</span>
+<span class="c1">#syslog_log_facility = LOG_USER</span>
+
+<span class="c1"># Use JSON formatting for logging. This option is ignored if</span>
+<span class="c1"># log_config_append is set. (boolean value)</span>
+<span class="c1">#use_json = false</span>
+
+<span class="c1"># Log output to standard error. This option is ignored if</span>
+<span class="c1"># log_config_append is set. (boolean value)</span>
+<span class="c1">#use_stderr = false</span>
+
+<span class="c1"># Format string to use for log messages with context. (string value)</span>
+<span class="c1">#logging_context_format_string = %(asctime)s.%(msecs)03d %(process)d %(levelname)s %(name)s [%(request_id)s %(user_identity)s] %(instance)s%(message)s</span>
+
+<span class="c1"># Format string to use for log messages when context is undefined.</span>
+<span class="c1"># (string value)</span>
+<span class="c1">#logging_default_format_string = %(asctime)s.%(msecs)03d %(process)d %(levelname)s %(name)s [-] %(instance)s%(message)s</span>
+
+<span class="c1"># Additional data to append to log message when logging level for the</span>
+<span class="c1"># message is DEBUG. (string value)</span>
+<span class="c1">#logging_debug_format_suffix = %(funcName)s %(pathname)s:%(lineno)d</span>
+
+<span class="c1"># Prefix each line of exception output with this format. (string</span>
+<span class="c1"># value)</span>
+<span class="c1">#logging_exception_prefix = %(asctime)s.%(msecs)03d %(process)d ERROR %(name)s %(instance)s</span>
+
+<span class="c1"># Defines the format string for %(user_identity)s that is used in</span>
+<span class="c1"># logging_context_format_string. (string value)</span>
+<span class="c1">#logging_user_identity_format = %(user)s %(tenant)s %(domain)s %(user_domain)s %(project_domain)s</span>
+
+<span class="c1"># List of package logging levels in logger=LEVEL pairs. This option is</span>
+<span class="c1"># ignored if log_config_append is set. (list value)</span>
+<span class="c1">#default_log_levels = sqlalchemy=WARNING,iso8601=WARNING,requests=WARNING,urllib3.connectionpool=WARNING,keystonemiddleware=WARNING,swiftclient=WARNING,keystoneauth=WARNING,ironicclient=WARNING</span>
+
+<span class="c1"># Enables or disables publication of error events. (boolean value)</span>
+<span class="c1">#publish_errors = false</span>
+
+<span class="c1"># The format for an instance that is passed with the log message.</span>
+<span class="c1"># (string value)</span>
+<span class="c1">#instance_format = &quot;[instance: %(uuid)s] &quot;</span>
+
+<span class="c1"># The format for an instance UUID that is passed with the log message.</span>
+<span class="c1"># (string value)</span>
+<span class="c1">#instance_uuid_format = &quot;[instance: %(uuid)s] &quot;</span>
+
+<span class="c1"># Interval, number of seconds, of log rate limiting. (integer value)</span>
+<span class="c1">#rate_limit_interval = 0</span>
+
+<span class="c1"># Maximum number of logged messages per rate_limit_interval. (integer</span>
+<span class="c1"># value)</span>
+<span class="c1">#rate_limit_burst = 0</span>
+
+<span class="c1"># Log level name used by rate limiting: CRITICAL, ERROR, INFO,</span>
+<span class="c1"># WARNING, DEBUG or empty string. Logs with level greater or equal to</span>
+<span class="c1"># rate_limit_except_level are not filtered. An empty string means that</span>
+<span class="c1"># all levels are filtered. (string value)</span>
+<span class="c1">#rate_limit_except_level = CRITICAL</span>
+
+<span class="c1"># Enables or disables fatal status of deprecations. (boolean value)</span>
+<span class="c1">#fatal_deprecations = false</span>
+
+
+<span class="p">[</span><span class="n">capabilities</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From ironic_inspector</span>
+<span class="c1">#</span>
+
+<span class="c1"># Whether to store the boot mode (BIOS or UEFI). (boolean value)</span>
+<span class="c1">#boot_mode = false</span>
+
+<span class="c1"># Mapping between a CPU flag and a capability to set if this flag is</span>
+<span class="c1"># present. (dict value)</span>
+<span class="c1">#cpu_flags = aes:cpu_aes,pdpe1gb:cpu_hugepages_1g,pse:cpu_hugepages,smx:cpu_txt,svm:cpu_vt,vmx:cpu_vt</span>
+
+
+<span class="p">[</span><span class="n">cors</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From oslo.middleware.cors</span>
+<span class="c1">#</span>
+
+<span class="c1"># Indicate whether this resource may be shared with the domain</span>
+<span class="c1"># received in the requests &quot;origin&quot; header. Format:</span>
+<span class="c1"># &quot;&lt;protocol&gt;://&lt;host&gt;[:&lt;port&gt;]&quot;, no trailing slash. Example:</span>
+<span class="c1"># https://horizon.example.com (list value)</span>
+<span class="c1">#allowed_origin = &lt;None&gt;</span>
+
+<span class="c1"># Indicate that the actual request can include user credentials</span>
+<span class="c1"># (boolean value)</span>
+<span class="c1">#allow_credentials = true</span>
+
+<span class="c1"># Indicate which headers are safe to expose to the API. Defaults to</span>
+<span class="c1"># HTTP Simple Headers. (list value)</span>
+<span class="c1">#expose_headers =</span>
+
+<span class="c1"># Maximum cache age of CORS preflight requests. (integer value)</span>
+<span class="c1">#max_age = 3600</span>
+
+<span class="c1"># Indicate which methods can be used during the actual request. (list</span>
+<span class="c1"># value)</span>
+<span class="c1">#allow_methods = GET,POST,PUT,HEAD,PATCH,DELETE,OPTIONS</span>
+
+<span class="c1"># Indicate which header field names may be used during the actual</span>
+<span class="c1"># request. (list value)</span>
+<span class="c1">#allow_headers = X-Auth-Token,X-OpenStack-Ironic-Inspector-API-Minimum-Version,X-OpenStack-Ironic-Inspector-API-Maximum-Version,X-OpenStack-Ironic-Inspector-API-Version</span>
+
+
+<span class="p">[</span><span class="n">database</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From oslo.db</span>
+<span class="c1">#</span>
+
+<span class="c1"># If True, SQLite uses synchronous mode. (boolean value)</span>
+<span class="c1">#sqlite_synchronous = true</span>
+
+<span class="c1"># The back end to use for the database. (string value)</span>
+<span class="c1"># Deprecated group/name - [DEFAULT]/db_backend</span>
+<span class="c1">#backend = sqlalchemy</span>
+
+<span class="c1"># The SQLAlchemy connection string to use to connect to the database.</span>
+<span class="c1"># (string value)</span>
+<span class="c1"># Deprecated group/name - [DEFAULT]/sql_connection</span>
+<span class="c1"># Deprecated group/name - [DATABASE]/sql_connection</span>
+<span class="c1"># Deprecated group/name - [sql]/connection</span>
+<span class="c1">#connection = &lt;None&gt;</span>
+
+<span class="c1"># The SQLAlchemy connection string to use to connect to the slave</span>
+<span class="c1"># database. (string value)</span>
+<span class="c1">#slave_connection = &lt;None&gt;</span>
+
+<span class="c1"># The SQL mode to be used for MySQL sessions. This option, including</span>
+<span class="c1"># the default, overrides any server-set SQL mode. To use whatever SQL</span>
+<span class="c1"># mode is set by the server configuration, set this to no value.</span>
+<span class="c1"># Example: mysql_sql_mode= (string value)</span>
+<span class="c1">#mysql_sql_mode = TRADITIONAL</span>
+
+<span class="c1"># If True, transparently enables support for handling MySQL Cluster</span>
+<span class="c1"># (NDB). (boolean value)</span>
+<span class="c1">#mysql_enable_ndb = false</span>
+
+<span class="c1"># Connections which have been present in the connection pool longer</span>
+<span class="c1"># than this number of seconds will be replaced with a new one the next</span>
+<span class="c1"># time they are checked out from the pool. (integer value)</span>
+<span class="c1"># Deprecated group/name - [DATABASE]/idle_timeout</span>
+<span class="c1"># Deprecated group/name - [database]/idle_timeout</span>
+<span class="c1"># Deprecated group/name - [DEFAULT]/sql_idle_timeout</span>
+<span class="c1"># Deprecated group/name - [DATABASE]/sql_idle_timeout</span>
+<span class="c1"># Deprecated group/name - [sql]/idle_timeout</span>
+<span class="c1">#connection_recycle_time = 3600</span>
+
+<span class="c1"># DEPRECATED: Minimum number of SQL connections to keep open in a</span>
+<span class="c1"># pool. (integer value)</span>
+<span class="c1"># Deprecated group/name - [DEFAULT]/sql_min_pool_size</span>
+<span class="c1"># Deprecated group/name - [DATABASE]/sql_min_pool_size</span>
+<span class="c1"># This option is deprecated for removal.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: The option to set the minimum pool size is not supported by</span>
+<span class="c1"># sqlalchemy.</span>
+<span class="c1">#min_pool_size = 1</span>
+
+<span class="c1"># Maximum number of SQL connections to keep open in a pool. Setting a</span>
+<span class="c1"># value of 0 indicates no limit. (integer value)</span>
+<span class="c1"># Deprecated group/name - [DEFAULT]/sql_max_pool_size</span>
+<span class="c1"># Deprecated group/name - [DATABASE]/sql_max_pool_size</span>
+<span class="c1">#max_pool_size = 5</span>
+
+<span class="c1"># Maximum number of database connection retries during startup. Set to</span>
+<span class="c1"># -1 to specify an infinite retry count. (integer value)</span>
+<span class="c1"># Deprecated group/name - [DEFAULT]/sql_max_retries</span>
+<span class="c1"># Deprecated group/name - [DATABASE]/sql_max_retries</span>
+<span class="c1">#max_retries = 10</span>
+
+<span class="c1"># Interval between retries of opening a SQL connection. (integer</span>
+<span class="c1"># value)</span>
+<span class="c1"># Deprecated group/name - [DEFAULT]/sql_retry_interval</span>
+<span class="c1"># Deprecated group/name - [DATABASE]/reconnect_interval</span>
+<span class="c1">#retry_interval = 10</span>
+
+<span class="c1"># If set, use this value for max_overflow with SQLAlchemy. (integer</span>
+<span class="c1"># value)</span>
+<span class="c1"># Deprecated group/name - [DEFAULT]/sql_max_overflow</span>
+<span class="c1"># Deprecated group/name - [DATABASE]/sqlalchemy_max_overflow</span>
+<span class="c1">#max_overflow = 50</span>
+
+<span class="c1"># Verbosity of SQL debugging information: 0=None, 100=Everything.</span>
+<span class="c1"># (integer value)</span>
+<span class="c1"># Minimum value: 0</span>
+<span class="c1"># Maximum value: 100</span>
+<span class="c1"># Deprecated group/name - [DEFAULT]/sql_connection_debug</span>
+<span class="c1">#connection_debug = 0</span>
+
+<span class="c1"># Add Python stack traces to SQL as comment strings. (boolean value)</span>
+<span class="c1"># Deprecated group/name - [DEFAULT]/sql_connection_trace</span>
+<span class="c1">#connection_trace = false</span>
+
+<span class="c1"># If set, use this value for pool_timeout with SQLAlchemy. (integer</span>
+<span class="c1"># value)</span>
+<span class="c1"># Deprecated group/name - [DATABASE]/sqlalchemy_pool_timeout</span>
+<span class="c1">#pool_timeout = &lt;None&gt;</span>
+
+<span class="c1"># Enable the experimental use of database reconnect on connection</span>
+<span class="c1"># lost. (boolean value)</span>
+<span class="c1">#use_db_reconnect = false</span>
+
+<span class="c1"># Seconds between retries of a database transaction. (integer value)</span>
+<span class="c1">#db_retry_interval = 1</span>
+
+<span class="c1"># If True, increases the interval between retries of a database</span>
+<span class="c1"># operation up to db_max_retry_interval. (boolean value)</span>
+<span class="c1">#db_inc_retry_interval = true</span>
+
+<span class="c1"># If db_inc_retry_interval is set, the maximum seconds between retries</span>
+<span class="c1"># of a database operation. (integer value)</span>
+<span class="c1">#db_max_retry_interval = 10</span>
+
+<span class="c1"># Maximum retries in case of connection error or deadlock error before</span>
+<span class="c1"># error is raised. Set to -1 to specify an infinite retry count.</span>
+<span class="c1"># (integer value)</span>
+<span class="c1">#db_max_retries = 20</span>
+
+<span class="c1"># Optional URL parameters to append onto the connection URL at connect</span>
+<span class="c1"># time; specify as param1=value1&amp;param2=value2&amp;... (string value)</span>
+<span class="c1">#connection_parameters =</span>
+
+
+<span class="p">[</span><span class="n">discovery</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From ironic_inspector</span>
+<span class="c1">#</span>
+
+<span class="c1"># The name of the Ironic driver used by the enroll hook when creating</span>
+<span class="c1"># a new node in Ironic. (string value)</span>
+<span class="c1">#enroll_node_driver = fake-hardware</span>
+
+
+<span class="p">[</span><span class="n">dnsmasq_pxe_filter</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From ironic_inspector</span>
+<span class="c1">#</span>
+
+<span class="c1"># The MAC address cache directory, exposed to dnsmasq.This directory</span>
+<span class="c1"># is expected to be in exclusive control of the driver. (string value)</span>
+<span class="c1">#dhcp_hostsdir = /var/lib/ironic-inspector/dhcp-hostsdir</span>
+
+<span class="c1"># Purge the hostsdir upon driver initialization. Setting to false</span>
+<span class="c1"># should only be performed when the deployment of inspector is such</span>
+<span class="c1"># that there are multiple processes executing inside of the same host</span>
+<span class="c1"># and namespace. In this case, the Operator is responsible for setting</span>
+<span class="c1"># up a custom cleaning facility. (boolean value)</span>
+<span class="c1">#purge_dhcp_hostsdir = true</span>
+
+<span class="c1"># A (shell) command line to start the dnsmasq service upon filter</span>
+<span class="c1"># initialization. Default: don&#39;t start. (string value)</span>
+<span class="c1">#dnsmasq_start_command =</span>
+
+<span class="c1"># A (shell) command line to stop the dnsmasq service upon inspector</span>
+<span class="c1"># (error) exit. Default: don&#39;t stop. (string value)</span>
+<span class="c1">#dnsmasq_stop_command =</span>
+
+
+<span class="p">[</span><span class="n">iptables</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From ironic_inspector</span>
+<span class="c1">#</span>
+
+<span class="c1"># Interface on which dnsmasq listens, the default is for VM&#39;s. (string</span>
+<span class="c1"># value)</span>
+<span class="c1">#dnsmasq_interface = br-ctlplane</span>
+
+<span class="c1"># iptables chain name to use. (string value)</span>
+<span class="c1">#firewall_chain = ironic-inspector</span>
+
+<span class="c1"># List of Etherent Over InfiniBand interfaces on the Inspector host</span>
+<span class="c1"># which are used for physical access to the DHCP network. Multiple</span>
+<span class="c1"># interfaces would be attached to a bond or bridge specified in</span>
+<span class="c1"># dnsmasq_interface. The MACs of the InfiniBand nodes which are not in</span>
+<span class="c1"># desired state are going to be blacklisted based on the list of</span>
+<span class="c1"># neighbor MACs on these interfaces. (list value)</span>
+<span class="c1">#ethoib_interfaces =</span>
+
+
+<span class="p">[</span><span class="n">ironic</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From ironic_inspector</span>
+<span class="c1">#</span>
+
+<span class="c1"># Authentication URL (string value)</span>
+<span class="c1">#auth_url = &lt;None&gt;</span>
+
+<span class="c1"># DEPRECATED: Method to use for authentication: noauth or keystone.</span>
+<span class="c1"># (string value)</span>
+<span class="c1"># Possible values:</span>
+<span class="c1"># keystone - &lt;No description provided&gt;</span>
+<span class="c1"># noauth - &lt;No description provided&gt;</span>
+<span class="c1"># This option is deprecated for removal.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: Use [ironic]/auth_type, for noauth case set</span>
+<span class="c1"># [ironic]/auth_type to `none` and specify ironic API URL via</span>
+<span class="c1"># [ironic]/endpoint_override option.</span>
+<span class="c1">#auth_strategy = keystone</span>
+
+<span class="c1"># Authentication type to load (string value)</span>
+<span class="c1"># Deprecated group/name - [ironic]/auth_plugin</span>
+<span class="c1">#auth_type = &lt;None&gt;</span>
+
+<span class="c1"># PEM encoded Certificate Authority to use when verifying HTTPs</span>
+<span class="c1"># connections. (string value)</span>
+<span class="c1">#cafile = &lt;None&gt;</span>
+
+<span class="c1"># PEM encoded client certificate cert file (string value)</span>
+<span class="c1">#certfile = &lt;None&gt;</span>
+
+<span class="c1"># Collect per-API call timing information. (boolean value)</span>
+<span class="c1">#collect_timing = false</span>
+
+<span class="c1"># Optional domain ID to use with v3 and v2 parameters. It will be used</span>
+<span class="c1"># for both the user and project domain in v3 and ignored in v2</span>
+<span class="c1"># authentication. (string value)</span>
+<span class="c1">#default_domain_id = &lt;None&gt;</span>
+
+<span class="c1"># Optional domain name to use with v3 API and v2 parameters. It will</span>
+<span class="c1"># be used for both the user and project domain in v3 and ignored in v2</span>
+<span class="c1"># authentication. (string value)</span>
+<span class="c1">#default_domain_name = &lt;None&gt;</span>
+
+<span class="c1"># Domain ID to scope to (string value)</span>
+<span class="c1">#domain_id = &lt;None&gt;</span>
+
+<span class="c1"># Domain name to scope to (string value)</span>
+<span class="c1">#domain_name = &lt;None&gt;</span>
+
+<span class="c1"># Always use this endpoint URL for requests for this client. NOTE: The</span>
+<span class="c1"># unversioned endpoint should be specified here; to request a</span>
+<span class="c1"># particular API version, use the `version`, `min-version`, and/or</span>
+<span class="c1"># `max-version` options. (string value)</span>
+<span class="c1">#endpoint_override = &lt;None&gt;</span>
+
+<span class="c1"># Verify HTTPS connections. (boolean value)</span>
+<span class="c1">#insecure = false</span>
+
+<span class="c1"># DEPRECATED: Ironic API URL, used to set Ironic API URL when</span>
+<span class="c1"># auth_strategy option is noauth or auth_type is &quot;none&quot; to work with</span>
+<span class="c1"># standalone Ironic without keystone. (string value)</span>
+<span class="c1"># This option is deprecated for removal.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: Use [ironic]/endpoint_override option to set a specific</span>
+<span class="c1"># ironic API url.</span>
+<span class="c1">#ironic_url = http://localhost:6385/</span>
+
+<span class="c1"># PEM encoded client certificate key file (string value)</span>
+<span class="c1">#keyfile = &lt;None&gt;</span>
+
+<span class="c1"># The maximum major version of a given API, intended to be used as the</span>
+<span class="c1"># upper bound of a range with min_version. Mutually exclusive with</span>
+<span class="c1"># version. (string value)</span>
+<span class="c1">#max_version = &lt;None&gt;</span>
+
+<span class="c1"># Maximum number of retries in case of conflict error (HTTP 409).</span>
+<span class="c1"># (integer value)</span>
+<span class="c1">#max_retries = 30</span>
+
+<span class="c1"># The minimum major version of a given API, intended to be used as the</span>
+<span class="c1"># lower bound of a range with max_version. Mutually exclusive with</span>
+<span class="c1"># version. If min_version is given with no max_version it is as if max</span>
+<span class="c1"># version is &quot;latest&quot;. (string value)</span>
+<span class="c1">#min_version = &lt;None&gt;</span>
+
+<span class="c1"># DEPRECATED: Ironic endpoint type. (string value)</span>
+<span class="c1"># This option is deprecated for removal.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: Use [ironic]/valid_interfaces option to specify endpoint</span>
+<span class="c1"># interfaces.</span>
+<span class="c1">#os_endpoint_type = internalURL</span>
+
+<span class="c1"># DEPRECATED: Keystone region used to get Ironic endpoints. (string</span>
+<span class="c1"># value)</span>
+<span class="c1"># This option is deprecated for removal.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: Use [ironic]/region_name option instead to configure region.</span>
+<span class="c1">#os_region = &lt;None&gt;</span>
+
+<span class="c1"># DEPRECATED: Ironic service type. (string value)</span>
+<span class="c1"># This option is deprecated for removal.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: Use [ironic]/service_type option to set a specific type.</span>
+<span class="c1">#os_service_type = baremetal</span>
+
+<span class="c1"># User&#39;s password (string value)</span>
+<span class="c1">#password = &lt;None&gt;</span>
+
+<span class="c1"># Domain ID containing project (string value)</span>
+<span class="c1">#project_domain_id = &lt;None&gt;</span>
+
+<span class="c1"># Domain name containing project (string value)</span>
+<span class="c1">#project_domain_name = &lt;None&gt;</span>
+
+<span class="c1"># Project ID to scope to (string value)</span>
+<span class="c1"># Deprecated group/name - [ironic]/tenant_id</span>
+<span class="c1">#project_id = &lt;None&gt;</span>
+
+<span class="c1"># Project name to scope to (string value)</span>
+<span class="c1"># Deprecated group/name - [ironic]/tenant_name</span>
+<span class="c1">#project_name = &lt;None&gt;</span>
+
+<span class="c1"># The default region_name for endpoint URL discovery. (string value)</span>
+<span class="c1">#region_name = &lt;None&gt;</span>
+
+<span class="c1"># Interval between retries in case of conflict error (HTTP 409).</span>
+<span class="c1"># (integer value)</span>
+<span class="c1">#retry_interval = 2</span>
+
+<span class="c1"># The default service_name for endpoint URL discovery. (string value)</span>
+<span class="c1">#service_name = &lt;None&gt;</span>
+
+<span class="c1"># The default service_type for endpoint URL discovery. (string value)</span>
+<span class="c1">#service_type = baremetal</span>
+
+<span class="c1"># Log requests to multiple loggers. (boolean value)</span>
+<span class="c1">#split_loggers = false</span>
+
+<span class="c1"># Scope for system operations (string value)</span>
+<span class="c1">#system_scope = &lt;None&gt;</span>
+
+<span class="c1"># Tenant ID (string value)</span>
+<span class="c1">#tenant_id = &lt;None&gt;</span>
+
+<span class="c1"># Tenant Name (string value)</span>
+<span class="c1">#tenant_name = &lt;None&gt;</span>
+
+<span class="c1"># Timeout value for http requests (integer value)</span>
+<span class="c1">#timeout = &lt;None&gt;</span>
+
+<span class="c1"># Trust ID (string value)</span>
+<span class="c1">#trust_id = &lt;None&gt;</span>
+
+<span class="c1"># User&#39;s domain id (string value)</span>
+<span class="c1">#user_domain_id = &lt;None&gt;</span>
+
+<span class="c1"># User&#39;s domain name (string value)</span>
+<span class="c1">#user_domain_name = &lt;None&gt;</span>
+
+<span class="c1"># User id (string value)</span>
+<span class="c1">#user_id = &lt;None&gt;</span>
+
+<span class="c1"># Username (string value)</span>
+<span class="c1"># Deprecated group/name - [ironic]/user_name</span>
+<span class="c1">#username = &lt;None&gt;</span>
+
+<span class="c1"># List of interfaces, in order of preference, for endpoint URL. (list</span>
+<span class="c1"># value)</span>
+<span class="c1">#valid_interfaces = internal,public</span>
+
+<span class="c1"># Minimum Major API version within a given Major API version for</span>
+<span class="c1"># endpoint URL discovery. Mutually exclusive with min_version and</span>
+<span class="c1"># max_version (string value)</span>
+<span class="c1">#version = &lt;None&gt;</span>
+
+
+<span class="p">[</span><span class="n">keystone_authtoken</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From keystonemiddleware.auth_token</span>
+<span class="c1">#</span>
+
+<span class="c1"># Complete &quot;public&quot; Identity API endpoint. This endpoint should not be</span>
+<span class="c1"># an &quot;admin&quot; endpoint, as it should be accessible by all end users.</span>
+<span class="c1"># Unauthenticated clients are redirected to this endpoint to</span>
+<span class="c1"># authenticate. Although this endpoint should ideally be unversioned,</span>
+<span class="c1"># client support in the wild varies. If you&#39;re using a versioned v2</span>
+<span class="c1"># endpoint here, then this should *not* be the same endpoint the</span>
+<span class="c1"># service user utilizes for validating tokens, because normal end</span>
+<span class="c1"># users may not be able to reach that endpoint. (string value)</span>
+<span class="c1"># Deprecated group/name - [keystone_authtoken]/auth_uri</span>
+<span class="c1">#www_authenticate_uri = &lt;None&gt;</span>
+
+<span class="c1"># DEPRECATED: Complete &quot;public&quot; Identity API endpoint. This endpoint</span>
+<span class="c1"># should not be an &quot;admin&quot; endpoint, as it should be accessible by all</span>
+<span class="c1"># end users. Unauthenticated clients are redirected to this endpoint</span>
+<span class="c1"># to authenticate. Although this endpoint should ideally be</span>
+<span class="c1"># unversioned, client support in the wild varies. If you&#39;re using a</span>
+<span class="c1"># versioned v2 endpoint here, then this should *not* be the same</span>
+<span class="c1"># endpoint the service user utilizes for validating tokens, because</span>
+<span class="c1"># normal end users may not be able to reach that endpoint. This option</span>
+<span class="c1"># is deprecated in favor of www_authenticate_uri and will be removed</span>
+<span class="c1"># in the S release. (string value)</span>
+<span class="c1"># This option is deprecated for removal since Queens.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: The auth_uri option is deprecated in favor of</span>
+<span class="c1"># www_authenticate_uri and will be removed in the S  release.</span>
+<span class="c1">#auth_uri = &lt;None&gt;</span>
+
+<span class="c1"># API version of the admin Identity API endpoint. (string value)</span>
+<span class="c1">#auth_version = &lt;None&gt;</span>
+
+<span class="c1"># Do not handle authorization requests within the middleware, but</span>
+<span class="c1"># delegate the authorization decision to downstream WSGI components.</span>
+<span class="c1"># (boolean value)</span>
+<span class="c1">#delay_auth_decision = false</span>
+
+<span class="c1"># Request timeout value for communicating with Identity API server.</span>
+<span class="c1"># (integer value)</span>
+<span class="c1">#http_connect_timeout = &lt;None&gt;</span>
+
+<span class="c1"># How many times are we trying to reconnect when communicating with</span>
+<span class="c1"># Identity API Server. (integer value)</span>
+<span class="c1">#http_request_max_retries = 3</span>
+
+<span class="c1"># Request environment key where the Swift cache object is stored. When</span>
+<span class="c1"># auth_token middleware is deployed with a Swift cache, use this</span>
+<span class="c1"># option to have the middleware share a caching backend with swift.</span>
+<span class="c1"># Otherwise, use the ``memcached_servers`` option instead. (string</span>
+<span class="c1"># value)</span>
+<span class="c1">#cache = &lt;None&gt;</span>
+
+<span class="c1"># Required if identity server requires client certificate (string</span>
+<span class="c1"># value)</span>
+<span class="c1">#certfile = &lt;None&gt;</span>
+
+<span class="c1"># Required if identity server requires client certificate (string</span>
+<span class="c1"># value)</span>
+<span class="c1">#keyfile = &lt;None&gt;</span>
+
+<span class="c1"># A PEM encoded Certificate Authority to use when verifying HTTPs</span>
+<span class="c1"># connections. Defaults to system CAs. (string value)</span>
+<span class="c1">#cafile = &lt;None&gt;</span>
+
+<span class="c1"># Verify HTTPS connections. (boolean value)</span>
+<span class="c1">#insecure = false</span>
+
+<span class="c1"># The region in which the identity server can be found. (string value)</span>
+<span class="c1">#region_name = &lt;None&gt;</span>
+
+<span class="c1"># DEPRECATED: Directory used to cache files related to PKI tokens.</span>
+<span class="c1"># This option has been deprecated in the Ocata release and will be</span>
+<span class="c1"># removed in the P release. (string value)</span>
+<span class="c1"># This option is deprecated for removal since Ocata.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: PKI token format is no longer supported.</span>
+<span class="c1">#signing_dir = &lt;None&gt;</span>
+
+<span class="c1"># Optionally specify a list of memcached server(s) to use for caching.</span>
+<span class="c1"># If left undefined, tokens will instead be cached in-process. (list</span>
+<span class="c1"># value)</span>
+<span class="c1"># Deprecated group/name - [keystone_authtoken]/memcache_servers</span>
+<span class="c1">#memcached_servers = &lt;None&gt;</span>
+
+<span class="c1"># In order to prevent excessive effort spent validating tokens, the</span>
+<span class="c1"># middleware caches previously-seen tokens for a configurable duration</span>
+<span class="c1"># (in seconds). Set to -1 to disable caching completely. (integer</span>
+<span class="c1"># value)</span>
+<span class="c1">#token_cache_time = 300</span>
+
+<span class="c1"># DEPRECATED: Determines the frequency at which the list of revoked</span>
+<span class="c1"># tokens is retrieved from the Identity service (in seconds). A high</span>
+<span class="c1"># number of revocation events combined with a low cache duration may</span>
+<span class="c1"># significantly reduce performance. Only valid for PKI tokens. This</span>
+<span class="c1"># option has been deprecated in the Ocata release and will be removed</span>
+<span class="c1"># in the P release. (integer value)</span>
+<span class="c1"># This option is deprecated for removal since Ocata.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: PKI token format is no longer supported.</span>
+<span class="c1">#revocation_cache_time = 10</span>
+
+<span class="c1"># (Optional) If defined, indicate whether token data should be</span>
+<span class="c1"># authenticated or authenticated and encrypted. If MAC, token data is</span>
+<span class="c1"># authenticated (with HMAC) in the cache. If ENCRYPT, token data is</span>
+<span class="c1"># encrypted and authenticated in the cache. If the value is not one of</span>
+<span class="c1"># these options or empty, auth_token will raise an exception on</span>
+<span class="c1"># initialization. (string value)</span>
+<span class="c1"># Possible values:</span>
+<span class="c1"># None - &lt;No description provided&gt;</span>
+<span class="c1"># MAC - &lt;No description provided&gt;</span>
+<span class="c1"># ENCRYPT - &lt;No description provided&gt;</span>
+<span class="c1">#memcache_security_strategy = None</span>
+
+<span class="c1"># (Optional, mandatory if memcache_security_strategy is defined) This</span>
+<span class="c1"># string is used for key derivation. (string value)</span>
+<span class="c1">#memcache_secret_key = &lt;None&gt;</span>
+
+<span class="c1"># (Optional) Number of seconds memcached server is considered dead</span>
+<span class="c1"># before it is tried again. (integer value)</span>
+<span class="c1">#memcache_pool_dead_retry = 300</span>
+
+<span class="c1"># (Optional) Maximum total number of open connections to every</span>
+<span class="c1"># memcached server. (integer value)</span>
+<span class="c1">#memcache_pool_maxsize = 10</span>
+
+<span class="c1"># (Optional) Socket timeout in seconds for communicating with a</span>
+<span class="c1"># memcached server. (integer value)</span>
+<span class="c1">#memcache_pool_socket_timeout = 3</span>
+
+<span class="c1"># (Optional) Number of seconds a connection to memcached is held</span>
+<span class="c1"># unused in the pool before it is closed. (integer value)</span>
+<span class="c1">#memcache_pool_unused_timeout = 60</span>
+
+<span class="c1"># (Optional) Number of seconds that an operation will wait to get a</span>
+<span class="c1"># memcached client connection from the pool. (integer value)</span>
+<span class="c1">#memcache_pool_conn_get_timeout = 10</span>
+
+<span class="c1"># (Optional) Use the advanced (eventlet safe) memcached client pool.</span>
+<span class="c1"># The advanced pool will only work under python 2.x. (boolean value)</span>
+<span class="c1">#memcache_use_advanced_pool = false</span>
+
+<span class="c1"># (Optional) Indicate whether to set the X-Service-Catalog header. If</span>
+<span class="c1"># False, middleware will not ask for service catalog on token</span>
+<span class="c1"># validation and will not set the X-Service-Catalog header. (boolean</span>
+<span class="c1"># value)</span>
+<span class="c1">#include_service_catalog = true</span>
+
+<span class="c1"># Used to control the use and type of token binding. Can be set to:</span>
+<span class="c1"># &quot;disabled&quot; to not check token binding. &quot;permissive&quot; (default) to</span>
+<span class="c1"># validate binding information if the bind type is of a form known to</span>
+<span class="c1"># the server and ignore it if not. &quot;strict&quot; like &quot;permissive&quot; but if</span>
+<span class="c1"># the bind type is unknown the token will be rejected. &quot;required&quot; any</span>
+<span class="c1"># form of token binding is needed to be allowed. Finally the name of a</span>
+<span class="c1"># binding method that must be present in tokens. (string value)</span>
+<span class="c1">#enforce_token_bind = permissive</span>
+
+<span class="c1"># DEPRECATED: If true, the revocation list will be checked for cached</span>
+<span class="c1"># tokens. This requires that PKI tokens are configured on the identity</span>
+<span class="c1"># server. (boolean value)</span>
+<span class="c1"># This option is deprecated for removal since Ocata.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: PKI token format is no longer supported.</span>
+<span class="c1">#check_revocations_for_cached = false</span>
+
+<span class="c1"># DEPRECATED: Hash algorithms to use for hashing PKI tokens. This may</span>
+<span class="c1"># be a single algorithm or multiple. The algorithms are those</span>
+<span class="c1"># supported by Python standard hashlib.new(). The hashes will be tried</span>
+<span class="c1"># in the order given, so put the preferred one first for performance.</span>
+<span class="c1"># The result of the first hash will be stored in the cache. This will</span>
+<span class="c1"># typically be set to multiple values only while migrating from a less</span>
+<span class="c1"># secure algorithm to a more secure one. Once all the old tokens are</span>
+<span class="c1"># expired this option should be set to a single value for better</span>
+<span class="c1"># performance. (list value)</span>
+<span class="c1"># This option is deprecated for removal since Ocata.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: PKI token format is no longer supported.</span>
+<span class="c1">#hash_algorithms = md5</span>
+
+<span class="c1"># A choice of roles that must be present in a service token. Service</span>
+<span class="c1"># tokens are allowed to request that an expired token can be used and</span>
+<span class="c1"># so this check should tightly control that only actual services</span>
+<span class="c1"># should be sending this token. Roles here are applied as an ANY check</span>
+<span class="c1"># so any role in this list must be present. For backwards</span>
+<span class="c1"># compatibility reasons this currently only affects the allow_expired</span>
+<span class="c1"># check. (list value)</span>
+<span class="c1">#service_token_roles = service</span>
+
+<span class="c1"># For backwards compatibility reasons we must let valid service tokens</span>
+<span class="c1"># pass that don&#39;t pass the service_token_roles check as valid. Setting</span>
+<span class="c1"># this true will become the default in a future release and should be</span>
+<span class="c1"># enabled if possible. (boolean value)</span>
+<span class="c1">#service_token_roles_required = false</span>
+
+<span class="c1"># Authentication type to load (string value)</span>
+<span class="c1"># Deprecated group/name - [keystone_authtoken]/auth_plugin</span>
+<span class="c1">#auth_type = &lt;None&gt;</span>
+
+<span class="c1"># Config Section from which to load plugin specific options (string</span>
+<span class="c1"># value)</span>
+<span class="c1">#auth_section = &lt;None&gt;</span>
+
+
+<span class="p">[</span><span class="n">oslo_policy</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From oslo.policy</span>
+<span class="c1">#</span>
+
+<span class="c1"># This option controls whether or not to enforce scope when evaluating</span>
+<span class="c1"># policies. If ``True``, the scope of the token used in the request is</span>
+<span class="c1"># compared to the ``scope_types`` of the policy being enforced. If the</span>
+<span class="c1"># scopes do not match, an ``InvalidScope`` exception will be raised.</span>
+<span class="c1"># If ``False``, a message will be logged informing operators that</span>
+<span class="c1"># policies are being invoked with mismatching scope. (boolean value)</span>
+<span class="c1">#enforce_scope = false</span>
+
+<span class="c1"># The file that defines policies. (string value)</span>
+<span class="c1">#policy_file = policy.json</span>
+
+<span class="c1"># Default rule. Enforced when a requested rule is not found. (string</span>
+<span class="c1"># value)</span>
+<span class="c1">#policy_default_rule = default</span>
+
+<span class="c1"># Directories where policy configuration files are stored. They can be</span>
+<span class="c1"># relative to any directory in the search path defined by the</span>
+<span class="c1"># config_dir option, or absolute paths. The file defined by</span>
+<span class="c1"># policy_file must exist for these directories to be searched.</span>
+<span class="c1"># Missing or empty directories are ignored. (multi valued)</span>
+<span class="c1">#policy_dirs = policy.d</span>
+
+<span class="c1"># Content Type to send and receive data for REST based policy check</span>
+<span class="c1"># (string value)</span>
+<span class="c1"># Possible values:</span>
+<span class="c1"># application/x-www-form-urlencoded - &lt;No description provided&gt;</span>
+<span class="c1"># application/json - &lt;No description provided&gt;</span>
+<span class="c1">#remote_content_type = application/x-www-form-urlencoded</span>
+
+<span class="c1"># server identity verification for REST based policy check (boolean</span>
+<span class="c1"># value)</span>
+<span class="c1">#remote_ssl_verify_server_crt = false</span>
+
+<span class="c1"># Absolute path to ca cert file for REST based policy check (string</span>
+<span class="c1"># value)</span>
+<span class="c1">#remote_ssl_ca_crt_file = &lt;None&gt;</span>
+
+<span class="c1"># Absolute path to client cert for REST based policy check (string</span>
+<span class="c1"># value)</span>
+<span class="c1">#remote_ssl_client_crt_file = &lt;None&gt;</span>
+
+<span class="c1"># Absolute path client key file REST based policy check (string value)</span>
+<span class="c1">#remote_ssl_client_key_file = &lt;None&gt;</span>
+
+
+<span class="p">[</span><span class="n">pci_devices</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From ironic_inspector</span>
+<span class="c1">#</span>
+
+<span class="c1"># An alias for PCI device identified by &#39;vendor_id&#39; and &#39;product_id&#39;</span>
+<span class="c1"># fields. Format: {&quot;vendor_id&quot;: &quot;1234&quot;, &quot;product_id&quot;: &quot;5678&quot;, &quot;name&quot;:</span>
+<span class="c1"># &quot;pci_dev1&quot;} (multi valued)</span>
+<span class="c1">#alias =</span>
+
+
+<span class="p">[</span><span class="n">processing</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From ironic_inspector</span>
+<span class="c1">#</span>
+
+<span class="c1"># Which MAC addresses to add as ports during introspection. Possible</span>
+<span class="c1"># values: all (all MAC addresses), active (MAC addresses of NIC with</span>
+<span class="c1"># IP addresses), pxe (only MAC address of NIC node PXE booted from,</span>
+<span class="c1"># falls back to &quot;active&quot; if PXE MAC is not supplied by the ramdisk).</span>
+<span class="c1"># (string value)</span>
+<span class="c1"># Possible values:</span>
+<span class="c1"># all - &lt;No description provided&gt;</span>
+<span class="c1"># active - &lt;No description provided&gt;</span>
+<span class="c1"># pxe - &lt;No description provided&gt;</span>
+<span class="c1"># disabled - &lt;No description provided&gt;</span>
+<span class="c1">#add_ports = pxe</span>
+
+<span class="c1"># Which ports (already present on a node) to keep after introspection.</span>
+<span class="c1"># Possible values: all (do not delete anything), present (keep ports</span>
+<span class="c1"># which MACs were present in introspection data), added (keep only</span>
+<span class="c1"># MACs that we added during introspection). (string value)</span>
+<span class="c1"># Possible values:</span>
+<span class="c1"># all - &lt;No description provided&gt;</span>
+<span class="c1"># present - &lt;No description provided&gt;</span>
+<span class="c1"># added - &lt;No description provided&gt;</span>
+<span class="c1">#keep_ports = all</span>
+
+<span class="c1"># Whether to overwrite existing values in node database. Disable this</span>
+<span class="c1"># option to make introspection a non-destructive operation. (boolean</span>
+<span class="c1"># value)</span>
+<span class="c1">#overwrite_existing = true</span>
+
+<span class="c1"># Comma-separated list of default hooks for processing pipeline. Hook</span>
+<span class="c1"># &#39;scheduler&#39; updates the node with the minimum properties required by</span>
+<span class="c1"># the Nova scheduler. Hook &#39;validate_interfaces&#39; ensures that valid</span>
+<span class="c1"># NIC data was provided by the ramdisk. Do not exclude these two</span>
+<span class="c1"># unless you really know what you&#39;re doing. (string value)</span>
+<span class="c1">#default_processing_hooks = ramdisk_error,root_disk_selection,scheduler,validate_interfaces,capabilities,pci_devices</span>
+
+<span class="c1"># Comma-separated list of enabled hooks for processing pipeline. The</span>
+<span class="c1"># default for this is $default_processing_hooks, hooks can be added</span>
+<span class="c1"># before or after the defaults like this:</span>
+<span class="c1"># &quot;prehook,$default_processing_hooks,posthook&quot;. (string value)</span>
+<span class="c1">#processing_hooks = $default_processing_hooks</span>
+
+<span class="c1"># If set, logs from ramdisk will be stored in this directory. (string</span>
+<span class="c1"># value)</span>
+<span class="c1">#ramdisk_logs_dir = &lt;None&gt;</span>
+
+<span class="c1"># Whether to store ramdisk logs even if it did not return an error</span>
+<span class="c1"># message (dependent upon &quot;ramdisk_logs_dir&quot; option being set).</span>
+<span class="c1"># (boolean value)</span>
+<span class="c1">#always_store_ramdisk_logs = false</span>
+
+<span class="c1"># The name of the hook to run when inspector receives inspection</span>
+<span class="c1"># information from a node it isn&#39;t already aware of. This hook is</span>
+<span class="c1"># ignored by default. (string value)</span>
+<span class="c1">#node_not_found_hook = &lt;None&gt;</span>
+
+<span class="c1"># Method for storing introspection data. If set to &#39;none&#39;,</span>
+<span class="c1"># introspection data will not be stored. (string value)</span>
+<span class="c1"># Possible values:</span>
+<span class="c1"># none - &lt;No description provided&gt;</span>
+<span class="c1"># swift - &lt;No description provided&gt;</span>
+<span class="c1">#store_data = none</span>
+
+<span class="c1"># Name of the key to store the location of stored data in the extra</span>
+<span class="c1"># column of the Ironic database. (string value)</span>
+<span class="c1">#store_data_location = &lt;None&gt;</span>
+
+<span class="c1"># Whether to leave 1 GiB of disk size untouched for partitioning. Only</span>
+<span class="c1"># has effect when used with the IPA as a ramdisk, for older ramdisk</span>
+<span class="c1"># local_gb is calculated on the ramdisk side. (boolean value)</span>
+<span class="c1">#disk_partitioning_spacing = true</span>
+
+<span class="c1"># File name template for storing ramdisk logs. The following</span>
+<span class="c1"># replacements can be used: {uuid} - node UUID or &quot;unknown&quot;, {bmc} -</span>
+<span class="c1"># node BMC address or &quot;unknown&quot;, {dt} - current UTC date and time,</span>
+<span class="c1"># {mac} - PXE booting MAC or &quot;unknown&quot;. (string value)</span>
+<span class="c1">#ramdisk_logs_filename_format = {uuid}_{dt:%Y%m%d-%H%M%S.%f}.tar.gz</span>
+
+<span class="c1"># Whether to power off a node after introspection. (boolean value)</span>
+<span class="c1">#power_off = true</span>
+
+
+<span class="p">[</span><span class="n">pxe_filter</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From ironic_inspector</span>
+<span class="c1">#</span>
+
+<span class="c1"># PXE boot filter driver to use, possible filters are: &quot;iptables&quot;,</span>
+<span class="c1"># &quot;dnsmasq&quot; and &quot;noop&quot;. Set &quot;noop &quot; to disable the firewall filtering.</span>
+<span class="c1"># (string value)</span>
+<span class="c1">#driver = iptables</span>
+
+<span class="c1"># Amount of time in seconds, after which repeat periodic update of the</span>
+<span class="c1"># filter. (integer value)</span>
+<span class="c1"># Minimum value: 0</span>
+<span class="c1">#sync_period = 15</span>
+
+
+<span class="p">[</span><span class="n">swift</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># From ironic_inspector</span>
+<span class="c1">#</span>
+
+<span class="c1"># Authentication URL (string value)</span>
+<span class="c1">#auth_url = &lt;None&gt;</span>
+
+<span class="c1"># Authentication type to load (string value)</span>
+<span class="c1"># Deprecated group/name - [swift]/auth_plugin</span>
+<span class="c1">#auth_type = &lt;None&gt;</span>
+
+<span class="c1"># PEM encoded Certificate Authority to use when verifying HTTPs</span>
+<span class="c1"># connections. (string value)</span>
+<span class="c1">#cafile = &lt;None&gt;</span>
+
+<span class="c1"># PEM encoded client certificate cert file (string value)</span>
+<span class="c1">#certfile = &lt;None&gt;</span>
+
+<span class="c1"># Collect per-API call timing information. (boolean value)</span>
+<span class="c1">#collect_timing = false</span>
+
+<span class="c1"># Default Swift container to use when creating objects. (string value)</span>
+<span class="c1">#container = ironic-inspector</span>
+
+<span class="c1"># Optional domain ID to use with v3 and v2 parameters. It will be used</span>
+<span class="c1"># for both the user and project domain in v3 and ignored in v2</span>
+<span class="c1"># authentication. (string value)</span>
+<span class="c1">#default_domain_id = &lt;None&gt;</span>
+
+<span class="c1"># Optional domain name to use with v3 API and v2 parameters. It will</span>
+<span class="c1"># be used for both the user and project domain in v3 and ignored in v2</span>
+<span class="c1"># authentication. (string value)</span>
+<span class="c1">#default_domain_name = &lt;None&gt;</span>
+
+<span class="c1"># Number of seconds that the Swift object will last before being</span>
+<span class="c1"># deleted. (set to 0 to never delete the object). (integer value)</span>
+<span class="c1">#delete_after = 0</span>
+
+<span class="c1"># Domain ID to scope to (string value)</span>
+<span class="c1">#domain_id = &lt;None&gt;</span>
+
+<span class="c1"># Domain name to scope to (string value)</span>
+<span class="c1">#domain_name = &lt;None&gt;</span>
+
+<span class="c1"># Always use this endpoint URL for requests for this client. NOTE: The</span>
+<span class="c1"># unversioned endpoint should be specified here; to request a</span>
+<span class="c1"># particular API version, use the `version`, `min-version`, and/or</span>
+<span class="c1"># `max-version` options. (string value)</span>
+<span class="c1">#endpoint_override = &lt;None&gt;</span>
+
+<span class="c1"># Verify HTTPS connections. (boolean value)</span>
+<span class="c1">#insecure = false</span>
+
+<span class="c1"># PEM encoded client certificate key file (string value)</span>
+<span class="c1">#keyfile = &lt;None&gt;</span>
+
+<span class="c1"># The maximum major version of a given API, intended to be used as the</span>
+<span class="c1"># upper bound of a range with min_version. Mutually exclusive with</span>
+<span class="c1"># version. (string value)</span>
+<span class="c1">#max_version = &lt;None&gt;</span>
+
+<span class="c1"># Maximum number of times to retry a Swift request, before failing.</span>
+<span class="c1"># (integer value)</span>
+<span class="c1">#max_retries = 2</span>
+
+<span class="c1"># The minimum major version of a given API, intended to be used as the</span>
+<span class="c1"># lower bound of a range with max_version. Mutually exclusive with</span>
+<span class="c1"># version. If min_version is given with no max_version it is as if max</span>
+<span class="c1"># version is &quot;latest&quot;. (string value)</span>
+<span class="c1">#min_version = &lt;None&gt;</span>
+
+<span class="c1"># DEPRECATED: Swift endpoint type. (string value)</span>
+<span class="c1"># This option is deprecated for removal.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: Use [swift]/valid_interfaces option to specify endpoint</span>
+<span class="c1"># interfaces.</span>
+<span class="c1">#os_endpoint_type = internalURL</span>
+
+<span class="c1"># DEPRECATED: Keystone region to get endpoint for. (string value)</span>
+<span class="c1"># This option is deprecated for removal.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: Use [swift]/region_name option to configure region.</span>
+<span class="c1">#os_region = &lt;None&gt;</span>
+
+<span class="c1"># DEPRECATED: Swift service type. (string value)</span>
+<span class="c1"># This option is deprecated for removal.</span>
+<span class="c1"># Its value may be silently ignored in the future.</span>
+<span class="c1"># Reason: Use [swift]/service_type option to set specific service type</span>
+<span class="c1">#os_service_type = object-store</span>
+
+<span class="c1"># User&#39;s password (string value)</span>
+<span class="c1">#password = &lt;None&gt;</span>
+
+<span class="c1"># Domain ID containing project (string value)</span>
+<span class="c1">#project_domain_id = &lt;None&gt;</span>
+
+<span class="c1"># Domain name containing project (string value)</span>
+<span class="c1">#project_domain_name = &lt;None&gt;</span>
+
+<span class="c1"># Project ID to scope to (string value)</span>
+<span class="c1"># Deprecated group/name - [swift]/tenant_id</span>
+<span class="c1">#project_id = &lt;None&gt;</span>
+
+<span class="c1"># Project name to scope to (string value)</span>
+<span class="c1"># Deprecated group/name - [swift]/tenant_name</span>
+<span class="c1">#project_name = &lt;None&gt;</span>
+
+<span class="c1"># The default region_name for endpoint URL discovery. (string value)</span>
+<span class="c1">#region_name = &lt;None&gt;</span>
+
+<span class="c1"># The default service_name for endpoint URL discovery. (string value)</span>
+<span class="c1">#service_name = &lt;None&gt;</span>
+
+<span class="c1"># The default service_type for endpoint URL discovery. (string value)</span>
+<span class="c1">#service_type = object-store</span>
+
+<span class="c1"># Log requests to multiple loggers. (boolean value)</span>
+<span class="c1">#split_loggers = false</span>
+
+<span class="c1"># Scope for system operations (string value)</span>
+<span class="c1">#system_scope = &lt;None&gt;</span>
+
+<span class="c1"># Tenant ID (string value)</span>
+<span class="c1">#tenant_id = &lt;None&gt;</span>
+
+<span class="c1"># Tenant Name (string value)</span>
+<span class="c1">#tenant_name = &lt;None&gt;</span>
+
+<span class="c1"># Timeout value for http requests (integer value)</span>
+<span class="c1">#timeout = &lt;None&gt;</span>
+
+<span class="c1"># Trust ID (string value)</span>
+<span class="c1">#trust_id = &lt;None&gt;</span>
+
+<span class="c1"># User&#39;s domain id (string value)</span>
+<span class="c1">#user_domain_id = &lt;None&gt;</span>
+
+<span class="c1"># User&#39;s domain name (string value)</span>
+<span class="c1">#user_domain_name = &lt;None&gt;</span>
+
+<span class="c1"># User id (string value)</span>
+<span class="c1">#user_id = &lt;None&gt;</span>
+
+<span class="c1"># Username (string value)</span>
+<span class="c1"># Deprecated group/name - [swift]/user_name</span>
+<span class="c1">#username = &lt;None&gt;</span>
+
+<span class="c1"># List of interfaces, in order of preference, for endpoint URL. (list</span>
+<span class="c1"># value)</span>
+<span class="c1">#valid_interfaces = internal,public</span>
+
+<span class="c1"># Minimum Major API version within a given Major API version for</span>
+<span class="c1"># endpoint URL discovery. Mutually exclusive with min_version and</span>
+<span class="c1"># max_version (string value)</span>
+<span class="c1">#version = &lt;None&gt;</span>
+</pre></div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="docs-actions">
+          
+            <a href="ironic-inspector.html"><i class="fa fa-angle-double-left" data-toggle="tooltip" data-placement="top" title="Previous: ironic-inspector.conf"></i></a>
+          
+          
+            <a href="policy.html"><i class="fa fa-angle-double-right" data-toggle="tooltip" data-placement="top" title="Next: Policies"></i></a>
+          
+            <a id="logABugLink3" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+          
+          </div>
+          <div class="row docs-byline bottom">
+            <div class="docs-updated">updated: 2019-10-31 19:28</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8 docs-license">
+<a href="https://creativecommons.org/licenses/by/3.0/">
+ <img src="../_static/images/docs/license.png" alt="Creative Commons Attribution 3.0 License"/>
+</a>
+<p>
+ Except where otherwise noted, this document is licensed under
+ <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons
+ Attribution 3.0 License</a>. See all <a href="http://www.openstack.org/legal">
+ OpenStack Legal Documents</a>.
+</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 docs-actions-wrapper">
+            <!-- ID buglinkbottom added so that pre-filled doc bugs
+                 are sent to Launchpad projects related to the
+                 document -->
+              <a href="#" id="logABugLink2" class="docs-footer-actions"><i class="fa fa-bug"></i> found an error? report a bug</a>
+              <a href="http://ask.openstack.org" class="docs-footer-actions"><i class="fa fa-question-circle"></i> questions?</a>
+            </div>
+          </div>
+        </div>
+<div class="col-lg-3 col-md-4 col-sm-4 col-lg-pull-9 col-md-pull-8 col-sm-pull-8 docs-sidebar">
+  <div class="btn-group docs-sidebar-releases">
+    <button onclick="location.href='/'" class="btn docs-sidebar-home" data-toggle="tooltip" data-placement="top" title="Docs Home"><i class="fa fa-arrow-circle-o-left"></i></button>
+<button href="#" type="button" data-toggle="dropdown" class="btn docs-sidebar-release-select">OpenStack Documentation<i class="fa fa-caret-down"></i></button>
+    <ul class="dropdown-menu docs-sidebar-dropdown" role="menu" aria-labelledby="dLabel">
+      <li role="presentation" class="dropdown-header">Guides</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#install-guides">Install Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#user-guides">User Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#configuration-guides">Configuration Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#ops-and-admin-guides">Operations and Administration Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#api-guides">API Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#contributor-guides">Contributor Guides</a></li>
+      <li role="presentation" class="dropdown-header">Languages</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/de/">Deutsch (German)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/fr/">Français (French)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/id/">Bahasa Indonesia (Indonesian)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/it/">Italiano (Italian)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/ja/">日本語 (Japanese)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/ko_KR/">한국어 (Korean)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/pt_BR/">Português (Portuguese)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/tr_TR/">Türkçe (Türkiye)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/zh_CN/">简体中文 (Simplified Chinese)</a></li>
+    </ul>
+  </div>
+  <div class="docs-sidebar-toc">
+    <div class="docs-sidebar-section" id="table-of-contents">
+      <a href="../index.html" class="docs-sidebar-section-title"><h4>ironic-inspector 2019.9.1.dev3</h4></a>
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install/index.html">Install Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Configuration Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ironic-inspector.html">Ironic Inspector Configuration Options</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Sample Ironic Inspector Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="policy.html">Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample-policy.html">Sample policy file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin/index.html">Administrator Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributor/index.html">How To Contribute</a></li>
+</ul>
+
+    </div>
+
+  </div>
+</div>
+      </div>
+    </div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+      <div class="col-lg-2 col-sm-2">
+        <h3>OpenStack</h3>
+        <ul>
+          <li><a href="http://openstack.org/projects/">Projects</a></li>
+          <li><a href="http://openstack.org/projects/openstack-security/">OpenStack Security</a></li>
+          <li><a href="http://openstack.org/projects/openstack-faq/">Common Questions</a></li>
+          <li><a href="http://openstack.org/blog/">Blog</a></li>
+          <li><a href="http://openstack.org/news/">News</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Community</h3>
+        <ul>
+          <li><a href="http://openstack.org/community/">User Groups</a></li>
+          <li><a href="http://openstack.org/community/events/">Events</a></li>
+          <li><a href="http://openstack.org/community/jobs/">Jobs</a></li>
+          <li><a href="http://openstack.org/foundation/companies/">Companies</a></li>
+          <li><a href="http://docs.openstack.org/infra/manual/developers.html">Contribute</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Documentation</h3>
+        <ul>
+          <li><a href="http://docs.openstack.org">OpenStack Manuals</a></li>
+          <li><a href="http://openstack.org/software/start/">Getting Started</a></li>
+          <li><a href="http://developer.openstack.org">API Documentation</a></li>
+          <li><a href="https://wiki.openstack.org">Wiki</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Branding & Legal</h3>
+        <ul>
+          <li><a href="http://openstack.org/brand/">Logos & Guidelines</a></li>
+          <li><a href="http://openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>
+          <li><a href="http://openstack.org/privacy/">Privacy Policy</a></li>
+          <li><a href="https://wiki.openstack.org/wiki/How_To_Contribute#Contributor_License_Agreement">OpenStack CLA</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <h3>Stay In Touch</h3>
+        <a href="https://twitter.com/OpenStack" target="_blank" class="social-icons footer-twitter"></a>
+        <a href="https://www.facebook.com/openstack" target="_blank" class="social-icons footer-facebook"></a>
+        <a href="https://www.linkedin.com/company/openstack" target="_blank" class="social-icons footer-linkedin"></a>
+        <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank" class="social-icons footer-youtube"></a>
+        <p class="fine-print">
+          The OpenStack project is provided under the
+          <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 license</a>. Openstack.org is powered by
+          <a href="http://rackspace.com" target="_blank">Rackspace Cloud Computing</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- jQuery -->
+<script type="text/javascript" src="../_static/js/jquery-3.2.1.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
+<script type="text/javascript" src="../_static/js/bootstrap.min.js"></script>
+
+<!-- The rest of the JS -->
+<script type="text/javascript" src="../_static/js/navigation.js"></script>
+
+<!-- Docs JS -->
+<script type="text/javascript" src="../_static/js/docs.js"></script>
+
+<!-- Popovers -->
+<script type="text/javascript" src="../_static/js/webui-popover.js"></script>
+
+<!-- standard sphinx include libraries, which allow search highlighting -->
+<script type="text/javascript" src="../_static/underscore.js"></script>
+<script type="text/javascript" src="../_static/doctools.js"></script>
+<script type="text/javascript" src="../_static/searchtools.js"></script>
+
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2019.9.1.dev3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        SOURCELINK_SUFFIX: '.txt',
+        HAS_SOURCE:  true
+      };
+</script>
+
+
+<!-- Javascript for page -->
+<script language="JavaScript">
+/* build a description of this page including SHA, source location on git repo,
+   build time and the project's launchpad bug tag. Set the HREF of the bug
+   buttons */
+
+    var lineFeed = "%0A";
+    var gitURL = "Source: Can't derive source file URL";
+
+    /* there have been cases where "pagename" wasn't set; better check for it */
+        /* "giturl" is the URL of the source file on Git and is auto-generated by
+           openstackdocstheme.
+
+           "pagename" is a standard sphinx parameter containing the name of
+           the source file, without extension.                             */
+
+        var sourceFile = "configuration/sample-config" + ".rst";
+        gitURL = "Source: https://git.openstack.org/cgit/openstack/ironic-inspector/tree/doc/source" + "/" + sourceFile;
+
+    /* gitsha, project and bug_tag rely on variables in conf.py */
+    var gitSha = "SHA: 8078a7d117a84fedb405447f7403b0e908afb559";
+        var bugProject = "ironic-inspector";
+        var bugTitle = "Ironic Inspector Configuration Options in ironic-inspector";
+    var fieldTags = "";
+        var useStoryboard = "";
+
+
+    /* "last_updated" is the build date and time. It relies on the
+       conf.py variable "html_last_updated_fmt", which should include
+       year/month/day as well as hours and minutes                   */
+    var buildstring = "Release: 2019.9.1.dev3 on 2019-10-31 19:28";
+
+    var fieldComment = encodeURI(buildstring) +
+                       lineFeed + encodeURI(gitSha) +
+                       lineFeed + encodeURI(gitURL) ;
+
+    logABug(bugTitle, bugProject, fieldComment, fieldTags);
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+          $.ajax({
+            context: this,
+            dataType : "html",
+            url : "https://docs.openstack.org/rocky/badge.html",
+            success : function(results) {
+                $('#deprecated-badge-container').html(results);
+            }
+        });
+    });
+</script>
+<div id="deprecated-badge-container"></div>
+
+  </body>
+</html>

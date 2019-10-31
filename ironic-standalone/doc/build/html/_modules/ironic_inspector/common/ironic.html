@@ -1,0 +1,627 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+
+    <title>OpenStack Docs: ironic_inspector.common.ironic</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link href="../../../_static/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Pygments CSS -->
+<link href="../../../_static/css/native.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link href="../../../_static/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="../../../_static/css/combined.css" rel="stylesheet">
+
+<!-- Search CSS -->
+<link href="../../../_static/css/search.css" rel="stylesheet">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+  
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-17511903-1', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+  </head>
+  <body>
+
+<!-- TEMPLATE_NAME: _modules/ironic_inspector/common/ironic -->
+
+ <script>
+    (function (window, document) {
+        var loader = function () {
+            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+            script.src = "https://search.openstack.org/widget/embed.min.js?t="+Date.now();
+            tag.parentNode.insertBefore(script, tag);
+        };
+        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+    })(window, document);
+</script>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="brand-wrapper">
+        <a class="navbar-brand" href="https://www.openstack.org/"></a>
+      </div>
+      <div class="search-icon show"><i class="fa fa-search"></i> Search</div></div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="search-container tiny">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</div>
+      <ul class="nav navbar-nav navbar-main show">
+        <li class="search-container-mobile">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</li>
+        <li>
+          <a href="https://www.openstack.org/software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuSoftware">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/">Overview</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/project-navigator/">Project Navigator</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/sample-configs/">Sample Configs</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/security/">Security</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/start/">Get Started</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/roadmap/">Roadmap</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/latest-release/">Latest Release</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/software/sourcecode/">Source Code</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/user-stories/" class="drop" id="dropdownMenuUsers">Users <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuUsers">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/user-stories/">Overview</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/telecoms-and-nfv/">Telecoms and NFV</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/enterprise/">OpenStack in the Enterprise</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/appdev/">Application Developers & ISVs</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org/">Superuser Magazine</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/surveys/landing">User Survey</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/community/" class="drop" id="dropdownMenuCommunity">Community <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuCommunity">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/">Welcome! Start Here</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation/">OpenStack Foundation</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://wiki.openstack.org">OpenStack Wiki</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://groups.openstack.org">User Groups</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/speakers/">Speakers Bureau</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation/companies/">Supporting Companies</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/jobs/">Jobs</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/">Join The Community</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/marketplace/">Marketplace</a>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/events/" class="drop" id="dropdownMenuEvents">Events <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuEvents">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//www.openstack.org/community/events/">Overview</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/summit/">The OpenStack Summit</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//www.openstack.org/community/events/">More OpenStack Events</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/community/events/openstackdays">OpenStack Days</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openstack.org/learn/" class="drop" id="dropdownMenuLearn">Learn <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/marketplace/training/">Training</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/coa/">Get Certified</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask a Technical Question</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser Magazine</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/videos/">Summit Videos</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/analysts/">Analyst Reports</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/news/">News</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/blog/">Blog</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://docs.openstack.org/">Docs</a>
+        </li>
+        <li>
+
+</li>
+
+
+            <li>
+
+                <li class="join-nav-section">
+                    <a href="https://www.openstack.org/join/" id="dropdownMenuJoin">Join <i class="fa fa-caret-down"></i></a>
+                    <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuJoin" style="display: none;">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/register/?membership-type=foundation">Sign up for Foundation Membership</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/join/#sponsor">Sponsor the Foundation</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.openstack.org/foundation">More about the Foundation</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://www.openstack.org/Security/login/?BackURL=/home/" class="sign-in-btn">Log In</a>
+                </li>
+
+            </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /.container -->
+</nav>
+    <div class="container docs-book-wrapper">
+      <div class="row">
+        <div class="col-lg-9 col-md-8 col-sm-8 col-lg-push-3 col-md-push-4 col-sm-push-4">
+<div class="row">
+  <div class="col-lg-8">
+      <h2>ironic_inspector.common.ironic</h2>
+    
+  </div>
+  <div class="docs-actions">
+    
+    
+    <a id="logABugLink1" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+    
+  </div>
+</div>
+          <div class="row docs-byline">
+            <div class="docs-updated">updated: 2019-10-31 19:28</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="docs-body">
+
+  <h1>Source code for ironic_inspector.common.ironic</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#    http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or</span>
+<span class="c1"># implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">socket</span>
+
+<span class="kn">from</span> <span class="nn">ironicclient</span> <span class="k">import</span> <span class="n">client</span>
+<span class="kn">from</span> <span class="nn">ironicclient</span> <span class="k">import</span> <span class="n">exceptions</span> <span class="k">as</span> <span class="n">ironic_exc</span>
+<span class="kn">import</span> <span class="nn">netaddr</span>
+<span class="kn">from</span> <span class="nn">oslo_config</span> <span class="k">import</span> <span class="n">cfg</span>
+<span class="kn">import</span> <span class="nn">retrying</span>
+
+<span class="kn">from</span> <span class="nn">ironic_inspector.common.i18n</span> <span class="k">import</span> <span class="n">_</span>
+<span class="kn">from</span> <span class="nn">ironic_inspector.common</span> <span class="k">import</span> <span class="n">keystone</span>
+<span class="kn">from</span> <span class="nn">ironic_inspector</span> <span class="k">import</span> <span class="n">utils</span>
+
+<span class="n">CONF</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">CONF</span>
+<span class="n">LOG</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">getProcessingLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># See https://docs.openstack.org/ironic/latest/contributor/states.html  # noqa</span>
+<span class="n">VALID_STATES</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;enroll&#39;</span><span class="p">,</span> <span class="s1">&#39;manageable&#39;</span><span class="p">,</span> <span class="s1">&#39;inspecting&#39;</span><span class="p">,</span> <span class="s1">&#39;inspect wait&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;inspect failed&#39;</span><span class="p">}</span>
+
+<span class="c1"># 1.38 is the latest API version in the Queens release series, 10.1.0.</span>
+<span class="c1"># NOTE(mgoddard): This should be updated with each release to ensure that</span>
+<span class="c1"># inspector is able to use the latest ironic API. In particular, this version</span>
+<span class="c1"># is used when processing introspection rules, and is the default version used</span>
+<span class="c1"># by processing plugins.</span>
+<span class="n">DEFAULT_IRONIC_API_VERSION</span> <span class="o">=</span> <span class="s1">&#39;1.38&#39;</span>
+
+<span class="n">IRONIC_SESSION</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="NotFound"><a class="viewcode-back" href="../../../contributor/api/ironic_inspector.common.ironic.html#ironic_inspector.common.ironic.NotFound">[docs]</a><span class="k">class</span> <span class="nc">NotFound</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Node not found in Ironic.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_ident</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Node </span><span class="si">%s</span><span class="s1"> was not found in Ironic&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">node_ident</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NotFound</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="reset_ironic_session"><a class="viewcode-back" href="../../../contributor/api/ironic_inspector.common.ironic.html#ironic_inspector.common.ironic.reset_ironic_session">[docs]</a><span class="k">def</span> <span class="nf">reset_ironic_session</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Reset the global session variable.</span>
+
+<span class="sd">    Mostly useful for unit tests.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">IRONIC_SESSION</span>
+    <span class="n">IRONIC_SESSION</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="get_ipmi_address"><a class="viewcode-back" href="../../../contributor/api/ironic_inspector.common.ironic.html#ironic_inspector.common.ironic.get_ipmi_address">[docs]</a><span class="k">def</span> <span class="nf">get_ipmi_address</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get the BMC address defined in node.driver_info dictionary</span>
+
+<span class="sd">    Possible names of BMC address value examined in order of list</span>
+<span class="sd">    [&#39;ipmi_address&#39;] + CONF.ipmi_address_fields. The value could</span>
+<span class="sd">    be an IP address or a hostname. DNS lookup performed for the</span>
+<span class="sd">    first non empty value.</span>
+
+<span class="sd">    The first valid BMC address value returned along with</span>
+<span class="sd">    it&#39;s v4 and v6 IP addresses.</span>
+
+<span class="sd">    :param node: Node object with defined driver_info dictionary</span>
+<span class="sd">    :return: tuple (ipmi_address, ipv4_address, ipv6_address)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">none_address</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="n">ipmi_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ipmi_address&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">CONF</span><span class="o">.</span><span class="n">ipmi_address_fields</span>
+    <span class="c1"># NOTE(sambetts): IPMI Address is useless to us if bridging is enabled so</span>
+    <span class="c1"># just ignore it and return None</span>
+    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">driver_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ipmi_bridging&quot;</span><span class="p">,</span> <span class="s2">&quot;no&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;no&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">none_address</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">ipmi_fields</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">driver_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">ipv4</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">ipv6</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">addrinfo</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOL_TCP</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">family</span><span class="p">,</span> <span class="n">socket_type</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="n">canon_name</span><span class="p">,</span> <span class="n">sockaddr</span> <span class="ow">in</span> <span class="n">addrinfo</span><span class="p">:</span>
+                <span class="n">ip</span> <span class="o">=</span> <span class="n">sockaddr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">netaddr</span><span class="o">.</span><span class="n">IPAddress</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span><span class="o">.</span><span class="n">is_loopback</span><span class="p">():</span>
+                    <span class="n">LOG</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Ignoring loopback BMC address </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span>
+                                <span class="n">node_info</span><span class="o">=</span><span class="n">node</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">family</span> <span class="o">==</span> <span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">:</span>
+                    <span class="n">ipv4</span> <span class="o">=</span> <span class="n">ip</span>
+                <span class="k">elif</span> <span class="n">family</span> <span class="o">==</span> <span class="n">socket</span><span class="o">.</span><span class="n">AF_INET6</span><span class="p">:</span>
+                    <span class="n">ipv6</span> <span class="o">=</span> <span class="n">ip</span>
+        <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">gaierror</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Failed to resolve the hostname (</span><span class="si">%(value)s</span><span class="s1">)&#39;</span>
+                    <span class="s1">&#39; for node </span><span class="si">%(uuid)s</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">msg</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span>
+                                     <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">uuid</span><span class="p">},</span>
+                              <span class="n">node_info</span><span class="o">=</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ipv4</span><span class="p">,</span> <span class="n">ipv6</span><span class="p">)</span> <span class="k">if</span> <span class="n">ipv4</span> <span class="ow">or</span> <span class="n">ipv6</span> <span class="k">else</span> <span class="n">none_address</span>
+    <span class="k">return</span> <span class="n">none_address</span></div>
+
+
+<div class="viewcode-block" id="get_client"><a class="viewcode-back" href="../../../contributor/api/ironic_inspector.common.ironic.html#ironic_inspector.common.ironic.get_client">[docs]</a><span class="k">def</span> <span class="nf">get_client</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">api_version</span><span class="o">=</span><span class="n">DEFAULT_IRONIC_API_VERSION</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+    <span class="sd">&quot;&quot;&quot;Get Ironic client instance.&quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">IRONIC_SESSION</span>
+
+    <span class="c1"># NOTE: To support standalone ironic without keystone</span>
+    <span class="c1"># TODO(pas-ha) remove handling of deprecated opts in Rocky</span>
+    <span class="c1"># TODO(pas-ha) rewrite when ironicclient natively supports &#39;none&#39; auth</span>
+    <span class="c1"># via sessions https://review.openstack.org/#/c/359061/</span>
+    <span class="k">if</span> <span class="n">CONF</span><span class="o">.</span><span class="n">ironic</span><span class="o">.</span><span class="n">auth_strategy</span> <span class="o">==</span> <span class="s1">&#39;noauth&#39;</span><span class="p">:</span>
+        <span class="n">CONF</span><span class="o">.</span><span class="n">set_override</span><span class="p">(</span><span class="s1">&#39;auth_type&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;ironic&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">IRONIC_SESSION</span><span class="p">:</span>
+        <span class="n">IRONIC_SESSION</span> <span class="o">=</span> <span class="n">keystone</span><span class="o">.</span><span class="n">get_session</span><span class="p">(</span><span class="s1">&#39;ironic&#39;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;os_ironic_api_version&#39;</span><span class="p">:</span> <span class="n">api_version</span><span class="p">,</span>
+        <span class="s1">&#39;max_retries&#39;</span><span class="p">:</span> <span class="n">CONF</span><span class="o">.</span><span class="n">ironic</span><span class="o">.</span><span class="n">max_retries</span><span class="p">,</span>
+        <span class="s1">&#39;retry_interval&#39;</span><span class="p">:</span> <span class="n">CONF</span><span class="o">.</span><span class="n">ironic</span><span class="o">.</span><span class="n">retry_interval</span><span class="p">}</span>
+
+    <span class="n">adapter_opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="c1"># TODO(pas-ha) use service auth with incoming token</span>
+    <span class="k">if</span> <span class="n">CONF</span><span class="o">.</span><span class="n">ironic</span><span class="o">.</span><span class="n">auth_type</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">token</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">args</span><span class="p">[</span><span class="s1">&#39;session&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">IRONIC_SESSION</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">args</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span>
+
+    <span class="c1"># TODO(pas-ha): remove handling of deprecated options in Rocky</span>
+    <span class="k">if</span> <span class="n">CONF</span><span class="o">.</span><span class="n">ironic</span><span class="o">.</span><span class="n">os_region</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">CONF</span><span class="o">.</span><span class="n">ironic</span><span class="o">.</span><span class="n">region_name</span><span class="p">:</span>
+        <span class="n">adapter_opts</span><span class="p">[</span><span class="s1">&#39;region_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CONF</span><span class="o">.</span><span class="n">ironic</span><span class="o">.</span><span class="n">os_region</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">CONF</span><span class="o">.</span><span class="n">ironic</span><span class="o">.</span><span class="n">auth_type</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span> <span class="ow">and</span>
+            <span class="ow">not</span> <span class="n">CONF</span><span class="o">.</span><span class="n">ironic</span><span class="o">.</span><span class="n">endpoint_override</span> <span class="ow">and</span>
+            <span class="n">CONF</span><span class="o">.</span><span class="n">ironic</span><span class="o">.</span><span class="n">ironic_url</span><span class="p">):</span>
+        <span class="n">adapter_opts</span><span class="p">[</span><span class="s1">&#39;endpoint_override&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CONF</span><span class="o">.</span><span class="n">ironic</span><span class="o">.</span><span class="n">ironic_url</span>
+
+    <span class="n">adapter</span> <span class="o">=</span> <span class="n">keystone</span><span class="o">.</span><span class="n">get_adapter</span><span class="p">(</span><span class="s1">&#39;ironic&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">IRONIC_SESSION</span><span class="p">,</span>
+                                   <span class="o">**</span><span class="n">adapter_opts</span><span class="p">)</span>
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="n">adapter</span><span class="o">.</span><span class="n">get_endpoint</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">client</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="check_provision_state"><a class="viewcode-back" href="../../../contributor/api/ironic_inspector.common.ironic.html#ironic_inspector.common.ironic.check_provision_state">[docs]</a><span class="k">def</span> <span class="nf">check_provision_state</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">provision_state</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">VALID_STATES</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Invalid provision state for introspection: &#39;</span>
+                <span class="s1">&#39;&quot;</span><span class="si">%(state)s</span><span class="s1">&quot;, valid states are &quot;</span><span class="si">%(valid)s</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">msg</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span> <span class="s1">&#39;valid&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">VALID_STATES</span><span class="p">)},</span>
+                          <span class="n">node_info</span><span class="o">=</span><span class="n">node</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="capabilities_to_dict"><a class="viewcode-back" href="../../../contributor/api/ironic_inspector.common.ironic.html#ironic_inspector.common.ironic.capabilities_to_dict">[docs]</a><span class="k">def</span> <span class="nf">capabilities_to_dict</span><span class="p">(</span><span class="n">caps</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert the Node&#39;s capabilities into a dictionary.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">caps</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">([</span><span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">caps</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)])</span></div>
+
+
+<div class="viewcode-block" id="dict_to_capabilities"><a class="viewcode-back" href="../../../contributor/api/ironic_inspector.common.ironic.html#ironic_inspector.common.ironic.dict_to_capabilities">[docs]</a><span class="k">def</span> <span class="nf">dict_to_capabilities</span><span class="p">(</span><span class="n">caps_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a dictionary into a string with the capabilities syntax.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">caps_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="get_node"><a class="viewcode-back" href="../../../contributor/api/ironic_inspector.common.ironic.html#ironic_inspector.common.ironic.get_node">[docs]</a><span class="k">def</span> <span class="nf">get_node</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="n">ironic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get a node from Ironic.</span>
+
+<span class="sd">    :param node_id: node UUID or name.</span>
+<span class="sd">    :param ironic: ironic client instance.</span>
+<span class="sd">    :param kwargs: arguments to pass to Ironic client.</span>
+<span class="sd">    :raises: Error on failure</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ironic</span> <span class="o">=</span> <span class="n">ironic</span> <span class="k">if</span> <span class="n">ironic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">get_client</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ironic</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ironic_exc</span><span class="o">.</span><span class="n">NotFound</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NotFound</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ironic_exc</span><span class="o">.</span><span class="n">HttpError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">utils</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Cannot get node </span><span class="si">%(node)s</span><span class="s2">: </span><span class="si">%(exc)s</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">%</span>
+                          <span class="p">{</span><span class="s1">&#39;node&#39;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span> <span class="s1">&#39;exc&#39;</span><span class="p">:</span> <span class="n">exc</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="call_with_retries"><a class="viewcode-back" href="../../../contributor/api/ironic_inspector.common.ironic.html#ironic_inspector.common.ironic.call_with_retries">[docs]</a><span class="nd">@retrying</span><span class="o">.</span><span class="n">retry</span><span class="p">(</span>
+    <span class="n">retry_on_exception</span><span class="o">=</span><span class="k">lambda</span> <span class="n">exc</span><span class="p">:</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">ironic_exc</span><span class="o">.</span><span class="n">ClientException</span><span class="p">),</span>
+    <span class="n">stop_max_attempt_number</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">wait_fixed</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">call_with_retries</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Call an ironic client function retrying all errors.</span>
+
+<span class="sd">    If an ironic client exception is raised, try calling the func again,</span>
+<span class="sd">    at most 5 times, waiting 1 sec between each call. If on the 5th attempt</span>
+<span class="sd">    the func raises again, the exception is propagated to the caller.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</pre></div>
+
+              </div>
+            </div>
+          </div>
+          <div class="docs-actions">
+          
+          
+            <a id="logABugLink3" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+          
+          </div>
+          <div class="row docs-byline bottom">
+            <div class="docs-updated">updated: 2019-10-31 19:28</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8 docs-license">
+<a href="https://creativecommons.org/licenses/by/3.0/">
+ <img src="../../../_static/images/docs/license.png" alt="Creative Commons Attribution 3.0 License"/>
+</a>
+<p>
+ Except where otherwise noted, this document is licensed under
+ <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons
+ Attribution 3.0 License</a>. See all <a href="http://www.openstack.org/legal">
+ OpenStack Legal Documents</a>.
+</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 docs-actions-wrapper">
+            <!-- ID buglinkbottom added so that pre-filled doc bugs
+                 are sent to Launchpad projects related to the
+                 document -->
+              <a href="#" id="logABugLink2" class="docs-footer-actions"><i class="fa fa-bug"></i> found an error? report a bug</a>
+              <a href="http://ask.openstack.org" class="docs-footer-actions"><i class="fa fa-question-circle"></i> questions?</a>
+            </div>
+          </div>
+        </div>
+<div class="col-lg-3 col-md-4 col-sm-4 col-lg-pull-9 col-md-pull-8 col-sm-pull-8 docs-sidebar">
+  <div class="btn-group docs-sidebar-releases">
+    <button onclick="location.href='/'" class="btn docs-sidebar-home" data-toggle="tooltip" data-placement="top" title="Docs Home"><i class="fa fa-arrow-circle-o-left"></i></button>
+<button href="#" type="button" data-toggle="dropdown" class="btn docs-sidebar-release-select">OpenStack Documentation<i class="fa fa-caret-down"></i></button>
+    <ul class="dropdown-menu docs-sidebar-dropdown" role="menu" aria-labelledby="dLabel">
+      <li role="presentation" class="dropdown-header">Guides</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#install-guides">Install Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#user-guides">User Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#configuration-guides">Configuration Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#ops-and-admin-guides">Operations and Administration Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#api-guides">API Guides</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/index.html#contributor-guides">Contributor Guides</a></li>
+      <li role="presentation" class="dropdown-header">Languages</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/de/">Deutsch (German)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/fr/">Français (French)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/id/">Bahasa Indonesia (Indonesian)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/it/">Italiano (Italian)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/ja/">日本語 (Japanese)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/ko_KR/">한국어 (Korean)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/pt_BR/">Português (Portuguese)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/tr_TR/">Türkçe (Türkiye)</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="http://docs.openstack.org/zh_CN/">简体中文 (Simplified Chinese)</a></li>
+    </ul>
+  </div>
+  <div class="docs-sidebar-toc">
+    <div class="docs-sidebar-section" id="table-of-contents">
+      <a href="../../../index.html" class="docs-sidebar-section-title"><h4>ironic-inspector 2019.9.1.dev3</h4></a>
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install/index.html">Install Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../configuration/index.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../admin/index.html">Administrator Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributor/index.html">How To Contribute</a></li>
+</ul>
+
+    </div>
+
+  </div>
+</div>
+      </div>
+    </div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+      <div class="col-lg-2 col-sm-2">
+        <h3>OpenStack</h3>
+        <ul>
+          <li><a href="http://openstack.org/projects/">Projects</a></li>
+          <li><a href="http://openstack.org/projects/openstack-security/">OpenStack Security</a></li>
+          <li><a href="http://openstack.org/projects/openstack-faq/">Common Questions</a></li>
+          <li><a href="http://openstack.org/blog/">Blog</a></li>
+          <li><a href="http://openstack.org/news/">News</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Community</h3>
+        <ul>
+          <li><a href="http://openstack.org/community/">User Groups</a></li>
+          <li><a href="http://openstack.org/community/events/">Events</a></li>
+          <li><a href="http://openstack.org/community/jobs/">Jobs</a></li>
+          <li><a href="http://openstack.org/foundation/companies/">Companies</a></li>
+          <li><a href="http://docs.openstack.org/infra/manual/developers.html">Contribute</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Documentation</h3>
+        <ul>
+          <li><a href="http://docs.openstack.org">OpenStack Manuals</a></li>
+          <li><a href="http://openstack.org/software/start/">Getting Started</a></li>
+          <li><a href="http://developer.openstack.org">API Documentation</a></li>
+          <li><a href="https://wiki.openstack.org">Wiki</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Branding & Legal</h3>
+        <ul>
+          <li><a href="http://openstack.org/brand/">Logos & Guidelines</a></li>
+          <li><a href="http://openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>
+          <li><a href="http://openstack.org/privacy/">Privacy Policy</a></li>
+          <li><a href="https://wiki.openstack.org/wiki/How_To_Contribute#Contributor_License_Agreement">OpenStack CLA</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <h3>Stay In Touch</h3>
+        <a href="https://twitter.com/OpenStack" target="_blank" class="social-icons footer-twitter"></a>
+        <a href="https://www.facebook.com/openstack" target="_blank" class="social-icons footer-facebook"></a>
+        <a href="https://www.linkedin.com/company/openstack" target="_blank" class="social-icons footer-linkedin"></a>
+        <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank" class="social-icons footer-youtube"></a>
+        <p class="fine-print">
+          The OpenStack project is provided under the
+          <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 license</a>. Openstack.org is powered by
+          <a href="http://rackspace.com" target="_blank">Rackspace Cloud Computing</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- jQuery -->
+<script type="text/javascript" src="../../../_static/js/jquery-3.2.1.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
+<script type="text/javascript" src="../../../_static/js/bootstrap.min.js"></script>
+
+<!-- The rest of the JS -->
+<script type="text/javascript" src="../../../_static/js/navigation.js"></script>
+
+<!-- Docs JS -->
+<script type="text/javascript" src="../../../_static/js/docs.js"></script>
+
+<!-- Popovers -->
+<script type="text/javascript" src="../../../_static/js/webui-popover.js"></script>
+
+<!-- standard sphinx include libraries, which allow search highlighting -->
+<script type="text/javascript" src="../../../_static/underscore.js"></script>
+<script type="text/javascript" src="../../../_static/doctools.js"></script>
+<script type="text/javascript" src="../../../_static/searchtools.js"></script>
+
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2019.9.1.dev3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        SOURCELINK_SUFFIX: '.txt',
+        HAS_SOURCE:  true
+      };
+</script>
+
+
+<!-- Javascript for page -->
+<script language="JavaScript">
+/* build a description of this page including SHA, source location on git repo,
+   build time and the project's launchpad bug tag. Set the HREF of the bug
+   buttons */
+
+    var lineFeed = "%0A";
+    var gitURL = "Source: Can't derive source file URL";
+
+    /* there have been cases where "pagename" wasn't set; better check for it */
+        /* "giturl" is the URL of the source file on Git and is auto-generated by
+           openstackdocstheme.
+
+           "pagename" is a standard sphinx parameter containing the name of
+           the source file, without extension.                             */
+
+        var sourceFile = "_modules/ironic_inspector/common/ironic" + ".rst";
+        gitURL = "Source: https://git.openstack.org/cgit/openstack/ironic-inspector/tree/doc/source" + "/" + sourceFile;
+
+    /* gitsha, project and bug_tag rely on variables in conf.py */
+    var gitSha = "SHA: 8078a7d117a84fedb405447f7403b0e908afb559";
+        var bugProject = "ironic-inspector";
+        var bugTitle = "ironic_inspector.common.ironic in ironic-inspector";
+    var fieldTags = "";
+        var useStoryboard = "";
+
+
+    /* "last_updated" is the build date and time. It relies on the
+       conf.py variable "html_last_updated_fmt", which should include
+       year/month/day as well as hours and minutes                   */
+    var buildstring = "Release: 2019.9.1.dev3 on 2019-10-31 19:28";
+
+    var fieldComment = encodeURI(buildstring) +
+                       lineFeed + encodeURI(gitSha) +
+                       lineFeed + encodeURI(gitURL) ;
+
+    logABug(bugTitle, bugProject, fieldComment, fieldTags);
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+          $.ajax({
+            context: this,
+            dataType : "html",
+            url : "https://docs.openstack.org/rocky/badge.html",
+            success : function(results) {
+                $('#deprecated-badge-container').html(results);
+            }
+        });
+    });
+</script>
+<div id="deprecated-badge-container"></div>
+
+  </body>
+</html>
